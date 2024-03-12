@@ -1,70 +1,44 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Genshin Companion App - ReactJS
 
-## Available Scripts
+Welcome to Genshin Companion[Placeholder] - ReactJS, an interactive web application designed to provide users with essential information for Mihoyo's popular game, Genshin Impact. This project combines HTML and CSS for the frontend and leverages the power of ReactJS for the backend. It's a personal passion project that I'll be continuously enhancing over time.
 
-In the project directory, you can run:
 
-### `npm start`
+## Features (so far)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Auto-updating character list display on landing page
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Roadmap
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Create static pages with basic information about the game, such as an introduction to Genshin Impact, its gameplay mechanics, and world exploration.
 
-### `npm run build`
+- Display a list of Genshin Impact characters with their basic information, such as name, image, element, and weapon type.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Similar to the character list, create a page to display a list of weapons with their details.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Implement individual pages for each character, showing detailed information, stats, abilities, and recommended builds.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Likewise, create individual pages for each weapon, displaying detailed information, stats, and recommended usage.
 
-### `npm run eject`
+- Add a search bar to allow users to search for characters or weapons by name.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Implement options to filter and sort characters or weapons based on various criteria, such as rarity, element, weapon type, etc.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Allow users to create accounts, log in, and possibly save their favorite characters, weapons, or builds.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Create interactive guides for quests, boss fights, resource farming routes, etc. [MAYBE]
+- Obligatory Light/Dark mode toggle
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Integration with APIs:
+- Enable users to track their in-game progress, such as completed quests, collected items, or character levels.
 
-## Learn More
+- Explore and integrate additional data from official Genshin Impact APIs, such as live event information or player statistics.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Authors
 
-### Code Splitting
+- [@camejia](https://github.com/HaizUber)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
