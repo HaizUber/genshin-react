@@ -1,0 +1,153 @@
+/* HomePage.css */
+
+@font-face {
+    font-family: 'Genshin';
+    src: url('/public/fonts/genshin-font.woff') format('woff');
+  }
+  
+.HomePage {
+    text-align: center;
+    padding: 20px;
+    background-color: #0c1447; /* Night theme background color */
+}
+
+h1 {
+    color: #ecce72; /* Genshin yellow */
+    font-size: 36px;
+    margin-bottom: 20px;
+    font-family: 'Genshin', sans-serif; /* Use Genshin font */
+}
+
+body {
+    font-family: 'Genshin', sans-serif;
+    color: #ffffff; /* White text */
+}
+
+.character-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.character-card {
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    width: 200px;
+    background-color: #1f2b56; /* Dark blue */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.character-card:hover {
+    transform: scale(1.05);
+}
+
+.character-card img {
+    max-width: 150px;
+    max-height: 150px;
+    margin-bottom: 10px;
+}
+
+.character-card p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .character-card {
+        width: 150px;
+    }
+
+    .character-card img {
+        max-width: 120px;
+        max-height: 120px;
+    }
+
+    .character-card p {
+        font-size: 16px;
+    }
+}
+
+/* Loader.css */
+
+/* HTML: <div class="loader-container"><div class="loader"></div></div> */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    aspect-ratio: 1;
+    color: #ecce72; /* Genshin yellow */
+    position: relative;
+    animation: l40 .5s infinite alternate;
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-size: 25px 25px;
+    background-position: 0 0,100% 0,100% 100%,0 100%;
+    background-repeat: no-repeat;
+}
+
+.loader:before {
+    background-image:
+        radial-gradient(farthest-side at top    left ,currentColor 96%,#0000),
+        radial-gradient(farthest-side at top    right,currentColor 96%,#0000),
+        radial-gradient(farthest-side at bottom right,currentColor 96%,#0000),
+        radial-gradient(farthest-side at bottom left ,currentColor 96%,#0000);
+    animation: l40-1 1s infinite;
+}
+
+.loader:after {
+    background-image: 
+        radial-gradient(farthest-side at top    left ,#0000 94%,currentColor 96%),
+        radial-gradient(farthest-side at top    right,#0000 94%,currentColor 96%),
+        radial-gradient(farthest-side at bottom right,#0000 94%,currentColor 96%),
+        radial-gradient(farthest-side at bottom left ,#0000 94%,currentColor 96%);
+    animation: l40-2 1s infinite;
+}
+
+@keyframes l40-1 {
+    0%,10%,90%,100% {inset:0}
+    40%,60% {inset:-10px}
+}
+
+@keyframes l40-2 {
+    0%,40%  {transform: rotate(0)}
+    60%,100%{transform: rotate(90deg)}
+}
+
+/* Loader text (quote) styling */
+.loader-text {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ecce72; /* Genshin yellow */
+    text-align: center;
+    font-family: 'Genshin', sans-serif; /* Use Genshin font */
+}
+
+/* Delay the loading of the site */
+@keyframes site-loading-delay {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.site-content {
+    animation: site-loading-delay 3s forwards; /* Delay the loading of the site */
+}
