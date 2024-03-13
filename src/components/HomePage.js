@@ -1,65 +1,40 @@
-// HomePage.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchAllCharacterNames } from '../api/genshinApi';
-import quotes from '../data/quotes.json'; // Import quotes JSON file
+import axios from 'axios'; // Import axios library for making HTTP requests
+import quotes from '../data/quotes.json';
 import '../styles/HomePage.css';
 
 const HomePage = () => {
   const [characters, setCharacters] = useState([]);
-  const [loading, setLoading] = useState(true); // State to manage loading status
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [randomQuote, setRandomQuote] = useState(''); // State to store random quote
-  const [quoteCharacter, setQuoteCharacter] = useState(''); // State to store the character of the quote
+  const [randomQuote, setRandomQuote] = useState('');
+  const [quoteCharacter, setQuoteCharacter] = useState('');
 
   useEffect(() => {
-    const fetchCharactersData = async () => {
+    const fetchCharacterData = async () => {
       try {
-        const characterNames = await fetchAllCharacterNames();
-        const charactersData = characterNames.map(name => {
-          let imageUrl;
-          if (name.startsWith('traveler')) {
-            const travelerType = name.split('-')[1]; // Extract traveler type
-            imageUrl = `https://genshin.jmp.blue/characters/traveler-${travelerType}/icon-big-lumine`;
-          } else {
-            imageUrl = `https://genshin.jmp.blue/characters/${name.toLowerCase().replace(/\s+/g, '-')}/icon-big`;
-          }
-          return {
-            name,
-            id: name.toLowerCase().replace(/\s+/g, '-'),
-            imageUrl
-          };
-        });
-        setCharacters(charactersData);
+        // Fetch character names directly from genshin-db-api endpoint
+        const response = await axios.get('https://genshin-db-api.vercel.app/api/characters?query=names&matchCategories=true');
+        const characterNames = response.data;
+
+        // Handle special cases
+        const formattedCharacters = characterNames.map(character => ({
+          name: character,
+          imageUrl: getSpecialCaseImageSrc(character)
+        }));
+
+        setCharacters(formattedCharacters);
+        setLoading(false);
       } catch (error) {
         setError(error.message);
+        setLoading(false);
       }
     };
 
-    fetchCharactersData();
-
-    // Event listener to detect when all resources are loaded
-    window.onload = () => {
-      setLoading(false); // Set loading to false when all resources are loaded
-    };
-
-    // Cleanup function to remove the event listener when the component unmounts
-    return () => {
-      window.onload = null;
-    };
+    fetchCharacterData();
   }, []);
 
-  useEffect(() => {
-    // Timeout to hide the loader after 3 seconds, even if the resources haven't finished loading
-    const timeoutId = setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-
-    // Cleanup function to clear the timeout when the component unmounts
-    return () => clearTimeout(timeoutId);
-  }, []);
-
-  // Function to select a random quote and character
   const getRandomQuote = () => {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const { quote, character } = quotes[randomIndex];
@@ -67,29 +42,83 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    // Set a random quote and character while loading
     const { quote, character } = getRandomQuote();
     setRandomQuote(quote);
     setQuoteCharacter(character);
   }, []);
 
+  const getSpecialCaseImageSrc = (characterName) => {
+    switch (characterName) {
+      case 'Aether':
+        return 'UI_AvatarIcon_PlayerBoy';
+      case 'Alhaitham':
+        return 'UI_AvatarIcon_Alhatham';
+      case 'Amber':
+        return 'UI_AvatarIcon_Ambor';
+      case 'Arataki Itto':
+        return 'UI_AvatarIcon_Itto';
+      case 'Baizhu':
+        return 'UI_AvatarIcon_Baizhuer';
+      case 'Hu Tao':
+        return 'UI_AvatarIcon_Hutao';
+      case 'Jean':
+        return 'UI_AvatarIcon_Qin';
+      case 'Kaedehara Kazuha':
+        return 'UI_AvatarIcon_Kazuha';
+      case 'Kamisato Ayaka':
+        return 'UI_AvatarIcon_Ayaka';
+      case 'Kamisato Ayato':
+        return 'UI_AvatarIcon_Ayato';
+      case 'Kirara':
+        return 'UI_AvatarIcon_Momoka';
+      case 'Kujou Sara':
+        return 'UI_AvatarIcon_Sara';
+      case 'Kuki Shinobu':
+        return 'UI_AvatarIcon_Shinobu';
+      case 'Lumine':
+        return 'UI_AvatarIcon_PlayerGirl';
+      case 'Lynette':
+        return 'UI_AvatarIcon_Linette';
+      case 'Lyney':
+        return 'UI_AvatarIcon_Liney';
+      case 'Noelle':
+        return 'UI_AvatarIcon_Noel';
+      case 'Raiden Shogun':
+        return 'UI_AvatarIcon_Shougun';
+      case 'Sangonomiya Kokomi':
+        return 'UI_AvatarIcon_Kokomi';
+      case 'Shikanoin Heizou':
+        return 'UI_AvatarIcon_Heizo';
+      case 'Thoma':
+        return 'UI_AvatarIcon_Tohma';
+      case 'Yae Miko':
+        return 'UI_AvatarIcon_Yae';
+      case 'Yanfei':
+        return 'UI_AvatarIcon_Feiyan';
+      case 'Yun Jin':
+        return 'UI_AvatarIcon_Yunjin';
+      default:
+        return `UI_AvatarIcon_${characterName.replace(/\s+/g, '')}`;
+    }
+  };
+
   return (
     <div className="HomePage">
-      {loading ? ( // If loading, display loader with random quote
+      {loading ? (
         <div className="loader-container">
           <div className="loader"></div>
           <p className="loading-text">"{randomQuote}" - {quoteCharacter}</p>
         </div>
-      ) : ( // If not loading, display content
+      ) : (
         <div className="site-content">
-          <h1 style={{ color: 'blue' }}>Characters</h1>
           {error && <p>Error: {error}</p>}
           <div className="character-list">
-            {characters.map((character) => (
-              <Link key={character.id} to={`/characters/${character.id}`}>
-                <div className="character-card" style={{ border: '1px solid black', padding: '10px', margin: '10px', textAlign: 'center' }}>
-                  <img src={character.imageUrl} alt={character.name} style={{ maxWidth: '200px', maxHeight: '200px' }} />
-                  <p style={{ fontWeight: 'bold', marginTop: '5px' }}>{character.name}</p>
+            {characters.map((character, index) => (
+              <Link key={index} to={`/characters/${character.name}`}>
+                <div className="character-card">
+                  {/* Dynamic image source based on character name */}
+                  <img src={process.env.PUBLIC_URL + `/assets/characters/${character.imageUrl}.png`} alt={character.name} />
+                  <p>{character.name}</p>
                 </div>
               </Link>
             ))}

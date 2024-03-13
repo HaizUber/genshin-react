@@ -3,8 +3,8 @@
 @font-face {
     font-family: 'Genshin';
     src: url('/public/fonts/genshin-font.woff') format('woff');
-  }
-  
+}
+
 .HomePage {
     text-align: center;
     padding: 20px;
@@ -13,7 +13,7 @@
 
 h1 {
     color: #ecce72; /* Genshin yellow */
-    font-size: 36px;
+    font-size: 48px;
     margin-bottom: 20px;
     font-family: 'Genshin', sans-serif; /* Use Genshin font */
 }
@@ -23,10 +23,22 @@ body {
     color: #ffffff; /* White text */
 }
 
+.site-content {
+    border-radius: 10px; /* Rounded box */
+    background-color: #1f2b56; /* Dark blue */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    animation: site-loading-delay 3s forwards; /* Delay the loading of the site */
+    margin-top: 20px; /* Add margin at the top to separate it from other elements */
+
+}
+
+
 .character-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .character-card {
@@ -45,8 +57,8 @@ body {
 }
 
 .character-card img {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 100px;
+    max-height: 100px;
     margin-bottom: 10px;
 }
 
@@ -148,6 +160,3 @@ body {
     }
 }
 
-.site-content {
-    animation: site-loading-delay 3s forwards; /* Delay the loading of the site */
-}
