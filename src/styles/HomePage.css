@@ -48,7 +48,7 @@ body {
     padding: 20px;
     width: 200px;
     background-color: #1f2b56; /* Dark blue */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 14px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -65,8 +65,10 @@ body {
 .character-card p {
     font-size: 18px;
     font-weight: bold;
-}
-
+    text-decoration: none; /* Remove underline */
+    color: #fdedda; /* Set font color to white */
+  }
+  
 @media (max-width: 768px) {
     .character-card {
         width: 150px;
@@ -160,3 +162,79 @@ body {
     }
 }
 
+/* Add the following styles for filter options */
+
+.filter-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center items vertically */
+    background-color: #1f2b56; /* Dark blue background */
+    border-radius: 10px; /* Rounded box */
+    padding: 10px; /* Add padding */
+    margin-bottom: 20px; /* Add margin to separate filter options from character list */
+    
+}
+/* Resize filter option button image */
+/* HomePage.css */
+
+.filter-options button {
+    background-color: transparent; /* Make the button background transparent */
+    border: none; /* Remove button border */
+    padding: 0; /* Remove padding */
+    font-family: 'Genshin', sans-serif; /* Use Genshin font */
+    color: #fdedda; /* Set font color to match the site's color */
+    display: flex; /* Make button content flex */
+    align-items: center; /* Center align items */
+}
+
+.filter-options button img {
+    max-width: 24px; /* Set maximum width for the image */
+    max-height: 24px; /* Set maximum height for the image */
+    margin-right: 5px; /* Add some margin between the image and text */
+}
+
+
+.rarity-filters,
+.element-filters {
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.rarity-filters button,
+.element-filters button {
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+    padding: 5px 10px; /* Reduce padding */
+    border: 2px solid transparent; /* Transparent border by default */
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.separator {
+    width: 2px;
+    height: 20px;
+    background-color: #ffffff; /* White color */
+    margin: 0 20px; /* Add space between rarity and element filters */
+}
+
+.active {
+    background-color: #ffffff; /* White background when button is clicked */
+    color: #1f2b56; /* Dark blue text color */
+    border-color: #ffffff; /* White border color when button is clicked */
+}
+
+.rarity-filters button:hover,
+.element-filters button:hover {
+    background-color: #ffffff; /* White background on hover */
+    color: #1f2b56; /* Dark blue text color on hover */
+    border-color: #ffffff; /* White border color on hover */
+}
+
+/* Resize filter option button image */
+.filter-options button img {
+    max-width: 24px; /* Set maximum width for the image */
+    max-height: 24px; /* Set maximum height for the image */
+    margin-right: 5px; /* Add margin to separate image from text */
+}

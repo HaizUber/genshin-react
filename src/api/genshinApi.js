@@ -17,4 +17,58 @@ const fetchAllCharacterNames = async () => {
   }
 };
 
-export { newApi, fetchAllCharacterNames };
+const getFiveStarCharacters = async () => {
+  try {
+    const response = await newApi.get('/characters?query=5&matchCategories=true');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching 5-star characters:', error);
+    throw error;
+  }
+};
+
+const getFourStarCharacters = async () => {
+  try {
+    const response = await newApi.get('/characters?query=4&matchCategories=true');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching 5-star characters:', error);
+    throw error;
+  }
+};
+
+// Example of getCharactersByElement in genshinApi.js
+export const getCharactersByElement = async (element) => {
+  let response = [];
+  switch (element) {
+    case 'Anemo':
+      response = await fetch('/data/anemoCharacters.json');
+      break;
+    case 'Cryo':
+      response = await fetch('/data/cryoCharacters.json');
+      break;
+    case 'Dendro':
+      response = await fetch('/data/dendroCharacters.json');
+      break;
+    case 'Electro':
+      response = await fetch('/data/electroCharacters.json');
+      break;
+    case 'Geo':
+      response = await fetch('/data/geoCharacters.json');
+      break;
+    case 'Hydro':
+      response = await fetch('/data/hydroCharacters.json');
+      break;
+    case 'Pyro':
+      response = await fetch('/data/pyroCharacters.json');
+      break;
+    default:
+      break;
+  }
+  return response.json();
+};
+
+
+
+
+export { newApi, fetchAllCharacterNames, getFiveStarCharacters, getFourStarCharacters };

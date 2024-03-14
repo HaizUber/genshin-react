@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'; // Import axios library for making HTTP requests
+import { getFiveStarCharacters, getFourStarCharacters, fetchAllCharacterNames, getCharactersByElement } from '../api/genshinApi';
 import quotes from '../data/quotes.json';
+import anemoCharacters from '../data/anemoCharacters.json'; // Import the anemoCharacters.json file
+import cryoCharacters from '../data/cryoCharacters.json'; // Import the cryoCharacters.json file
+import dendroCharacters from '../data/dendroCharacters.json'; // Import the dendroCharacters.json file
+import electroCharacters from '../data/electroCharacters.json'; // Import the electroCharacters.json file
+import geoCharacters from '../data/geoCharacters.json'; // Import the geoCharacters.json file
+import hydroCharacters from '../data/hydroCharacters.json'; // Import the hydroCharacters.json file
+import pyroCharacters from '../data/pyroCharacters.json'; // Import the pyroCharacters.json file
 import '../styles/HomePage.css';
 
 const HomePage = () => {
@@ -10,21 +17,14 @@ const HomePage = () => {
   const [error, setError] = useState(null);
   const [randomQuote, setRandomQuote] = useState('');
   const [quoteCharacter, setQuoteCharacter] = useState('');
+  const [filterOptions, setFilterOptions] = useState({ rarity: null, element: null });
+  const [allCharacterNames, setAllCharacterNames] = useState([]);
 
   useEffect(() => {
-    const fetchCharacterData = async () => {
+    const fetchData = async () => {
       try {
-        // Fetch character names directly from genshin-db-api endpoint
-        const response = await axios.get('https://genshin-db-api.vercel.app/api/characters?query=names&matchCategories=true');
-        const characterNames = response.data;
-
-        // Handle special cases
-        const formattedCharacters = characterNames.map(character => ({
-          name: character,
-          imageUrl: getSpecialCaseImageSrc(character)
-        }));
-
-        setCharacters(formattedCharacters);
+        const characterNames = await fetchAllCharacterNames();
+        setAllCharacterNames(characterNames);
         setLoading(false);
       } catch (error) {
         setError(error.message);
@@ -32,20 +32,84 @@ const HomePage = () => {
       }
     };
 
-    fetchCharacterData();
+    fetchData();
   }, []);
 
-  const getRandomQuote = () => {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const { quote, character } = quotes[randomIndex];
-    return { quote, character };
-  };
-
   useEffect(() => {
+    const getRandomQuote = () => {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      const { quote, character } = quotes[randomIndex];
+      return { quote, character };
+    };
+
     const { quote, character } = getRandomQuote();
     setRandomQuote(quote);
     setQuoteCharacter(character);
   }, []);
+
+  useEffect(() => {
+    const filterCharacters = async () => {
+      try {
+        let filteredCharacters = [];
+
+        if (filterOptions.rarity === '5') {
+          filteredCharacters = await getFiveStarCharacters();
+        } else if (filterOptions.rarity === '4') {
+          filteredCharacters = await getFourStarCharacters();
+        } else {
+          filteredCharacters = allCharacterNames;
+        }
+
+        if (filterOptions.element) {
+          let elementCharacterNames = [];
+          switch (filterOptions.element) {
+            case 'Anemo':
+              elementCharacterNames = anemoCharacters;
+              break;
+            case 'Cryo':
+              elementCharacterNames = cryoCharacters;
+              break;
+            case 'Dendro':
+              elementCharacterNames = dendroCharacters;
+              break;
+            case 'Electro':
+              elementCharacterNames = electroCharacters;
+              break;
+            case 'Geo':
+              elementCharacterNames = geoCharacters;
+              break;
+            case 'Hydro':
+              elementCharacterNames = hydroCharacters;
+              break;
+            case 'Pyro':
+              elementCharacterNames = pyroCharacters;
+              break;
+            default:
+              break;
+          }
+          filteredCharacters = filteredCharacters.filter(character => elementCharacterNames.includes(character));
+        }
+
+        setCharacters(filteredCharacters.map(character => ({
+          name: character,
+          imageUrl: getSpecialCaseImageSrc(character)
+        })));
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    filterCharacters();
+  }, [filterOptions, allCharacterNames]);
+
+  const handleFilterOption = (option) => {
+    setFilterOptions(prevOptions => ({
+      ...prevOptions,
+      [option.type]: option.value === prevOptions[option.type] ? null : option.value
+    }));
+  };
 
   const getSpecialCaseImageSrc = (characterName) => {
     switch (characterName) {
@@ -97,13 +161,31 @@ const HomePage = () => {
         return 'UI_AvatarIcon_Feiyan';
       case 'Yun Jin':
         return 'UI_AvatarIcon_Yunjin';
+      case 'Xianyun':
+        return 'UI_AvatarIcon_Liuyun';
       default:
         return `UI_AvatarIcon_${characterName.replace(/\s+/g, '')}`;
     }
   };
-
   return (
     <div className="HomePage">
+      <div className="filter-options">
+        <div className="rarity-filters">
+          <button onClick={() => handleFilterOption({ type: 'rarity', value: '5' })} className={filterOptions.rarity === '5' ? 'active' : ''}>5<img src={process.env.PUBLIC_URL + '/assets/icons/star.png'} alt="5star" /></button>
+          <button onClick={() => handleFilterOption({ type: 'rarity', value: '4' })} className={filterOptions.rarity === '4' ? 'active' : ''}>4<img src={process.env.PUBLIC_URL + '/assets/icons/starpurple.png'} alt="4star" /></button>
+        </div>
+        <div className="separator"></div>
+        <div className="element-filters">
+        <button onClick={() => handleFilterOption({ type: 'element', value: 'Anemo' })} className={filterOptions.element === 'Anemo' ? 'active' : ''}>
+        <img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_305.png'} alt="Anemo" /></button>
+          <button onClick={() => handleFilterOption({ type: 'element', value: 'Cryo' })} className={filterOptions.element === 'Cryo' ? 'active' : ''}><img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_306.png'} alt="Pyro" /></button>
+          <button onClick={() => handleFilterOption({ type: 'element', value: 'Dendro' })} className={filterOptions.element === 'Dendro' ? 'active' : ''}><img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_303.png'} alt="Pyro" /></button>
+          <button onClick={() => handleFilterOption({ type: 'element', value: 'Electro' })} className={filterOptions.element === 'Electro' ? 'active' : ''}><img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_304.png'} alt="Pyro" /></button>
+          <button onClick={() => handleFilterOption({ type: 'element', value: 'Geo' })} className={filterOptions.element === 'Geo' ? 'active' : ''}><img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_307.png'} alt="Pyro" /></button>
+          <button onClick={() => handleFilterOption({ type: 'element', value: 'Hydro' })} className={filterOptions.element === 'Hydro' ? 'active' : ''}><img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_302.png'} alt="Pyro" /></button>
+          <button onClick={() => handleFilterOption({ type: 'element', value: 'Pyro' })} className={filterOptions.element === 'Pyro' ? 'active' : ''}><img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_301.png'} alt="Pyro" /></button>
+        </div>
+      </div>
       {loading ? (
         <div className="loader-container">
           <div className="loader"></div>
@@ -116,7 +198,6 @@ const HomePage = () => {
             {characters.map((character, index) => (
               <Link key={index} to={`/characters/${character.name}`}>
                 <div className="character-card">
-                  {/* Dynamic image source based on character name */}
                   <img src={process.env.PUBLIC_URL + `/assets/characters/${character.imageUrl}.png`} alt={character.name} />
                   <p>{character.name}</p>
                 </div>
@@ -130,3 +211,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
