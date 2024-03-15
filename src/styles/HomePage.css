@@ -5,10 +5,20 @@
     src: url('/public/fonts/genshin-font.woff') format('woff');
 }
 
+body {
+    font-family: 'Genshin', sans-serif;
+    color: #ffffff; /* White text */
+    margin: 0; /* Remove default body margin */
+}
+
 .HomePage {
     text-align: center;
     padding: 20px;
     background-color: #0c1447; /* Night theme background color */
+    min-height: 100vh; /* Use min-height instead of height for responsiveness */
+    display: flex;
+    flex-direction: column; /* Align children vertically */
+    justify-content: center; /* Center content vertically */
 }
 
 h1 {
@@ -18,11 +28,6 @@ h1 {
     font-family: 'Genshin', sans-serif; /* Use Genshin font */
 }
 
-body {
-    font-family: 'Genshin', sans-serif;
-    color: #ffffff; /* White text */
-}
-
 .site-content {
     border-radius: 10px; /* Rounded box */
     background-color: #1f2b56; /* Dark blue */
@@ -30,26 +35,28 @@ body {
     padding: 20px;
     animation: site-loading-delay 3s forwards; /* Delay the loading of the site */
     margin-top: 20px; /* Add margin at the top to separate it from other elements */
-
+    flex: 1; /* Take remaining vertical space */
 }
-
 
 .character-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allow flex items to wrap onto multiple lines */
     justify-content: center;
     margin-top: 20px;
 }
+
 
 .character-card {
     border: 2px solid #3498db;
     border-radius: 10px;
     margin: 10px;
     padding: 20px;
-    width: 200px;
+    width: 200px; /* Set a fixed width for the character card */
+    max-width: 100%; /* Allow the character card to resize dynamically if needed */
     background-color: #1f2b56; /* Dark blue */
     box-shadow: 0 14px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
+    overflow: hidden; /* Hide overflow content */
 }
 
 .character-card:hover {
@@ -57,26 +64,28 @@ body {
 }
 
 .character-card img {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 100%;
+    max-height: 100px; /* Limit image height */
     margin-bottom: 10px;
 }
 
 .character-card p {
     font-size: 18px;
     font-weight: bold;
-    text-decoration: none; /* Remove underline */
-    color: #fdedda; /* Set font color to white */
-  }
-  
+    text-decoration: none;
+    color: #fdedda;
+    overflow: hidden; /* Hide overflow content */
+    white-space: nowrap; /* Prevent wrapping */
+    text-overflow: ellipsis; /* Show ellipsis (...) when text overflows */
+}
 @media (max-width: 768px) {
     .character-card {
-        width: 150px;
+        width: calc(50% - 20px); /* 50% width with gap */
     }
 
     .character-card img {
-        max-width: 120px;
-        max-height: 120px;
+        max-width: 100%; /* Adjust image width */
+        max-height: 80px; /* Adjust image height */
     }
 
     .character-card p {
@@ -85,8 +94,6 @@ body {
 }
 
 /* Loader.css */
-
-/* HTML: <div class="loader-container"><div class="loader"></div></div> */
 .loader-container {
     display: flex;
     flex-direction: column;
@@ -142,7 +149,6 @@ body {
     60%,100%{transform: rotate(90deg)}
 }
 
-/* Loader text (quote) styling */
 .loader-text {
     margin-top: 20px;
     font-size: 16px;
@@ -166,25 +172,24 @@ body {
 
 .filter-options {
     display: flex;
-    justify-content: space-between;
-    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
     background-color: #1f2b56; /* Dark blue background */
     border-radius: 10px; /* Rounded box */
     padding: 10px; /* Add padding */
+    margin-top: 40px;
     margin-bottom: 20px; /* Add margin to separate filter options from character list */
-    
 }
-/* Resize filter option button image */
-/* HomePage.css */
 
 .filter-options button {
     background-color: transparent; /* Make the button background transparent */
     border: none; /* Remove button border */
-    padding: 0; /* Remove padding */
+    padding: 5px; /* Add padding */
     font-family: 'Genshin', sans-serif; /* Use Genshin font */
     color: #fdedda; /* Set font color to match the site's color */
     display: flex; /* Make button content flex */
     align-items: center; /* Center align items */
+    cursor: pointer;
 }
 
 .filter-options button img {
@@ -193,15 +198,21 @@ body {
     margin-right: 5px; /* Add some margin between the image and text */
 }
 
+.filter-options button:hover {
+    opacity: 0.8; /* Reduce opacity on hover */
+}
 
 .rarity-filters,
-.element-filters {
+.element-filters,
+.weapon-type-filters {
     display: flex;
     align-items: center; /* Center items vertically */
+    margin: 0 10px; /* Add margin between filter groups */
 }
 
 .rarity-filters button,
-.element-filters button {
+.element-filters button,
+.weapon-type-filters button {
     display: flex;
     align-items: center; /* Align icon and text vertically */
     padding: 5px 10px; /* Reduce padding */
@@ -216,17 +227,19 @@ body {
     width: 2px;
     height: 20px;
     background-color: #ffffff; /* White color */
-    margin: 0 20px; /* Add space between rarity and element filters */
+    margin: 0 20px; /* Add space between filter groups */
 }
 
 .active {
     background-color: #ffffff; /* White background when button is clicked */
     color: #1f2b56; /* Dark blue text color */
     border-color: #ffffff; /* White border color when button is clicked */
+    opacity: 0.5;
 }
 
 .rarity-filters button:hover,
-.element-filters button:hover {
+.element-filters button:hover,
+.weapon-type-filters button:hover {
     background-color: #ffffff; /* White background on hover */
     color: #1f2b56; /* Dark blue text color on hover */
     border-color: #ffffff; /* White border color on hover */
@@ -238,3 +251,70 @@ body {
     max-height: 24px; /* Set maximum height for the image */
     margin-right: 5px; /* Add margin to separate image from text */
 }
+/* Add tooltip styles */
+
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]:hover::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    background-color: #1f2b56; /* Dark blue */
+    color: #ffffff; /* White text */
+    padding: 5px;
+    border-radius: 5px;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 1;
+}
+
+/* Add search bar styles */
+
+.search-bar {
+    margin: 20px 0;
+    background-color: #152238; /* Darker color than the filter options */
+    position: relative;
+    border-radius: 10px;
+}
+
+.search-bar input {
+    width: 100%; /* Take up full width of parent container */
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #ffffff; /* Text color */
+    background-color: #152238; /* Darker background color */
+    padding-left: 40px;
+}
+
+.search-bar input:focus {
+    outline: none; /* Remove outline on focus */
+    border-color: #007bff; /* Change border color on focus */
+}
+.magnifying-glass-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Adjust positioning as needed */
+    transform: translateY(-50%);
+    fill: #ffffff; /* Icon color */
+}
+.clear-icon {
+    position: absolute;
+    top: 38%;
+    right: 10px; /* Adjust the right position */
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    display: none; /* Initially hide the clear button */
+  }
+  
+  /* Show the clear button when there is text in the input field */
+  .search-bar input:not(:placeholder-shown) + .clear-icon {
+    display: block;
+  }

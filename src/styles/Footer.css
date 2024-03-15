@@ -1,0 +1,25 @@
+/* Footer.css */
+
+.Footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #0c1447; /* Night theme background color */
+    padding: 20px 0;
+    text-align: center;
+    color: #ffffff; /* White text */
+    font-size: 16px;
+    font-family: 'Genshin', sans-serif; /* Use Genshin font */
+  }
+  
+  .Footer a {
+    color: #ecce72; /* Genshin yellow */
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth transition for link color */
+    margin-left: 20px;
+  }
+  
+  .Footer a:hover {
+    color: #fdedda; /* Light yellow color on hover */
+  }
+  
