@@ -68,7 +68,26 @@ export const getCharactersByElement = async (element) => {
   return response.json();
 };
 
+const getCharacterDetail = async (characterName) => {
+  try {
+      const response = await fetch(`https://genshin.jmp.blue/characters/${characterName}`);
+    let data = null;
+
+    if (response.ok) {
+      data = await response.json();
+    }
+
+    const alternativeResponse = await fetch(`https://genshin-db-api.vercel.app/api/characters?query=${characterName}&matchCategories=true`);
+    const alternativeData = await alternativeResponse.json();
+
+    return { data, alternativeData };
+  } catch (error) {
+    throw new Error('Failed to fetch character details');
+  }
+};
 
 
 
-export { newApi, fetchAllCharacterNames, getFiveStarCharacters, getFourStarCharacters };
+
+
+export { newApi, fetchAllCharacterNames, getFiveStarCharacters, getFourStarCharacters, getCharacterDetail };

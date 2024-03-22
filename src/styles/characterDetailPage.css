@@ -1,0 +1,130 @@
+@font-face {
+    font-family: 'Genshin';
+    src: url('/public/fonts/genshin-font.woff') format('woff');
+}
+
+body {
+    font-family: 'Genshin', sans-serif;
+    color: #ffffff; /* White text */
+    margin: 0; /* Remove default body margin */
+    background-color: #0c1447; /* Night theme background color */
+}
+
+.character-detail-container {
+    text-align: center;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px;
+    justify-content: center; /* Center content horizontally */
+}
+
+.character-header {
+    grid-column: 1;
+}
+
+.character-header h2 {
+    color: #ecce72;
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-family: 'Genshin', sans-serif;
+}
+
+.character-header img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%;
+}
+
+.character-info {
+    grid-column: 2;
+    border-radius: 10px;
+    background-color: #1f2b56;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    animation: site-loading-delay 3s forwards;
+    margin-top: 20px;
+    max-width: 400px;
+    align-self: start; /* Align to the top of the grid cell */
+}
+
+.info-section h3 {
+    color: #ecce72; /* Genshin yellow */
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.info-section p {
+    font-size: 24px;
+}
+
+.character-section {
+    margin-top: 40px;
+}
+
+.character-section h3 {
+    color: #ecce72; /* Genshin yellow */
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.character-section .talent,
+.character-section .passive-talent,
+.character-section .ascension-level,
+.character-section .constellation {
+    border-radius: 10px; /* Rounded border */
+    background-color: #1f2b56; /* Dark blue */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.character-section .talent h4,
+.character-section .passive-talent h4,
+.character-section .ascension-level h4,
+.character-section .constellation h4 {
+    color: #ecce72; /* Genshin yellow */
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.character-section .talent p,
+.character-section .passive-talent p,
+.character-section .constellation p {
+    font-size: 20px;
+    color: #fdedda; /* Light text color */
+    margin-bottom: 15px;
+}
+
+.character-section .ascension-level ul li {
+    font-size: 18px; /* Decrease font size for better fit */
+    color: #fdedda; /* Light text color */
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #2a376e; /* Dark blue */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex; /* Align items horizontally */
+    align-items: center; /* Center items vertically */
+}
+
+.character-section .ascension-level ul li img {
+    margin-right: 10px; /* Add space between icon and text */
+    width: 44px; /* Set width for consistency */
+    height: 44px; /* Set height for consistency */
+}
+
+
+.character-links a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.character-links a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+}

@@ -17,9 +17,9 @@ import NavMenu from './NavMenu';
 import Footer from './Footer';
 import '../styles/HomePage.css';
 
-const HomePage = () => {
-  const [characters, setCharacters] = useState([]);
+  const HomePage = () => {
   const [loading, setLoading] = useState(false); // Add loading state
+  const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
   const [filterOptions, setFilterOptions] = useState({ rarity: null, element: null });
   const [searchQuery, setSearchQuery] = useState('');
@@ -271,14 +271,14 @@ const HomePage = () => {
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
         <div className="character-list">
-          {characters.map((character, index) => (
-            <Link key={index} to={`/characters/${character.name}`}>
-              <div className="character-card">
-                <img src={process.env.PUBLIC_URL + `/assets/characters/${character.imageUrl}.png`} alt={character.name} />
-                <p>{character.name}</p>
-              </div>
-            </Link>
-          ))}
+              {characters.map((character, index) => (
+           <Link key={index} to={`/characters/${character.name}`}>
+             <div className="character-card">
+            <img src={process.env.PUBLIC_URL + `/assets/characters/${character.imageUrl}.png`} alt={character.name} />
+               <p>{character.name}</p>
+             </div>
+           </Link>
+       ))}
         </div>
       </div>
       <Footer />
