@@ -1,0 +1,43 @@
+  {
+      "Amber": {
+        "weapons": [
+          "Elegy for the End",
+          "Favonius Warbow",
+          "Sacrificial Bow",
+          "The Viridescent Hunt",
+          "End of the Line"
+        ],
+        "artifacts": {
+          "4 piece Noblesse": [
+            "Noblesse Oblige "
+          ],
+          "4 piece Instructor": [
+            "Instructor "
+          ],
+          "2 piece Emblem/Exile": [
+            "Emblem of Severed Fate ",
+            "The Exile "
+          ],
+          "2 piece Emblem/Noblesse": [
+            "Emblem of Severed Fate ",
+            "Noblesse Oblige "
+          ]
+        },
+        "main_stats": {
+          "Sands": "Energy Recharge",
+          "Goblet": "Pyro DMG",
+          "Circlet": "CRIT Rate / CRIT DMG"
+        },
+        "substats": [
+          "Energy Recharge",
+          "CRIT Rate",
+          "CRIT DMG",
+          "ATK%"
+        ],
+        "talent_priority": [
+          "Normal Attack",
+          "Skill"
+        ]
+      }
+    }
+    

@@ -4,13 +4,15 @@ import { getCharacterDetail } from '../api/genshinApi';
 import '../styles/characterDetailPage.css'; // Import the CSS file
 import NavMenu from './NavMenu';
 import Footer from './Footer';
-
+import characterBuilds from '../data/characterbuilds.json'; // Import the character builds
 const CharacterDetailPage = () => {
   const { characterName } = useParams();
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+   const [weaponImages, setWeaponImages] = useState([]);
+   const [weaponRarities, setWeaponRarities] = useState([]);
+   const [artifacts, setArtifacts] = useState([]);
   useEffect(() => {
     const fetchCharacterDetail = async () => {
       try {
@@ -39,9 +41,82 @@ const CharacterDetailPage = () => {
       }
     };
 
+
     fetchCharacterDetail();
   }, [characterName]);
 
+  useEffect(() => {
+    if (character) {
+      // Fetch weapon images and rarities
+      const weapons = characterBuilds[characterName].weapons;
+  
+      Promise.all(
+        weapons.map(weapon => 
+          fetch(`https://genshin-db-api.vercel.app/api/weapons?query=${encodeURIComponent(weapon)}&matchAliases=true&matchCategories=true&verboseCategories=true`)
+            .then(response => response.json())
+            .then(data => ({ nameicon: data.images.nameicon, rarity: data.rarity })) // Extract nameicon and rarity
+            .catch(error => {
+              console.error("Error fetching weapon data:", error);
+              return null; // Return null if there's an error to maintain order
+            })
+        )
+      ).then(results => {
+        // Filter out any null values
+        const filteredResults = results.filter(result => result !== null);
+        const nameIcons = filteredResults.map(result => result.nameicon);
+        const rarities = filteredResults.map(result => result.rarity);
+  
+        setWeaponImages(nameIcons);
+        setWeaponRarities(rarities);
+      });
+    }
+    }, [character, characterName]); 
+  
+    useEffect(() => {
+      const fetchArtifactData = async () => {
+        try {
+          const artifactNames = Object.values(characterBuilds[characterName].artifacts).flat().map(name => name.split(" ")[0]);
+          console.log("Artifact Names:", artifactNames);
+        
+          // Fetch artifact data for each artifact name
+          const artifactPromises = artifactNames.map(async artifactName => {
+            const response = await fetch(`https://genshin-db-api.vercel.app/api/artifacts?query=${encodeURIComponent(artifactName)}`);
+            const data = await response.json();
+            console.log("API Response:", data);
+        
+            // Check if 'data' exists and contains the necessary information
+            if (data && data.name && data.images && data.images.nameflower) {
+              const artifactData = {
+                name: data.name,
+                imageSrc: `/assets/artifacts/${data.images.nameflower}.png`
+              };
+              return artifactData;
+            } else {
+              console.error("No data or empty array in API response:", data);
+              return null; // Or handle the case when no data is found
+            }
+          });
+        
+          // Resolve all artifact promises
+          const fetchedArtifacts = await Promise.all(artifactPromises);
+          console.log("Fetched Artifacts:", fetchedArtifacts);
+          setArtifacts(fetchedArtifacts.filter(artifact => artifact !== null)); // Filter out null values
+        } catch (error) {
+          console.error('Error fetching artifact data:', error);
+        }
+      };
+      
+      
+      
+      
+      
+      
+      
+    
+      fetchArtifactData();
+    }, [characterBuilds, characterName]);
+    
+  
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -115,103 +190,188 @@ const getSpecialCaseImageSrc = (characterName) => {
   const getMaterialImageSrc = (materialId) => {
     return `/assets/materials/UI_ItemIcon_${materialId}.png`;
   };
+  
 
   return (
-    <div className="character-detail-container">
+    <div className="character-detail-wrapper">
       <NavMenu />
-      <div className="character-header">
-        <h2>{character.name}</h2>
-        <img src={`/assets/characters/${getSpecialCaseImageSrc(characterName)}.png`} alt={characterName} />
-      </div>
-      <div className="character-info">
-        <div className="info-item">
-          <h3>Description:</h3>
-          <p>{character.description}</p>
-        </div>
-        <div className="info-item">
-          <h3>Rarity:</h3>
-          <p>{character.rarity}</p>
-        </div>
-        <div className="info-item">
-          <h3>Element:</h3>
-          <p>{character.element}</p>
-        </div>
-        <div className="info-item">
-          <h3>Weapon Type:</h3>
-          <p>{character.weapon}</p>
-        </div>
-        <div className="info-item">
-          <h3>Gender:</h3>
-          <p>{character.gender}</p>
-        </div>
-        <div className="info-item">
-          <h3>Nation:</h3>
-          <p>{character.nation}</p>
-        </div>
-        <div className="info-item">
-          <h3>Affiliation:</h3>
-          <p>{character.affiliation}</p>
-        </div>
-        <div className="info-item">
-          <h3>Constellation:</h3>
-          <p>{character.constellation}</p>
-        </div>
-        <div className="info-item">
-          <h3>Birthday:</h3>
-          <p>{character.birthday}</p>
-        </div>
-        <div className="info-item">
-          <h3>Release Date:</h3>
-          <p>{character.release}</p>
-        </div>
-      </div>
-      <div className="character-section">
-        <h3>Talents:</h3>
-        {character.skillTalents && character.skillTalents.map((talent) => (
-          <div key={talent.name} className="talent">
-            <h4>{talent.name}</h4>
-            <p>{talent.description}</p>
+      <div className="character-detail-container">
+      <h2>{character.name}</h2>
+        <div className="character-header">
+          <img src={`/assets/characters/${getSpecialCaseImageSrc(characterName)}.png`} alt={characterName} />
+          <div className="character-info">
+          <div className="info-item">
+            <h3>Description:</h3>
+            <p>{character.description}</p>
           </div>
-        ))}
-      </div>
-      <div className="character-section">
-        <h3>Passive Talents:</h3>
-        {character.passiveTalents && character.passiveTalents.map((talent) => (
-          <div key={talent.name} className="passive-talent">
-            <h4>{talent.name}</h4>
-            <p>{talent.description}</p>
+          <div className="info-item">
+            <h3>Rarity:</h3>
+            <p>{character.rarity}</p>
           </div>
-        ))}
-      </div>
-      <div className="character-section">
-        <h3>Constellations:</h3>
-        {character.constellations && character.constellations.map((constellation) => (
-          <div key={constellation.name} className="constellation">
-          <h4>{constellation.name}</h4>
-          <p>{constellation.description}</p>
+          <div className="info-item">
+            <h3>Element:</h3>
+            <p>{character.element}</p>
+          </div>
+          <div className="info-item">
+            <h3>Weapon Type:</h3>
+            <p>{character.weapon}</p>
+          </div>
+          <div className="info-item">
+            <h3>Nation:<p>{character.nation}</p></h3>
+          </div>
+          <div className="info-item">
+            <h3>Affiliation:</h3>
+            <p>{character.affiliation}</p>
+          </div>
+          <div className="info-item">
+            <h3>Constellation:</h3>
+            <p>{character.constellation}</p>
+          </div>
+          <div className="info-item">
+            <h3>Birthday:</h3>
+            <p>{character.birthday}</p>
+          </div>
+          <div className="info-item">
+            <h3>Release Date:</h3>
+            <p>{character.release}</p>
+          </div>
         </div>
-      ))}
-    </div>
-    <div className="character-section">
-        <h3>Ascension Costs:</h3>
-        {character && character.costs && Object.entries(character.costs).map(([ascendLevel, items]) => (
-          <div key={ascendLevel} className="ascension-level">
-            <h4>Ascension Level {ascendLevel.slice(-1)}</h4>
+        </div>
+               {/* Display character's specific build */}
+               {characterBuilds[characterName] && (
+          <div className="character-build">
+            <h4>Character Build:</h4>
             <ul>
-              {items.map((item, index) => (
-                <li key={index}>
-                  <img src={getMaterialImageSrc(item.id)} alt={item.name} />
-                  {item.name}: {item.count}
-                </li>
-              ))}
+{/* Display weapons */}
+<li>
+    <h4>Weapons</h4>
+    <ul>
+        {characterBuilds[characterName].weapons.map((weapon, index) => (
+            <li key={index}>
+                <img src={`/assets/weapons/${weaponImages[index]}.png`} alt={weapon} className="weapon-image"/>
+                {weapon} ({weaponRarities[index]}✩)
+            </li>
+        ))}
+    </ul> 
+</li>
+
+{/* Display artifacts */}
+<li className='artifact-list'>
+  <h4>Artifacts</h4>
+  <ul>
+    {Object.entries(characterBuilds[characterName].artifacts).map(([setName, setItems], setIndex) => (
+      <li key={setIndex}>
+        <h5>{setName}</h5>
+        <ul>
+          {setItems.map((artifact, index) => {
+            console.log("setName:", setName);
+            console.log("artifact:", artifact);
+            const artifactName = artifact.trim(); // Remove any leading/trailing spaces
+            console.log("artifactName:", artifactName);
+            const matchedArtifact = artifacts.find(item => item.name === artifactName);
+            console.log("matchedArtifact:", matchedArtifact);
+            if (!matchedArtifact) {
+              console.log(`Artifact not found for name: ${artifactName}`);
+              return null; // Skip rendering if artifact is not found
+            }
+            return (
+              <li key={index}>
+                {/* Display artifact image and name */}
+                <>
+                  <img src={matchedArtifact.imageSrc} alt={artifactName} className='artifact-image' />
+                  {artifactName}
+                </>
+              </li>
+            );
+          })}
+        </ul>
+      </li>
+    ))}
+  </ul>
+</li>
+    
+              {/* Display main stats */}
+              <li>
+                <h4>Main Stats</h4>
+                <ul>
+                  {Object.entries(characterBuilds[characterName].main_stats).map(([stat, value]) => (
+                    <li key={stat}>{stat}: {value}</li>
+                  ))}
+                </ul>
+              </li>
+
+              {/* Display substats */}
+              <li>
+                <h4>Substats</h4>
+                <ul>
+                  {characterBuilds[characterName].substats.map((substat, index) => (
+                    <li key={index}>{index + 1}: {substat}</li>
+                  ))}
+                </ul>
+              </li>
+
+              {/* Display talent priority */}
+              <li>
+                <h4>Talent Priority</h4>
+                <ul>
+                  {characterBuilds[characterName].talent_priority.map((talent, index) => (
+                    <li key={index}>{index + 1}: {talent}</li>
+                  ))}
+                </ul>
+              </li>
             </ul>
           </div>
-        ))}
+        )}
+        <div className="character-section">
+          <h3>Talents:</h3>
+          {character.skillTalents && character.skillTalents.map((talent) => (
+            <div key={talent.name} className="talent">
+              <h4>{talent.name}</h4>
+              <p>{talent.description}</p>
+            </div>
+          ))}
+        </div>
+        <div className="character-section">
+          <h3>Passive Talents:</h3>
+          {character.passiveTalents && character.passiveTalents.map((talent) => (
+            <div key={talent.name} className="passive-talent">
+              <h4>{talent.name}</h4>
+              <p>{talent.description}</p>
+            </div>
+          ))}
+        </div>
+        <div className="character-section">
+          <h3>Constellations:</h3>
+          {character.constellations && character.constellations.map((constellation) => (
+            <div key={constellation.name} className="constellation">
+              <h4>{constellation.name}</h4>
+              <p>{constellation.description}</p>
+            </div>
+          ))}
+        </div>
+        <div className="character-section">
+          <h3>Ascension Costs:</h3>
+          {character && character.costs && Object.entries(character.costs).map(([ascendLevel, items]) => (
+            <div key={ascendLevel} className="ascension-level">
+              <h4>Ascension Level {ascendLevel.slice(-1)}</h4>
+              <ul>
+                {items.map((item, index) => (
+                  <li key={index}>
+                    <img src={getMaterialImageSrc(item.id)} alt={item.name} />
+                    {item.name}: {item.count}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
-      
+      <Footer />
     </div>
-);
+  );
 };
-<div><Footer /></div>
+
 export default CharacterDetailPage;
+  
+  
 
