@@ -7,6 +7,7 @@ Welcome to Genshin Companion[Placeholder] - ReactJS, an interactive web applicat
 ## Features (so far)
 
 - Auto-updating character list display on landing page
+- Auto-updating character details page
 
 
 ## Roadmap
