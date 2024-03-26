@@ -237,7 +237,7 @@ const getSpecialCaseImageSrc = (characterName) => {
         return 'Liuyun';
       default:
         // For all other cases, just remove spaces and convert to lowercase
-        return characterName.replace(/\s+/g, '').toLowerCase();
+        return characterName.replace(/\s+/g, '');
     }
   };
   
