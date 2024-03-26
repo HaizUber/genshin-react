@@ -113,6 +113,46 @@
         "CRIT DMG",
         "Elemental Mastery"
       ]
+    },
+     "Aloy": {
+      "weapons": [
+        "Thundering Pulse",
+        "Polar Star",
+        "Skyward Harp",
+        "The Stringless",
+        "The Viridescent Hunt"
+      ],
+      "artifacts": {
+        "4 piece Noblesse Oblige": [
+          "Noblesse Oblige"
+        ],
+        "2 piece Blizzard Strayer / Noblesse Oblige": [
+          "Blizzard Strayer",
+          "Noblesse Oblige"
+        ],
+        "4 piece Emblem of Severed Fate": [
+          "Emblem of Severed Fate"
+        ],
+        "2 piece Blizzard Strayer / Gilded Dreams": [
+          "Blizzard Strayer",
+          "Gilded Dreams"
+        ],
+        "2 piece Noblesse Oblige / Gilded Dreams": [
+          "Noblesse Oblige",
+          "Gilded Dreams"
+        ]
+      },
+      "main_stats": {
+        "Sands": "ATK% / Elemental Mastery",
+        "Goblet": "Cryo DMG",
+        "Circlet": "CRIT Rate / CRIT DMG"
+      },
+      "substats": [
+        "CRIT Rate",
+        "CRIT DMG",
+        "ATK%",
+        "Elemental Mastery"
+      ]
     }
   }  
 
