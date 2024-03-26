@@ -1,43 +1,118 @@
-  {
-      "Amber": {
-        "weapons": [
-          "Elegy for the End",
-          "Favonius Warbow",
-          "Sacrificial Bow",
-          "The Viridescent Hunt",
-          "End of the Line"
+{
+  "Amber": {
+    "weapons": [
+      "Elegy for the End",
+      "Favonius Warbow",
+      "Sacrificial Bow",
+      "The Viridescent Hunt",
+      "End of the Line"
+    ],
+    "artifacts": {
+      "4 piece Noblesse": [
+        "Noblesse Oblige "
+      ],
+      "4 piece Instructor": [
+        "Instructor "
+      ],
+      "2 piece Emblem of Severed Fate / The Exile": [
+        "Emblem of Severed Fate ",
+        "The Exile "
+      ],
+      "2 piece Emblem of Severed Fate / Noblesse Oblige": [
+        "Emblem of Severed Fate ",
+        "Noblesse Oblige "
+      ]
+    },
+    "main_stats": {
+      "Sands": "Energy Recharge",
+      "Goblet": "Pyro DMG",
+      "Circlet": "CRIT Rate / CRIT DMG"
+    },
+    "substats": [
+      "Energy Recharge",
+      "CRIT Rate",
+      "CRIT DMG",
+      "ATK%"
+    ]
+  },
+  "Albedo": {
+    "weapons": [
+      "Cinnabar Spindle",
+      "Harbinger of Dawn",
+      "Primordial Jade Cutter",
+      "Mistsplitter Reforged",
+      "Freedom-Sworn"
+    ],
+    "artifacts": {
+      "4 piece Husk of Opulent Dreams": [
+        "Husk of Opulent Dreams"
+      ],
+      "2 piece Archaic Petra / Husk of Opulent Dreams": [
+        "Archaic Petra",
+        "Husk of Opulent Dreams"
+      ],
+      "2 piece Noblesse Oblige / Archaic Petra": [
+        "Noblesse Oblige",
+        "Archaic Petra"
+      ],
+      "4 piece Tenacity of the Millelith": [
+        "Tenacity of the Millelith"
+      ],
+      "4 piece Noblesse Oblige": [
+        "Noblesse Oblige"
+      ]
+    },
+    "main_stats": {
+      "Sands": "DEF%",
+      "Goblet": "Geo DMG",
+      "Circlet": "CRIT Rate / CRIT DMG / DEF%"
+    },
+    "substats": [
+      "CRIT Rate",
+      "CRIT DMG",
+      "DEF%",
+      "ATK%"
+    ]
+  },
+    "Alhaitham": {
+      "weapons": [
+        "Light of Foliar Incision",
+        "Primordial Jade Cutter",
+        "Mistsplitter Reforged",
+        "Haran Geppaku Futsu",
+        "The Black Sword"
+      ],
+      "artifacts": {
+        "4 piece Gilded Dreams": [
+          "Gilded Dreams"
         ],
-        "artifacts": {
-          "4 piece Noblesse": [
-            "Noblesse Oblige "
-          ],
-          "4 piece Instructor": [
-            "Instructor "
-          ],
-          "2 piece Emblem/Exile": [
-            "Emblem of Severed Fate ",
-            "The Exile "
-          ],
-          "2 piece Emblem/Noblesse": [
-            "Emblem of Severed Fate ",
-            "Noblesse Oblige "
-          ]
-        },
-        "main_stats": {
-          "Sands": "Energy Recharge",
-          "Goblet": "Pyro DMG",
-          "Circlet": "CRIT Rate / CRIT DMG"
-        },
-        "substats": [
-          "Energy Recharge",
-          "CRIT Rate",
-          "CRIT DMG",
-          "ATK%"
+        "2 piece Deepwood Memories / Emblem of Severed Fate": [
+          "Deepwood Memories",
+          "Emblem of Severed Fate"
         ],
-        "talent_priority": [
-          "Normal Attack",
-          "Skill"
+        "2 piece Deepwood Memories / Gilded Dreams": [
+          "Deepwood Memories",
+          "Gilded Dreams"
+        ],
+        "2 piece Emblem of Severed Fate / Gilded Dreams": [
+          "Emblem of Severed Fate",
+          "Gilded Dreams"
+        ],
+        "4 piece Deepwood Memories": [
+          "Deepwood Memories"
         ]
-      }
+      },
+      "main_stats": {
+        "Sands": "Elemental Mastery / ATK%",
+        "Goblet": "Dendro DMG",
+        "Circlet": "CRIT Rate / CRIT DMG"
+      },
+      "substats": [
+        "Energy Recharge",
+        "CRIT Rate",
+        "CRIT DMG",
+        "Elemental Mastery"
+      ]
     }
-    
+  }  
+

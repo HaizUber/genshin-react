@@ -46,7 +46,24 @@
     align-items: center; /* Center vertically */
     text-align: center;
     font-family: 'Genshin', sans-serif;
+    background-size: 150px; /* Cover the entire container */
+    background-position: center; /* Center the background image */
+    /* Add CSS animations */
+    animation-name: fadeInBackground;
+    animation-duration: 1s;
+    animation-fill-mode: both;
 }
+
+/* Define CSS animation */
+@keyframes fadeInBackground {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .character-header img {
     max-width: 100%;
     height: auto; /* Maintain aspect ratio */
@@ -92,7 +109,16 @@
 }
 
 
+.info-item h3 {
+    color: #ecce72; /* Genshin yellow */
+    font-size: 24px;
+    margin-bottom: 10px;
+}
 
+.info-item p {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
 .info-section h3 {
     color: #ecce72; /* Genshin yellow */
     font-size: 36px;
@@ -116,10 +142,17 @@
 
 .character-section .talent,
 .character-section .passive-talent,
-.character-section .ascension-level,
 .character-section .constellation {
     border-radius: 10px; /* Rounded border */
-    background-color: #1f2b56; /* Dark blue */
+    background-color: #2a376e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.character-section .ascension-level{
+    border-radius: 10px; /* Rounded border */
+    background-color:#1f2b56;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px;
