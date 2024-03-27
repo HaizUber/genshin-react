@@ -268,17 +268,18 @@ import '../styles/HomePage.css';
 
       </div>
       <div className="site-content">
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {error}</p>}
-        <div className="character-list">
-              {characters.map((character, index) => (
-           <Link key={index} to={`/characters/${character.name}`}>
-             <div className="character-card">
-            <img src={process.env.PUBLIC_URL + `/assets/characters/${character.imageUrl}.png`} alt={character.name} />
-               <p>{character.name}</p>
-             </div>
-           </Link>
-       ))}
+      {loading && <p>Loading...</p>}
+  {error && <p>Error: {error}</p>}
+  <div className="character-list">
+    {characters.map((character, index) => (
+      // Replace spaces with hyphens in the character name for the link
+      <Link key={index} to={`/characters/${character.name.replace(/\s/g, '-')}`}>
+        <div className="character-card">
+          <img src={process.env.PUBLIC_URL + `/assets/characters/${character.imageUrl}.png`} alt={character.name} />
+          <p>{character.name}</p>
+        </div>
+      </Link>
+    ))}
         </div>
       </div>
       <Footer />

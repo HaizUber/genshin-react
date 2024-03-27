@@ -70,24 +70,30 @@ export const getCharactersByElement = async (element) => {
 
 const getCharacterDetail = async (characterName) => {
   try {
-      const response = await fetch(`https://genshin.jmp.blue/characters/${characterName}`);
+    const response = await fetch(`https://genshin.jmp.blue/characters/${characterName}`);
     let data = null;
 
     if (response.ok) {
       data = await response.json();
     }
 
-    const alternativeResponse = await fetch(`https://genshin-db-api.vercel.app/api/characters?query=${characterName}&matchCategories=true`);
-    const alternativeData = await alternativeResponse.json();
-
-    return { data, alternativeData };
+    return data;
   } catch (error) {
     throw new Error('Failed to fetch character details');
   }
 };
 
+const getAlternativeResponse = async (characterName) => {
+  try {
+    // Extract the first word from the character name and convert it to lowercase
+    const firstName = characterName.split('-')[0].toLowerCase();
 
+    const alternativeResponse = await fetch(`https://genshin-db-api.vercel.app/api/characters?query=${firstName}&matchCategories=true`);
+    const alternativeData = await alternativeResponse.json();
+    return alternativeData;
+  } catch (error) {
+    throw new Error('Failed to fetch alternative response');
+  }
+};
 
-
-
-export { newApi, fetchAllCharacterNames, getFiveStarCharacters, getFourStarCharacters, getCharacterDetail };
+export { newApi, fetchAllCharacterNames, getFiveStarCharacters, getFourStarCharacters, getCharacterDetail, getAlternativeResponse };

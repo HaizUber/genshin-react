@@ -1,5 +1,14 @@
 {
   "Amber": {
+    "materials": [
+      "Ballad",
+      "Tusk of Monoceros Caeli",
+      "Prithiva Topaz Silver",
+      "Basalt Pillar",
+      "Cecilia",
+      "Divining Scroll"
+    ],
+
     "weapons": [
       "Elegy for the End",
       "Favonius Warbow",
@@ -74,85 +83,376 @@
       "ATK%"
     ]
   },
-    "Alhaitham": {
-      "weapons": [
-        "Light of Foliar Incision",
-        "Primordial Jade Cutter",
-        "Mistsplitter Reforged",
-        "Haran Geppaku Futsu",
-        "The Black Sword"
+  "Alhaitham": {
+    "materials": [
+      "Ingenuity",
+      "Mirror of Mushin",
+      "Nagadus Emerald Sliver",
+      "Pseudo-Stamens",
+      "Sand Grease Pupa",
+      "Faded Red Satin"
+    ],
+    "weapons": [
+      "Light of Foliar Incision",
+      "Primordial Jade Cutter",
+      "Mistsplitter Reforged",
+      "Haran Geppaku Futsu",
+      "The Black Sword"
+    ],
+    "artifacts": {
+      "4 piece Gilded Dreams": [
+        "Gilded Dreams"
       ],
-      "artifacts": {
-        "4 piece Gilded Dreams": [
-          "Gilded Dreams"
-        ],
-        "2 piece Deepwood Memories / Emblem of Severed Fate": [
-          "Deepwood Memories",
-          "Emblem of Severed Fate"
-        ],
-        "2 piece Deepwood Memories / Gilded Dreams": [
-          "Deepwood Memories",
-          "Gilded Dreams"
-        ],
-        "2 piece Emblem of Severed Fate / Gilded Dreams": [
-          "Emblem of Severed Fate",
-          "Gilded Dreams"
-        ],
-        "4 piece Deepwood Memories": [
-          "Deepwood Memories"
-        ]
-      },
-      "main_stats": {
-        "Sands": "Elemental Mastery / ATK%",
-        "Goblet": "Dendro DMG",
-        "Circlet": "CRIT Rate / CRIT DMG"
-      },
-      "substats": [
-        "Energy Recharge",
-        "CRIT Rate",
-        "CRIT DMG",
-        "Elemental Mastery"
+      "2 piece Deepwood Memories / Emblem of Severed Fate": [
+        "Deepwood Memories",
+        "Emblem of Severed Fate"
+      ],
+      "2 piece Deepwood Memories / Gilded Dreams": [
+        "Deepwood Memories",
+        "Gilded Dreams"
+      ],
+      "2 piece Emblem of Severed Fate / Gilded Dreams": [
+        "Emblem of Severed Fate",
+        "Gilded Dreams"
+      ],
+      "4 piece Deepwood Memories": [
+        "Deepwood Memories"
       ]
     },
-     "Aloy": {
-      "weapons": [
-        "Thundering Pulse",
-        "Polar Star",
-        "Skyward Harp",
-        "The Stringless",
-        "The Viridescent Hunt"
+    "main_stats": {
+      "Sands": "Elemental Mastery / ATK%",
+      "Goblet": "Dendro DMG",
+      "Circlet": "CRIT Rate / CRIT DMG"
+    },
+    "substats": [
+      "Energy Recharge",
+      "CRIT Rate",
+      "CRIT DMG",
+      "Elemental Mastery"
+    ]
+  },
+  "Aloy": {
+    "materials": [
+      "Freedom",
+      "Molten Moment",
+      "Shivada Jade Sliver",
+      "Crystalline Bloom",
+      "Crystal Marrow",
+      "Spectral Husk"
+    ],
+    "weapons": [
+      "Thundering Pulse",
+      "Polar Star",
+      "Skyward Harp",
+      "The Stringless",
+      "The Viridescent Hunt"
+    ],
+    "artifacts": {
+      "4 piece Noblesse Oblige": [
+        "Noblesse Oblige"
       ],
-      "artifacts": {
-        "4 piece Noblesse Oblige": [
-          "Noblesse Oblige"
-        ],
-        "2 piece Blizzard Strayer / Noblesse Oblige": [
-          "Blizzard Strayer",
-          "Noblesse Oblige"
-        ],
-        "4 piece Emblem of Severed Fate": [
-          "Emblem of Severed Fate"
-        ],
-        "2 piece Blizzard Strayer / Gilded Dreams": [
-          "Blizzard Strayer",
-          "Gilded Dreams"
-        ],
-        "2 piece Noblesse Oblige / Gilded Dreams": [
-          "Noblesse Oblige",
-          "Gilded Dreams"
-        ]
-      },
-      "main_stats": {
-        "Sands": "ATK% / Elemental Mastery",
-        "Goblet": "Cryo DMG",
-        "Circlet": "CRIT Rate / CRIT DMG"
-      },
-      "substats": [
-        "CRIT Rate",
-        "CRIT DMG",
-        "ATK%",
-        "Elemental Mastery"
+      "2 piece Blizzard Strayer / Noblesse Oblige": [
+        "Blizzard Strayer",
+        "Noblesse Oblige"
+      ],
+      "4 piece Emblem of Severed Fate": [
+        "Emblem of Severed Fate"
+      ],
+      "2 piece Blizzard Strayer / Gilded Dreams": [
+        "Blizzard Strayer",
+        "Gilded Dreams"
+      ],
+      "2 piece Noblesse Oblige / Gilded Dreams": [
+        "Noblesse Oblige",
+        "Gilded Dreams"
       ]
-    }
+    },
+    "main_stats": {
+      "Sands": "ATK% / Elemental Mastery",
+      "Goblet": "Cryo DMG",
+      "Circlet": "CRIT Rate / CRIT DMG"
+    },
+    "substats": [
+      "CRIT Rate",
+      "CRIT DMG",
+      "ATK%",
+      "Elemental Mastery"
+    ]
+  },
+  "Arataki-Itto": {
+    "materials": [
+      "Elegance",
+      "Ashen Heart",
+      "Prithiva Topaz Sliver",
+      "Riftborn Regalia",
+      "Onikabuto",
+      "Slime Condensate"
+    ],
+    "weapons": [
+      "Redhorn Stonethresher",
+      "Serpent Spine",
+      "Skyward Pride",
+      "Whiteblind",
+      "Wolf's Gravestone"
+    ],
+    "artifacts": {
+      "4 piece Husk of Opulent Dreams": [
+        "Husk of Opulent Dreams"
+      ],
+      "4 piece Desert Pavilion Chronicle": [
+        "Desert Pavilion Chronicle"
+      ],
+      "4 piece Retracing Bolide": [
+        "Retracing Bolide"
+      ],
+      "2 piece Archaic Petra / Husk of Opulent Dreams": [
+        "Archaic Petra",
+        "Husk of Opulent Dreams"
+      ],
+      "2 piece Emblem of Severed Fate / Husk of Opulent Dreams": [
+        "Emblem of Severed Fate",
+        "Husk of Opulent Dreams"
+      ]
+    },
+    "main_stats": {
+      "Sands": "DEF%",
+      "Goblet": "Geo DMG",
+      "Circlet": "CRIT Rate / CRIT DMG"
+    },
+    "substats": [
+      "CRIT Rate",
+      "CRIT DMG",
+      "DEF%",
+      "Energy Recharge"
+    ]
+  }, "Baizhu": {
+    "materials": [
+      "Gold",
+      "Worldspan Fern",
+      "Nagadus Emerald Sliver",
+      "Evergloom Ring",
+      "Fungal Spores",
+      "Violetgrass"
+    ],
+    "weapons": [
+      "Jadefall's Splendor",
+      "Prototype Amber",
+      "Favonius Codex",
+      "Hakushin Ring",
+      "Thrilling Tales of Dragon Slayers"
+    ],
+    "artifacts": {
+      "4 piece Deepwood Memories": [
+        "Deepwood Memories"
+      ],
+      "4 piece Ocean-Hued Clam": [
+        "Ocean-Hued Clam"
+      ],
+      "4 piece Instructor": [
+        "Instructor"
+      ],
+      "4 piece Noblesse Oblige": [
+        "Noblesse Oblige"
+      ],
+      "2 piece Emblem of Severed Fate / Tenacity of the Millelith": [
+        "Emblem of Severed Fate",
+        "Tenacity of the Millelith"
+      ]
+    },
+    "main_stats": {
+      "Sands": "HP% / Energy Recharge",
+      "Goblet": "HP%",
+      "Circlet": "HP"
+    },
+    "substats": [
+      "Energy Recharge",
+      "HP%",
+      "HP"
+    ]
+  },"Ayaka": {
+    "materials": [
+      "Elegance",
+      "Bloodjade Branch",
+      "Shivada Jade Sliver",
+      "Perpetual Heart",
+      "Sakura Bloom",
+      "Old Handguard"
+    ],
+    "weapons": [
+      "Mistsplitter Reforged",
+      "Haran Geppaku Futsu",
+      "Light of Foliar Incision",
+      "Summit Shaper",
+      "Amenoma Kageuchi"
+    ],
+    "artifacts": {
+      "4 piece Blizzard Strayer": [
+        "Blizzard Strayer"
+      ],
+      "2 piece Shimenawa's Reminiscence / Blizzard Strayer": [
+        "Shimenawa's Reminiscence",
+        "Blizzard Strayer"
+      ],
+      "2 piece Gladiator's Finale": [
+        "Gladiator's Finale"
+      ],
+      "2 piece Shimenawa's Reminiscence": [
+        "Shimenawa's Reminiscence"
+      ],
+      "2 piece Echoes of an Offering / Vermillion Hereafter": [
+        "Echoes of an Offering",
+        "Vermillion Hereafter"
+      ],
+      "2 piece Noblesse Oblige / Blizzard Strayer": [
+        "Noblesse Oblige",
+        "Blizzard Strayer"
+      ]
+    },
+    "main_stats": {
+      "Sands": "ATK%",
+      "Goblet": "Cryo DMG",
+      "Circlet": "CRIT DMG / ATK%"
+    },
+    "substats": [
+      "CRIT DMG",
+      "ATK%",
+      "Energy Recharge"
+    ]
+  },"Ayato": {
+    "materials": [
+      "Elegance",
+      "Mudra of the Malefic General",
+      "Varunada Lazurite Sliver",
+      "Dew of Repudiation",
+      "Sakura Bloom",
+      "Old Handguard"
+    ],
+    "weapons": [
+      "Haran Geppaku Futsu",
+      "Primordial Jade Cutter",
+      "Mistsplitter Reforged",
+      "The Black Sword",
+      "Summit Shaper"
+    ],
+    "artifacts": {
+      "4 piece Heart of Depth": [
+        "Heart of Depth"
+      ],
+      "4 piece Gladiator's Finale": [
+        "Gladiator's Finale"
+      ],
+      "4 piece Nymph's Dream": [
+        "Nymph's Dream"
+      ],
+      "2 piece Gladiator's Finale / Heart of Depth": [
+        "Gladiator's Finale",
+        "Heart of Depth"
+      ],
+      "2 piece Blizzard Strayer": [
+        "Blizzard Strayer"
+      ]
+    },
+    "main_stats": {
+      "Sands": "ATK%",
+      "Goblet": "Cryo DMG",
+      "Circlet": "CRIT DMG / ATK%"
+    },
+    "substats": [
+      "CRIT DMG",
+      "ATK%",
+      "Energy Recharge"
+    ]
+  },"Childe": {
+    "materials": [
+      "Freedom",
+      "Shard of a Foul Legacy",
+      "Varunada Lazurite Sliver",
+      "Cleansing Heart",
+      "Starconch",
+      "Recruit's Insignia"
+    ],
+    "weapons": [
+      "Polar Star",
+      "Thundering Pulse",
+      "Hunter's Path",
+      "Aqua Simulacra",
+      "The Viridescent Hunt"
+    ],
+    "artifacts": {
+      "4 piece Heart of Depth": [
+        "Heart of Depth"
+      ],
+      "2 piece Heart of Depth": [
+        "Heart of Depth"
+      ],
+      "2 piece Shimenawa's Reminiscence": [
+        "Shimenawa's Reminiscence"
+      ],
+      "2 piece Noblesse Oblige": [
+        "Noblesse Oblige"
+      ],
+      "4 piece Shimenawa's Reminiscence": [
+        "Shimenawa's Reminiscence"
+      ]
+    },
+    "main_stats": {
+      "Sands": "ATK%",
+      "Goblet": "Hydro DMG",
+      "Circlet": "CRIT Rate / CRIT DMG"
+    },
+    "substats": [
+      "CRIT Rate",
+      "CRIT DMG",
+      "ATK%",
+      "Elemental Mastery"
+    ]
+  },"Cyno": {
+    "materials": [
+      "Admonition",
+      "Mudra of the Malefic General",
+      "Vajrada Amethyst Sliver",
+      "Thunderclap Fruitcore",
+      "Scarab",
+      "Divining Scroll"
+    ],
+    "weapons": [
+      "Staff of the Scarlet Sands",
+      "Primordial Jade Winged-Spear",
+      "Calamity Queller",
+      "Staff of Homa",
+      "White Tassel R5"
+    ],
+    "artifacts": {
+      "4 piece Gladiator's Finale": [
+        "Gladiator's Finale"
+      ],
+      "4 piece Thundering Fury": [
+        "Thundering Fury"
+      ],
+      "4 piece Gilded Dreams": [
+        "Gilded Dreams"
+      ],
+      "2 piece Shimenawa's Reminiscence / Thundering Fury": [
+        "Shimenawa's Reminiscence",
+        "Thundering Fury"
+      ],
+      "2 piece Emblem of Severed Fate / Thundering Fury": [
+        "Emblem of Severed Fate",
+        "Thundering Fury"
+      ]
+    },
+    "main_stats": {
+      "Sands": "Elemental Mastery / ATK%",
+      "Goblet": "Electro DMG",
+      "Circlet": "CRIT Rate / CRIT DMG"
+    },
+    "substats": [
+      "Energy Recharge",
+      "CRIT Rate",
+      "CRIT DMG",
+      "Elemental Mastery",
+      "ATK%"
+    ]
+  }
   }  
 

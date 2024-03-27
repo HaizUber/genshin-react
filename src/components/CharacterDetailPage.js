@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getCharacterDetail } from '../api/genshinApi';
+import { getCharacterDetail, getAlternativeResponse } from '../api/genshinApi';
 import '../styles/characterDetailPage.css'; // Import the CSS file
 import NavMenu from './NavMenu';
 import Footer from './Footer';
@@ -13,26 +13,35 @@ const CharacterDetailPage = () => {
    const [weaponImages, setWeaponImages] = useState([]);
    const [weaponRarities, setWeaponRarities] = useState([]);
    const [artifacts, setArtifacts] = useState([]);
-  useEffect(() => {
+   const [upgradeMaterials, setUpgradeMaterials] = useState([]);
+   const [scrollPosition, setScrollPosition] = useState(0);
+
+   
+   useEffect(() => {
     const fetchCharacterDetail = async () => {
       try {
         setLoading(true);
-
+  
+        // Ensure character name is in the correct format for the first API endpoint
+        const formattedCharacterName = characterName.replace(/-/g, '-');
+  
         // Fetch character data from the first endpoint
-        const { data: characterData } = await getCharacterDetail(characterName);
+        const characterData = await getCharacterDetail(formattedCharacterName);
         console.log("Character data:", characterData); // Log character data
-
+  
+        // Extract the first word from the character name and convert it to lowercase
+        const firstName = characterName.split(' ')[0];
+  
         // Fetch additional data including ascension costs from the second endpoint
-        const alternativeResponse = await fetch(`https://genshin-db-api.vercel.app/api/characters?query=${characterName}&matchCategories=true`);
-        const additionalData = await alternativeResponse.json();
-        console.log("Additional data:", additionalData); // Log additional data
-
+        const alternativeData = await getAlternativeResponse(firstName);
+        console.log("Additional data:", alternativeData); // Log additional data
+  
         // Merge the additional data into the character data
         const characterWithCosts = {
           ...characterData,
-          ...additionalData // Assuming all data from the second endpoint is needed
+          ...alternativeData // Assuming all data from the second endpoint is needed
         };
-
+  
         setCharacter(characterWithCosts);
       } catch (error) {
         setError(error.message);
@@ -40,11 +49,10 @@ const CharacterDetailPage = () => {
         setLoading(false);
       }
     };
-
-
+  
     fetchCharacterDetail();
   }, [characterName]);
-
+  
   useEffect(() => {
     if (character) {
       // Fetch weapon images and rarities
@@ -107,6 +115,64 @@ const CharacterDetailPage = () => {
       };
       fetchArtifactData();
     }, [ characterName ]);
+
+// Declare getUpgradeMaterialImageSrc function before the useEffect hook
+const getUpgradeMaterialImageSrc = (materialId) => {
+  return `/assets/materials/${materialId}.png`;
+};
+
+// Inside the existing useEffect hook
+useEffect(() => {
+  const fetchUpgradeMaterialsData = async () => {
+    try {
+      // Get the list of upgrade materials for the character
+      const upgradeMaterials = characterBuilds[characterName].materials;
+
+      // Fetch material data for each upgrade material
+      const upgradeMaterialPromises = upgradeMaterials.map(async material => {
+        const response = await fetch(`https://genshin-db-api.vercel.app/api/materials?query=${encodeURIComponent(material)}&matchAliases=true&matchCategories=true&verboseCategories=true`);
+        const data = await response.json();
+        console.log("Upgrade Material API Response:", data);
+
+        // Check if 'data' exists and contains the necessary information
+        if (data && data.id && data.images && data.images.nameicon) {
+          const upgradeMaterialData = {
+            id: data.id,
+            name: data.name,
+            imageSrc: getUpgradeMaterialImageSrc(data.images.nameicon)
+          };
+          return upgradeMaterialData;
+        } else {
+          console.error("No data or empty array in upgrade material API response:", data);
+          return null; // Or handle the case when no data is found
+        }
+      });
+
+      // Resolve all upgrade material promises
+      const fetchedUpgradeMaterials = await Promise.all(upgradeMaterialPromises);
+      console.log("Fetched Upgrade Materials:", fetchedUpgradeMaterials);
+      setUpgradeMaterials(fetchedUpgradeMaterials.filter(material => material !== null)); // Filter out null values
+    } catch (error) {
+      console.error('Error fetching upgrade material data:', error);
+    }
+  };
+  fetchUpgradeMaterialsData();
+}, [characterName]);
+
+useEffect(() => {
+  const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+  };
+
+  window.addEventListener('scroll', handleScroll);
+
+  return () => {
+      window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+
+const backgroundPositionY = `${scrollPosition * 0.5}px`; // Adjust the scroll speed as needed
+
     
   if (loading) {
     return <p>Loading...</p>;
@@ -129,7 +195,7 @@ const getSpecialCaseImageSrc = (characterName) => {
       return 'UI_Gacha_AvatarImg_Alhatham';
     case 'Amber':
       return 'UI_Gacha_AvatarImg_Ambor';
-    case 'Arataki Itto':
+    case 'Arataki-Itto':
       return 'UI_Gacha_AvatarImg_Itto';
     case 'Baizhu':
       return 'UI_Gacha_AvatarImg_Baizhuer';
@@ -185,141 +251,163 @@ const getSpecialCaseImageSrc = (characterName) => {
   
   const convertCharacterNameToImageFormat = (characterName) => {
     switch (characterName) {
-      case 'Aether':
-        return 'PlayerBoy';
-      case 'Alhaitham':
-        return 'Alhatham';
-      case 'Amber':
-        return 'Ambor';
-      case 'Arataki Itto':
-        return 'Itto';
-      case 'Baizhu':
-        return 'Baizhuer';
-      case 'Hu Tao':
-        return 'Hutao';
-      case 'Jean':
-        return 'Qin';
-      case 'Kaedehara Kazuha':
-        return 'Kazuha';
-      case 'Kamisato Ayaka':
-        return 'Ayaka';
-      case 'Kamisato Ayato':
-        return 'Ayato';
-      case 'Kirara':
-        return 'Momoka';
-      case 'Kujou Sara':
-        return 'Sara';
-      case 'Kuki Shinobu':
-        return 'Shinobu';
-      case 'Lumine':
-        return 'PlayerGirl';
-      case 'Lynette':
-        return 'Linette';
-      case 'Lyney':
-        return 'Liney';
-      case 'Noelle':
-        return 'Noel';
-      case 'Raiden Shogun':
-        return 'Shougun';
-      case 'Sangonomiya Kokomi':
-        return 'Kokomi';
-      case 'Shikanoin Heizou':
-        return 'Heizo';
-      case 'Thoma':
-        return 'Tohma';
-      case 'Yae Miko':
-        return 'Yae';
-      case 'Yanfei':
-        return 'Feiyan';
-      case 'Yun Jin':
-        return 'Yunjin';
-      case 'Xianyun':
-        return 'Liuyun';
-      default:
-        // For all other cases, just remove spaces and convert to lowercase
-        return characterName.replace(/\s+/g, '');
+        case 'Aether':
+            return 'PlayerBoy';
+        case 'Alhaitham':
+            return 'Alhatham';
+        case 'Amber':
+            return 'Ambor';
+        case 'Arataki-Itto':
+            return 'Itto';
+        case 'Baizhu':
+            return 'Baizhuer';
+        case 'Hu Tao':
+            return 'Hutao';
+        case 'Jean':
+            return 'Qin';
+        case 'Kaedehara Kazuha':
+            return 'Kazuha';
+        case 'Kamisato Ayaka':
+            return 'Ayaka';
+        case 'Kamisato Ayato':
+            return 'Ayato';
+        case 'Kirara':
+            return 'Momoka';
+        case 'Kujou Sara':
+            return 'Sara';
+        case 'Kuki Shinobu':
+            return 'Shinobu';
+        case 'Lumine':
+            return 'PlayerGirl';
+        case 'Lynette':
+            return 'Linette';
+        case 'Lyney':
+            return 'Liney';
+        case 'Noelle':
+            return 'Noel';
+        case 'Raiden Shogun':
+            return 'Shougun';
+        case 'Sangonomiya Kokomi':
+            return 'Kokomi';
+        case 'Shikanoin Heizou':
+            return 'Heizo';
+        case 'Thoma':
+            return 'Tohma';
+        case 'Yae Miko':
+            return 'Yae';
+        case 'Yanfei':
+            return 'Feiyan';
+        case 'Yun Jin':
+            return 'Yunjin';
+        case 'Xianyun':
+            return 'Liuyun';
+        default:
+            // If the name contains spaces, remove the first word, remove spaces, replace hyphens with empty string, and convert to lowercase
+            if (characterName.includes(' ')) {
+                const remainingName = characterName.split(' ').slice(1).join('');
+                return remainingName.replace(/\s+/g, '').replace('-', '').toLowerCase();
+            } else {
+                // Return the original character name if not found and does not contain spaces
+                return characterName;
+            }
     }
-  };
-  
-// Helper function to get the talent image based on weapon type and talent type
+};
+
 const getTalentImage = (weaponType, talentType, characterName) => {
   const talentTypeMap = {
-    NORMAL_ATTACK: "Skill_A",
-    ELEMENTAL_SKILL: "Skill_S",
-    ELEMENTAL_BURST: "Skill_E"
+      NORMAL_ATTACK: "Skill_A",
+      ELEMENTAL_SKILL: "Skill_S",
+      ELEMENTAL_BURST: "Skill_E"
   };
 
-  // Convert character name to match image format
-  const characterNameForImage = convertCharacterNameToImageFormat(characterName);
-
+  // Get the talent image prefix based on the talent type
   let talentImagePrefix;
-  if (talentType === "ELEMENTAL_SKILL") {
-    // Elemental Skill talent image
-    talentImagePrefix = "Skill_S";
-    const imagePath = `/assets/talents/${talentImagePrefix}_${characterNameForImage}_01.png`;
-    return imagePath;
-  } else if (talentType === "ELEMENTAL_BURST") {
-    // Elemental Burst talent image
-    talentImagePrefix = "Skill_E";
-    const imagePath = `/assets/talents/${talentImagePrefix}_${characterNameForImage}_01_HD.png`;
-    return imagePath;
+  switch (talentType.toLowerCase()) {
+      case "elemental_skill":
+          talentImagePrefix = "Skill_S";
+          break;
+      case "elemental_burst":
+          talentImagePrefix = "Skill_E";
+          break;
+      default:
+          talentImagePrefix = talentTypeMap[talentType]; // Use the default talent type mapping
   }
 
-  // For Normal Attack talent image
-  let weaponPrefix;
-  switch (weaponType) {
-    case "sword":
-      weaponPrefix = "01";
-      break;
-    case "bow":
-      weaponPrefix = "02";
-      break;
-    case "polearm":
-      weaponPrefix = "03";
-      break;
-    case "claymore":
-      weaponPrefix = "04";
-      break;
-    case "catalyst":
-      return `/assets/talents/Skill_A_Catalyst_MD.png`;
-    default:
-      weaponPrefix = "01"; // Default to sword if weapon type is unknown
+  // Construct the talent image path based on talent type
+  let imagePath;
+  if (talentType.toLowerCase() === "normal_attack") {
+      // Determine the weapon prefix based on the weapon type for normal attack
+      let weaponPrefix = "01"; // Default to sword if weapon type is unknown
+      if (weaponType) {
+          switch (weaponType.toLowerCase()) {
+              case "sword":
+                  weaponPrefix = "01";
+                  break;
+              case "bow":
+                  weaponPrefix = "02";
+                  break;
+              case "polearm":
+                  weaponPrefix = "03";
+                  break;
+              case "claymore":
+                  weaponPrefix = "04";
+                  break;
+              case "catalyst":
+                  return `/assets/talents/Skill_A_Catalyst_MD.png`;
+              default:
+                  break; // No need to change the weapon prefix for other talent types
+          }
+      }
+      imagePath = `/assets/talents/Skill_A_${weaponPrefix}.png`;
+  } else if (talentType.toLowerCase() === "elemental_burst") {
+      // Convert character name to match image format
+      const formattedCharacterName = convertCharacterNameToImageFormat(characterName);
+      imagePath = `/assets/talents/Skill_E_${formattedCharacterName}_01_HD.png`;
+  } else {
+      // Convert character name to match image format
+      const formattedCharacterName = convertCharacterNameToImageFormat(characterName);
+      imagePath = `/assets/talents/${talentImagePrefix}_${formattedCharacterName}_01.png`;
   }
 
-  return `/assets/talents/${talentTypeMap[talentType]}_${weaponPrefix}.png`;
+  return imagePath;
 };
 
 const getPassiveTalentImage = (characterName, talent) => {
   if (!talent) {
-    return ""; // Return default image URL or handle it as needed
+      return ""; // Return default image URL or handle it as needed
   }
+
+  // Convert character name to match image format
+  const formattedCharacterName = convertCharacterNameToImageFormat(characterName);
 
   // Check unlock condition
   if (talent.unlock === "Unlocked at Ascension 1") {
-    return `/assets/talents/UI_Talent_S_${convertCharacterNameToImageFormat(characterName)}_05.png`;
+      return `/assets/talents/UI_Talent_S_${formattedCharacterName}_05.png`;
   } else if (talent.unlock === "Unlocked at Ascension 4") {
-    return `/assets/talents/UI_Talent_S_${convertCharacterNameToImageFormat(characterName)}_06.png`;
+      return `/assets/talents/UI_Talent_S_${formattedCharacterName}_06.png`;
   } else {
-    // Check description for additional conditions
-    if (talent.description.includes("Decreases all party members' gliding Stamina Consumption")) {
-      return "/assets/talents/UI_Talent_Explosion_Glide.png";
-    } else if (talent.description.includes("Weapon Ascension Materials, he has a 10% chance to receive double the product.")) {
-      return "/assets/talents/UI_Talent_Combine_Weapon_Double.png";
-    }
-    
-    // For other unlock conditions, handle them accordingly
-    // You can add more conditions here as needed
-    return ""; // Return default image URL or handle it as needed
+      // Check description for additional conditions
+      if (talent.description.includes("Decreases all party members' gliding Stamina Consumption")) {
+          return "/assets/talents/UI_Talent_Explosion_Glide.png";
+      } else if (talent.description.includes("Weapon Ascension Materials, he has a 10% chance to receive double the product.")) {
+          return "/assets/talents/UI_Talent_Combine_Weapon_Double.png";
+      } else if (talent.description.includes("When a party member uses attacks to obtain wood from a tree, they have a 25% chance to get an additional log of wood.")) {
+          return "/assets/talents/UI_Talent_S_Itto_07.png";
+      }
+
+      // For other unlock conditions, handle them accordingly
+      // You can add more conditions here as needed
+      return ""; // Return default image URL or handle it as needed
   }
 };
 
-// Define function to get constellation image URL
 const getConstellationImage = (characterName, constellation) => {
   const constellationIndex = constellation.level - 1; // Adjust level to array index
-  let imageUrl;
 
-  // Ensure consistent character name formatting
+  // Convert character name to match image format
   const formattedCharacterName = convertCharacterNameToImageFormat(characterName);
+
+  let imageUrl;
 
   // Construct image URL based on constellation type and index
   switch (constellationIndex) {
@@ -332,29 +420,44 @@ const getConstellationImage = (characterName, constellation) => {
       case 2:
           imageUrl = `/assets/constellations/UI_Talent_U_${formattedCharacterName}_01.png`; // 3rd constellation
           break;
-      case 3:
-          imageUrl = `/assets/constellations/UI_Talent_S_${formattedCharacterName}_03.png`; // 4th constellation
-          break;
-      case 4:
-          imageUrl = `/assets/constellations/UI_Talent_U_${formattedCharacterName}_02.png`; // 5th constellation
-          break;
-      case 5:
-          imageUrl = `/assets/constellations/UI_Talent_S_${formattedCharacterName}_04.png`; // 6th constellation
-          break;
-      default:
-          imageUrl = ''; // Default image URL
-  }
-  return imageUrl;
+          case 3:
+            imageUrl = `/assets/constellations/UI_Talent_S_${formattedCharacterName}_03.png`; // 4th constellation
+            break;
+        case 4:
+            imageUrl = `/assets/constellations/UI_Talent_U_${formattedCharacterName}_02.png`; // 5th constellation
+            break;
+        case 5:
+            imageUrl = `/assets/constellations/UI_Talent_S_${formattedCharacterName}_04.png`; // 6th constellation
+            break;
+        default:
+            imageUrl = ''; // Default image URL
+    }
+    return imageUrl;
 };
 
   return (
     <div className="character-detail-wrapper">
       <NavMenu />
-      <div className="character-detail-container">
-      <h2>{character.name}</h2>
-      <div className="character-header" style={{ backgroundImage: `url('/assets/constellations/Eff_UI_Talent_${convertCharacterNameToImageFormat(character.name)}.png')` }}>
+      <div className="character-detail-container" style={{ 
+            backgroundImage: `url('/assets/constellations/Eff_UI_Talent_${convertCharacterNameToImageFormat(character.name)}.png')`,
+            backgroundRepeat: 'repeat',
+            backgroundSize: '250px',
+            borderRadius: '10px',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+            padding: '20px',
+            animationName: 'fadeIn',
+            animationDuration: '1s',
+            animationFillMode: 'both',
+            backgroundPositionY: backgroundPositionY,
+        }}>
+          
+      <div className="character-header">
           <img src={`/assets/characters/${getSpecialCaseImageSrc(characterName)}.png`} alt={characterName} />
           <div className="character-info">
+          <div className="info-item">
+            <h3>Name:</h3>
+            <h2>{character.name}</h2>
+          </div>
           <div className="info-item">
             <h3>Description:</h3>
             <p>{character.description}</p>
@@ -393,32 +496,43 @@ const getConstellationImage = (characterName, constellation) => {
           </div>
         </div>
         </div>
-               {/* Display character's specific build */}
-               {characterBuilds[characterName] && (
-          <div className="character-build">
-            <h4>Character Build:</h4>
-            <ul>
-{/* Display weapons */}
-<li>
-    <h4>Weapons</h4>
-    <ul>
-        {characterBuilds[characterName].weapons.map((weapon, index) => (
-            <li key={index}>
-                <img src={`/assets/weapons/${weaponImages[index]}.png`} alt={weapon} className="weapon-image"/>
-                {weapon} ({weaponRarities[index]}✩)
-            </li>
-        ))}
-    </ul> 
-</li>
 
-{/* Display artifacts */}
-<li className='artifact-list'>
-  <h4>Artifacts</h4>
-  <ul>
+        <div className="character-section">
+      <h3>Upgrade Materials:</h3>
+      <div className="upgrade-materials">
+        {upgradeMaterials.map((material, index) => (
+          <div key={index} className="upgrade-materials-item">
+            <img src={material.imageSrc} alt={material.name} />
+            <p>{material.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+               {/* Display character's specific build */}
+{characterBuilds[characterName] && (
+  <div className="character-build">
+    <h4>Character Build:</h4>
+    <ul>
+      {/* Display weapons */}
+      <li className="build-item">
+        <h4>Weapons</h4>
+        <ul className="build-sublist">
+          {characterBuilds[characterName].weapons.map((weapon, index) => (
+            <li key={index}>
+              <img src={`/assets/weapons/${weaponImages[index]}.png`} alt={weapon} className="weapon-image"/>
+              <p>{weapon}</p> ({weaponRarities[index]}✩)
+            </li>
+          ))}
+        </ul> 
+      </li>
+
+      <div className="character-section artifacts">
+  <h3>Artifacts:</h3>
+  <div className="artifacts-wrapper">
     {Object.entries(characterBuilds[characterName].artifacts).map(([setName, setItems], setIndex) => (
-      <li key={setIndex}>
-        <h5>{setName}</h5>
-        <ul>
+      <div key={setIndex} className="artifact-set">
+        <h4>{setName}</h4>
+        <div className="artifact-items">
           {setItems.map((artifact, index) => {
             const artifactName = artifact.trim(); // Remove any leading/trailing spaces
             const matchedArtifact = artifacts.find(item => item.name === artifactName);
@@ -426,55 +540,54 @@ const getConstellationImage = (characterName, constellation) => {
               return null; // Skip rendering if artifact is not found
             }
             return (
-              <li key={index}>
-                {/* Display artifact image and name */}
-                <>
-                  <img src={matchedArtifact.imageSrc} alt={artifactName} className='artifact-image' />
-                  {artifactName}
-                </>
-              </li>
+              <div key={index} className="artifact-item">
+                <img src={matchedArtifact.imageSrc} alt={artifactName} className="artifact-image" />
+                <p>{artifactName}</p>
+              </div>
             );
           })}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+      
+      {/* Display main stats */}
+      <li className="build-item">
+        <h4>Main Stats</h4>
+        <ul className="build-sublist">
+          {Object.entries(characterBuilds[characterName].main_stats).map(([stat, value]) => (
+            <li key={stat}>{stat}: {value}</li>
+          ))}
         </ul>
       </li>
-    ))}
-  </ul>
-</li>
-    
-              {/* Display main stats */}
-              <li>
-                <h4>Main Stats</h4>
-                <ul>
-                  {Object.entries(characterBuilds[characterName].main_stats).map(([stat, value]) => (
-                    <li key={stat}>{stat}: {value}</li>
-                  ))}
-                </ul>
-              </li>
 
-              {/* Display substats */}
-              <li>
-                <h4>Substats</h4>
-                <ul>
-                  {characterBuilds[characterName].substats.map((substat, index) => (
-                    <li key={index}>{index + 1}: {substat}</li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
-          </div>
+      {/* Display substats */}
+      <li className="build-item">
+        <h4>Substats</h4>
+        <ul className="build-sublist">
+          {characterBuilds[characterName].substats.map((substat, index) => (
+            <li key={index}>{index + 1}: {substat}</li>
+          ))}
+        </ul>
+      </li>
+    </ul>
+  </div>
+)}
+
+  <div className="character-section">
+    <h3>Talents:</h3>
+    {character.skillTalents && character.skillTalents.map((talent, index) => (
+      <div key={index} className="talent">
+        <h4>{talent.name}</h4>
+        {characterName && (
+          <img src={getTalentImage(character.weapon, talent.type, character.name)} alt={talent.type} />
         )}
-<div className="character-section">
-  <h3>Talents:</h3>
-  {character.skillTalents && character.skillTalents.map((talent, index) => (
-    <div key={index} className="talent">
-      <h4>{talent.name}</h4>
-      {characterName && (
-        <img src={getTalentImage(character.weapon, talent.type, convertCharacterNameToImageFormat(characterName))} alt={talent.type} />
-      )}
-      <p>{talent.description}</p>
-    </div>
-  ))}
-</div>
+        <p>{talent.description}</p>
+      </div>
+    ))}
+  </div>
 
 <div className="character-section">
   <h3>Passive Talents:</h3>

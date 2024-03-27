@@ -1,54 +1,42 @@
-/* CharacterDetailPage.css */
-
 /* Wrapper for the entire character detail page */
 .character-detail-wrapper {
-    background-color: #0c1447; /* Night theme background color */
+    background-color: #0c1447;
     padding: 20px;
-    border-radius: 10px; /* Rounded box */
+    border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-    min-height: 100vh; /* Use min-height instead of height for responsiveness */
+    min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Align children vertically */
-    justify-content: center; /* Center content vertically */
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
     font-family: 'Genshin', sans-serif;
 }
 
 /* Container for character details */
 .character-detail-container {
-    border-radius: 10px; /* Rounded box */
-    background-color: #1f2b56; /* Dark blue */
+    border-radius: 10px;
+    background-color: #1f2b56;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 20px 140px; /* Center the container */
-    flex: 1; /* Take remaining vertical space */
+    margin: 20px 140px;
+    flex: 1;
     display: flex;
-    flex-direction: column; /* Align children vertically */
-    justify-content: center; /* Center content vertically */
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
     font-family: 'Genshin', sans-serif;
 }
 
-/* Header styles */
-.character-detail-container h2 {
-    color: #ecce72; /* Genshin yellow */
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-/* Header styles */
 .character-header {
-    background-color: #1f2b56; /* Dark blue */
     padding: 20px;
     display: grid;
-    grid-template-columns: auto 2fr; /* Increase the width of the second column */
-    align-items: center; /* Center vertically */
+    grid-template-columns: auto 2fr;
+    align-items: center;
     text-align: center;
     font-family: 'Genshin', sans-serif;
-    background-size: 150px; /* Cover the entire container */
-    background-position: center; /* Center the background image */
-    /* Add CSS animations */
+    background-size: 150px;
+    background-position: center;
     animation-name: fadeInBackground;
     animation-duration: 1s;
     animation-fill-mode: both;
@@ -66,17 +54,16 @@
 
 .character-header img {
     max-width: 100%;
-    height: auto; /* Maintain aspect ratio */
+    height: auto;
     border-radius: 50%;
-    grid-column: 1; /* Position image in the first column */
-    padding: 12px; /* Add padding to create space between border and image */
-    transition: transform 0.3s ease-in-out; /* Add smooth transition for hover effect */
+    grid-column: 1;
+    padding: 12px;
+    transition: transform 0.3s ease-in-out;
 }
 
 .character-header img:hover {
-    transform: scale(1.1); /* Scale up the image on hover for a zoom effect */
+    transform: scale(1.1);
 }
-
 
 
 /* Info section styles */
@@ -86,31 +73,31 @@
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-top: 20px;
-    width: 100%; /* Adjusted width for the character info */
-    max-width: 600px; /* Maximum width for larger screens */
-    height: auto; /* Adjusted height for the character info */
-    align-self: start; /* Align to the top of the grid cell */
-    grid-column: 2; /* Position character info in the second column */
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    align-self: start;
+    grid-column: 2;
 }
 
 /* Responsive Media Queries */
 @media (max-width: 768px) {
     .character-header {
-        grid-template-columns: auto; /* Change to single column layout on smaller screens */
-        justify-content: center; /* Center align on smaller screens */
+        grid-template-columns: auto;
+        justify-content: center;
     }
 
     .character-info {
         margin-top: 20px;
-        width: 100%; /* Adjust width to full width on smaller screens */
-        max-width: none; /* Remove max-width restriction */
-        height: auto; /* Adjust height to auto */
+        width: 100%;
+        max-width: none;
+        height: auto;
     }
 }
 
-
+/* Info section item styles */
 .info-item h3 {
-    color: #ecce72; /* Genshin yellow */
+    color: #ecce72;
     font-size: 24px;
     margin-bottom: 10px;
 }
@@ -119,15 +106,6 @@
     font-size: 20px;
     margin-bottom: 10px;
 }
-.info-section h3 {
-    color: #ecce72; /* Genshin yellow */
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.info-section p {
-    font-size: 24px;
-}
 
 /* Character section styles */
 .character-section {
@@ -135,7 +113,7 @@
 }
 
 .character-section h3 {
-    color: #ecce72; /* Genshin yellow */
+    color: #ecce72;
     font-size: 28px;
     margin-bottom: 20px;
 }
@@ -143,26 +121,24 @@
 .character-section .talent,
 .character-section .passive-talent,
 .character-section .constellation {
-    border-radius: 10px; /* Rounded border */
+    border-radius: 10px;
     background-color: #2a376e;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px;
 }
-
-.character-section .ascension-level{
-    border-radius: 10px; /* Rounded border */
-    background-color:#1f2b56;
+.character-section .ascension-level {
+    border-radius: 10px;
+    background-color: #1f2b56;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px;
 }
-
 .character-section .talent h4,
 .character-section .passive-talent h4,
 .character-section .ascension-level h4,
 .character-section .constellation h4 {
-    color: #ecce72; /* Genshin yellow */
+    color: #ecce72;
     font-size: 24px;
     margin-bottom: 10px;
 }
@@ -171,26 +147,26 @@
 .character-section .passive-talent p,
 .character-section .constellation p {
     font-size: 20px;
-    color: #fdedda; /* Light text color */
+    color: #fdedda;
     margin-bottom: 15px;
 }
 
 .character-section .ascension-level ul li {
-    font-size: 18px; /* Decrease font size for better fit */
-    color: #fdedda; /* Light text color */
+    font-size: 18px;
+    color: #fdedda;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 10px;
-    background-color: #2a376e; /* Dark blue */
+    background-color: #2a376e;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex; /* Align items horizontally */
-    align-items: center; /* Center items vertically */
+    display: flex;
+    align-items: center;
 }
 
 .character-section .ascension-level ul li img {
-    margin-right: 10px; /* Add space between icon and text */
-    width: 44px; /* Set width for consistency */
-    height: 44px; /* Set height for consistency */
+    margin-right: 10px;
+    width: 44px;
+    height: 44px;
 }
 
 /* Character links styles */
@@ -208,61 +184,172 @@
     color: red;
     text-align: center;
 }
-.character-section {
-    margin-top: 40px;
-  }
-  
-  .character-section h3 {
-    color: #ecce72;
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-  
-  .character-build {
+
+/* Character build styles */
+.character-build {
     border-radius: 10px;
     background-color: #1f2b56;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px;
+}
+
+.character-build h4 {
+    color: #ecce72;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Style for each build item */
+.build-item {
+    border-radius: 10px;
+    background-color: #2a376e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    list-style: none;
+}
+
+/* Style for sublists within build items */
+.build-sublist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 0;
+}
+
+/* Add rounded border to list items inside build-sublist */
+.build-sublist li {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    list-style: none;
+}
+
+/* Style for text inside build-sublist */
+.build-sublist li h5,
+.build-sublist li p {
+    color: #fdedda;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.weapon-image {
+    width: 70px;
+    height: auto;
+    margin-right: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.weapon-image:hover {
+    transform: scale(1.1);
+    filter: brightness(110%);
+}
+
+
+/* Remove list markers */
+.build-item::marker,
+.build-sublist::marker {
+    display: none;
+}
+
+/* Upgrade materials section styles */
+.upgrade-materials {
+    border-radius: 10px;
+    background-color: #1f2b56;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.upgrade-materials-item {
+    border-radius: 10px;
+    background-color: #2a376e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.upgrade-materials-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.upgrade-materials-item h4 {
+    color: #ecce72;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.upgrade-materials-item p {
+    font-size: 18px;
+    color: #fdedda;
+    margin-bottom: 10px;
+}
+
+/* Artifacts section styles */
+.character-section.artifacts {
+    margin-top: 40px;
+    margin-bottom: 40px;
   }
   
-  .character-build h4 {
+  .artifacts-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .artifact-set {
+    border-radius: 10px;
+    background-color: #2a376e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .artifact-set h4 {
     color: #ecce72;
     font-size: 24px;
     margin-bottom: 10px;
   }
   
-  .character-build ul li {
-    font-size: 18px; /* Decrease font size for better fit */
-    color: #fdedda; /* Light text color */
+  .artifact-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+  }
+  
+  .artifact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .artifact-item img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
     margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #2a376e; /* Dark blue */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex; /* Align items horizontally */
-    align-items: center; /* Center items vertically */
-  }
-  
-  .character-build ul li:last-child {
-    margin-bottom: 0;
-  }
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
 
-  .weapon-image {
-    width: 70px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 5px; /* Add some spacing between images */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  }
+.artifact-item img:hover {
+    transform: scale(1.1);
+    filter: brightness(110%);
+}
+
   
-/* CSS Styles for Artifact Image */
-.artifact-image {
-    width: 50px; /* Example width */
-    height: 50px; /* Example height */
-    margin-right: 10px; /* Example margin */
-    border-radius: 50%; /* Example border radius for rounded images */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Example box shadow for a subtle effect */
+  .artifact-item p {
+    color: #fdedda;
+    font-size: 18px;
+    text-align: center;
   }
-  
   
