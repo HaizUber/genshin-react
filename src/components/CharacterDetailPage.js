@@ -305,7 +305,7 @@ const getSpecialCaseImageSrc = (characterName) => {
             // If the name contains spaces, remove the first word, remove spaces, replace hyphens with empty string, and convert to lowercase
             if (characterName.includes(' ')) {
                 const remainingName = characterName.split(' ').slice(1).join('');
-                return remainingName.replace(/\s+/g, '').replace('-', '').toLowerCase();
+                return remainingName.replace(/\s+/g, '').replace('-', '');
             } else {
                 // Return the original character name if not found and does not contain spaces
                 return characterName;
@@ -322,7 +322,7 @@ const getTalentImage = (weaponType, talentType, characterName) => {
 
   // Get the talent image prefix based on the talent type
   let talentImagePrefix;
-  switch (talentType.toLowerCase()) {
+  switch (talentType) {
       case "elemental_skill":
           talentImagePrefix = "Skill_S";
           break;
@@ -335,11 +335,11 @@ const getTalentImage = (weaponType, talentType, characterName) => {
 
   // Construct the talent image path based on talent type
   let imagePath;
-  if (talentType.toLowerCase() === "normal_attack") {
+  if (talentType === "NORMAL_ATTACK") {
       // Determine the weapon prefix based on the weapon type for normal attack
       let weaponPrefix = "01"; // Default to sword if weapon type is unknown
       if (weaponType) {
-          switch (weaponType.toLowerCase()) {
+          switch (weaponType) {
               case "sword":
                   weaponPrefix = "01";
                   break;
@@ -359,7 +359,7 @@ const getTalentImage = (weaponType, talentType, characterName) => {
           }
       }
       imagePath = `/assets/talents/Skill_A_${weaponPrefix}.png`;
-  } else if (talentType.toLowerCase() === "elemental_burst") {
+  } else if (talentType === "ELEMENTAL_BURST") {
       // Convert character name to match image format
       const formattedCharacterName = convertCharacterNameToImageFormat(characterName);
       imagePath = `/assets/talents/Skill_E_${formattedCharacterName}_01_HD.png`;
