@@ -1,99 +1,129 @@
-/* HomePage.css */
+:root {
+    --card-height: 300px;
+    --card-width: calc(var(--card-height) / 1.5);
+}
 
 @font-face {
     font-family: 'Genshin';
     src: url('/public/fonts/genshin-font.woff') format('woff');
 }
 
-body {
-    font-family: 'Genshin', sans-serif;
-    color: #ffffff; /* White text */
-    margin: 0; /* Remove default body margin */
+.card {
+    width: var(--card-width);
+    height: var(--card-height);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 36px;
+    perspective: 2500px;
+    margin: 0 50px;
 }
+
+.cover-image {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+}
+
+.wrapper {
+    transition: all 0.5s;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+.card:hover .wrapper {
+    transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+}
+
+.wrapper::before,
+.wrapper::after {
+    content: "";
+    opacity: 0;
+    width: 100%;
+    height: 80px;
+    transition: all 0.5s;
+    position: absolute;
+    left: 0;
+}
+
+.wrapper::before {
+    top: 0;
+    height: 100%;
+}
+
+.wrapper::after {
+    bottom: 0;
+    opacity: 1;
+}
+
+.card:hover .wrapper::before,
+.wrapper::after {
+    opacity: 1;
+}
+
+.card:hover .wrapper::after {
+    height: 120px;
+}
+
+.title {
+    width: 100%;
+    transition: transform 0.5s;
+}
+
+.card:hover .title {
+    transform: translate3d(0%, -50px, 100px);
+}
+
+.character {
+    width: 40%;
+    opacity: 0;
+    transition: all 0.5s;
+    position: absolute;
+    z-index: -1;
+}
+
+.card:hover .character {
+    opacity: 1;
+    transform: translate3d(0%, -30%, 100px);
+}
+
+/* HomePage.css */
 
 .HomePage {
     text-align: center;
     padding: 20px;
-    background-color: #0c1447; /* Night theme background color */
-    min-height: 100vh; /* Use min-height instead of height for responsiveness */
+    background-color: #0c1447;
+    min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Align children vertically */
-    justify-content: center; /* Center content vertically */
+    flex-direction: column;
+    justify-content: center;
 }
 
 h1 {
-    color: #ecce72; /* Genshin yellow */
+    color: #ecce72;
     font-size: 48px;
     margin-bottom: 20px;
-    font-family: 'Genshin', sans-serif; /* Use Genshin font */
 }
 
 .site-content {
-    border-radius: 10px; /* Rounded box */
-    background-color: #1f2b56; /* Dark blue */
+    border-radius: 10px;
+    background-color: #1f2b56;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    animation: site-loading-delay 3s forwards; /* Delay the loading of the site */
-    margin-top: 20px; /* Add margin at the top to separate it from other elements */
-    flex: 1; /* Take remaining vertical space */
+    animation: site-loading-delay 3s forwards;
+    margin-top: 20px;
+    flex: 1;
 }
 
 .character-list {
     display: flex;
-    flex-wrap: wrap; /* Allow flex items to wrap onto multiple lines */
+    flex-wrap: wrap;
     justify-content: center;
     margin-top: 20px;
 }
 
-
-.character-card {
-    border: 2px solid #3498db;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 20px;
-    width: 200px; /* Set a fixed width for the character card */
-    max-width: 100%; /* Allow the character card to resize dynamically if needed */
-    background-color: #1f2b56; /* Dark blue */
-    box-shadow: 0 14px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-    overflow: hidden; /* Hide overflow content */
-}
-
-.character-card:hover {
-    transform: scale(1.05);
-}
-
-.character-card img {
-    max-width: 100%;
-    max-height: 100px; /* Limit image height */
-    margin-bottom: 10px;
-}
-
-.character-card p {
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #fdedda;
-    overflow: hidden; /* Hide overflow content */
-    white-space: nowrap; /* Prevent wrapping */
-    text-overflow: ellipsis; /* Show ellipsis (...) when text overflows */
-}
-@media (max-width: 768px) {
-    .character-card {
-        width: calc(50% - 20px); /* 50% width with gap */
-    }
-
-    .character-card img {
-        max-width: 100%; /* Adjust image width */
-        max-height: 80px; /* Adjust image height */
-    }
-
-    .character-card p {
-        font-size: 16px;
-    }
-}
-
-/* Loader.css */
 .loader-container {
     display: flex;
     flex-direction: column;
@@ -106,7 +136,7 @@ h1 {
     width: 50px;
     height: 50px;
     aspect-ratio: 1;
-    color: #ecce72; /* Genshin yellow */
+    color: #ecce72;
     position: relative;
     animation: l40 .5s infinite alternate;
 }
@@ -139,26 +169,14 @@ h1 {
     animation: l40-2 1s infinite;
 }
 
-@keyframes l40-1 {
-    0%,10%,90%,100% {inset:0}
-    40%,60% {inset:-10px}
-}
-
-@keyframes l40-2 {
-    0%,40%  {transform: rotate(0)}
-    60%,100%{transform: rotate(90deg)}
-}
-
 .loader-text {
     margin-top: 20px;
     font-size: 16px;
     font-weight: bold;
-    color: #ecce72; /* Genshin yellow */
+    color: #ecce72;
     text-align: center;
-    font-family: 'Genshin', sans-serif; /* Use Genshin font */
 }
 
-/* Delay the loading of the site */
 @keyframes site-loading-delay {
     0% {
         opacity: 0;
@@ -168,90 +186,80 @@ h1 {
     }
 }
 
-/* Add the following styles for filter options */
-
 .filter-options {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    background-color: #1f2b56; /* Dark blue background */
-    border-radius: 10px; /* Rounded box */
-    padding: 10px; /* Add padding */
+    justify-content: center;
+    align-items: center;
+    background-color: #1f2b56;
+    border-radius: 10px;
+    padding: 10px;
     margin-top: 40px;
-    margin-bottom: 20px; /* Add margin to separate filter options from character list */
+    margin-bottom: 20px;
 }
 
 .filter-options button {
-    background-color: transparent; /* Make the button background transparent */
-    border: none; /* Remove button border */
-    padding: 5px; /* Add padding */
-    font-family: 'Genshin', sans-serif; /* Use Genshin font */
-    color: #fdedda; /* Set font color to match the site's color */
-    display: flex; /* Make button content flex */
-    align-items: center; /* Center align items */
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    font-family: 'Genshin', sans-serif;
+    color: #fdedda;
+    display: flex;
+    align-items: center;
     cursor: pointer;
 }
 
 .filter-options button img {
-    max-width: 24px; /* Set maximum width for the image */
-    max-height: 24px; /* Set maximum height for the image */
-    margin-right: 5px; /* Add some margin between the image and text */
+    max-width: 24px;
+    max-height: 24px;
+    margin-right: 5px;
 }
 
 .filter-options button:hover {
-    opacity: 0.8; /* Reduce opacity on hover */
+    opacity: 0.8;
 }
 
 .rarity-filters,
 .element-filters,
 .weapon-type-filters {
     display: flex;
-    align-items: center; /* Center items vertically */
-    margin: 0 10px; /* Add margin between filter groups */
+    align-items: center;
+    margin: 0 10px;
 }
 
 .rarity-filters button,
 .element-filters button,
 .weapon-type-filters button {
     display: flex;
-    align-items: center; /* Align icon and text vertically */
-    padding: 5px 10px; /* Reduce padding */
-    border: 2px solid transparent; /* Transparent border by default */
+    align-items: center;
+    padding: 5px 10px;
+    border: 2px solid transparent;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: all 0.3s ease; /* Smooth transition for hover effect */
+    transition: all 0.3s ease;
 }
 
 .separator {
     width: 2px;
     height: 20px;
-    background-color: #ffffff; /* White color */
-    margin: 0 20px; /* Add space between filter groups */
+    background-color: #ffffff;
+    margin: 0 20px;
 }
 
 .active {
-    background-color: #ffffff; /* White background when button is clicked */
-    color: #1f2b56; /* Dark blue text color */
-    border-color: #ffffff; /* White border color when button is clicked */
+    background-color: #ffffff;
+    color: #1f2b56;
+    border-color: #ffffff;
     opacity: 0.5;
 }
 
 .rarity-filters button:hover,
 .element-filters button:hover,
 .weapon-type-filters button:hover {
-    background-color: #ffffff; /* White background on hover */
-    color: #1f2b56; /* Dark blue text color on hover */
-    border-color: #ffffff; /* White border color on hover */
+    background-color: #ffffff;
+    color: #1f2b56;
+    border-color: #ffffff;
 }
-
-/* Resize filter option button image */
-.filter-options button img {
-    max-width: 24px; /* Set maximum width for the image */
-    max-height: 24px; /* Set maximum height for the image */
-    margin-right: 5px; /* Add margin to separate image from text */
-}
-/* Add tooltip styles */
 
 [data-tooltip] {
     position: relative;
@@ -260,8 +268,8 @@ h1 {
 [data-tooltip]:hover::before {
     content: attr(data-tooltip);
     position: absolute;
-    background-color: #1f2b56; /* Dark blue */
-    color: #ffffff; /* White text */
+    background-color: #1f2b56;
+    color: #ffffff;
     padding: 5px;
     border-radius: 5px;
     bottom: 125%;
@@ -271,50 +279,49 @@ h1 {
     z-index: 1;
 }
 
-/* Add search bar styles */
-
 .search-bar {
     margin: 20px 0;
-    background-color: #152238; /* Darker color than the filter options */
+    background-color: #152238;
     position: relative;
     border-radius: 10px;
 }
 
 .search-bar input {
-    width: 100%; /* Take up full width of parent container */
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     border: none;
     border-radius: 5px;
     box-sizing: border-box;
-    color: #ffffff; /* Text color */
-    background-color: #152238; /* Darker background color */
+    color: #ffffff;
+    background-color: #152238;
     padding-left: 40px;
 }
 
 .search-bar input:focus {
-    outline: none; /* Remove outline on focus */
-    border-color: #007bff; /* Change border color on focus */
+    outline: none;
+    border-color: #007bff;
 }
+
 .magnifying-glass-icon {
     position: absolute;
     top: 50%;
-    left: 10px; /* Adjust positioning as needed */
+    left: 10px;
     transform: translateY(-50%);
-    fill: #ffffff; /* Icon color */
+    fill: #ffffff;
 }
+
 .clear-icon {
     position: absolute;
     top: 38%;
-    right: 10px; /* Adjust the right position */
+    right: 10px;
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
     cursor: pointer;
-    display: none; /* Initially hide the clear button */
-  }
-  
-  /* Show the clear button when there is text in the input field */
-  .search-bar input:not(:placeholder-shown) + .clear-icon {
+    display: none;
+}
+
+.search-bar input:not(:placeholder-shown) + .clear-icon {
     display: block;
-  }
+}

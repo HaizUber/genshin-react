@@ -3,8 +3,10 @@ import { useParams } from 'react-router-dom';
 import { getCharacterDetail, getAlternativeResponse } from '../api/genshinApi';
 import '../styles/characterDetailPage.css'; // Import the CSS file
 import NavMenu from './NavMenu';
+import CharacterNavMenu from './characterNavmenu'; 
 import Footer from './Footer';
 import characterBuilds from '../data/characterbuilds.json'; // Import the character builds
+
 const CharacterDetailPage = () => {
   const { characterName } = useParams();
   const [character, setCharacter] = useState(null);
@@ -15,43 +17,46 @@ const CharacterDetailPage = () => {
    const [artifacts, setArtifacts] = useState([]);
    const [upgradeMaterials, setUpgradeMaterials] = useState([]);
    const [scrollPosition, setScrollPosition] = useState(0);
-
-   
+  
    useEffect(() => {
     const fetchCharacterDetail = async () => {
-      try {
-        setLoading(true);
-  
-        // Ensure character name is in the correct format for the first API endpoint
-        const formattedCharacterName = characterName.replace(/-/g, '-');
-  
-        // Fetch character data from the first endpoint
-        const characterData = await getCharacterDetail(formattedCharacterName);
-        console.log("Character data:", characterData); // Log character data
-  
-        // Extract the first word from the character name and convert it to lowercase
-        const firstName = characterName.split(' ')[0];
-  
-        // Fetch additional data including ascension costs from the second endpoint
-        const alternativeData = await getAlternativeResponse(firstName);
-        console.log("Additional data:", alternativeData); // Log additional data
-  
-        // Merge the additional data into the character data
-        const characterWithCosts = {
-          ...characterData,
-          ...alternativeData // Assuming all data from the second endpoint is needed
-        };
-  
-        setCharacter(characterWithCosts);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
+        try {
+            setLoading(true);
+
+            // Special case for "Kamisato Ayaka": return "Ayaka" instead
+            let firstName = characterName;
+            if (characterName === 'Kamisato-Ayaka') {
+                firstName = 'Ayaka';
+            } else {
+                // Extract the first word from the character name
+                firstName = characterName.split(' ')[0];
+            }
+
+            // Fetch character data from the first endpoint
+            const characterData = await getCharacterDetail(firstName);
+
+
+            // Fetch additional data including ascension costs from the second endpoint
+            const alternativeData = await getAlternativeResponse(firstName);
+
+
+            // Merge the additional data into the character data
+            const characterWithCosts = {
+                ...characterData,
+                ...alternativeData // Assuming all data from the second endpoint is needed
+            };
+
+            setCharacter(characterWithCosts);
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
     };
-  
-    fetchCharacterDetail();
-  }, [characterName]);
+
+    fetchCharacterDetail(); // Invoke the fetchCharacterDetail function
+}, [characterName]); // Run the effect whenever characterName changes
+
   
   useEffect(() => {
     if (character) {
@@ -64,7 +69,7 @@ const CharacterDetailPage = () => {
             .then(response => response.json())
             .then(data => ({ nameicon: data.images.nameicon, rarity: data.rarity })) // Extract nameicon and rarity
             .catch(error => {
-              console.error("Error fetching weapon data:", error);
+
               return null; // Return null if there's an error to maintain order
             })
         )
@@ -84,13 +89,13 @@ const CharacterDetailPage = () => {
       const fetchArtifactData = async () => {
         try {
           const artifactNames = Object.values(characterBuilds[characterName].artifacts).flat().map(name => name.split(" ")[0]);
-          console.log("Artifact Names:", artifactNames);
+
         
           // Fetch artifact data for each artifact name
           const artifactPromises = artifactNames.map(async artifactName => {
             const response = await fetch(`https://genshin-db-api.vercel.app/api/artifacts?query=${encodeURIComponent(artifactName)}`);
             const data = await response.json();
-            console.log("API Response:", data);
+
         
             // Check if 'data' exists and contains the necessary information
             if (data && data.name && data.images && data.images.nameflower) {
@@ -100,17 +105,17 @@ const CharacterDetailPage = () => {
               };
               return artifactData;
             } else {
-              console.error("No data or empty array in API response:", data);
+
               return null; // Or handle the case when no data is found
             }
           });
         
           // Resolve all artifact promises
           const fetchedArtifacts = await Promise.all(artifactPromises);
-          console.log("Fetched Artifacts:", fetchedArtifacts);
+
           setArtifacts(fetchedArtifacts.filter(artifact => artifact !== null)); // Filter out null values
         } catch (error) {
-          console.error('Error fetching artifact data:', error);
+
         }
       };
       fetchArtifactData();
@@ -132,7 +137,7 @@ useEffect(() => {
       const upgradeMaterialPromises = upgradeMaterials.map(async material => {
         const response = await fetch(`https://genshin-db-api.vercel.app/api/materials?query=${encodeURIComponent(material)}&matchAliases=true&matchCategories=true&verboseCategories=true`);
         const data = await response.json();
-        console.log("Upgrade Material API Response:", data);
+
 
         // Check if 'data' exists and contains the necessary information
         if (data && data.id && data.images && data.images.nameicon) {
@@ -143,17 +148,16 @@ useEffect(() => {
           };
           return upgradeMaterialData;
         } else {
-          console.error("No data or empty array in upgrade material API response:", data);
           return null; // Or handle the case when no data is found
         }
       });
 
       // Resolve all upgrade material promises
       const fetchedUpgradeMaterials = await Promise.all(upgradeMaterialPromises);
-      console.log("Fetched Upgrade Materials:", fetchedUpgradeMaterials);
+
       setUpgradeMaterials(fetchedUpgradeMaterials.filter(material => material !== null)); // Filter out null values
     } catch (error) {
-      console.error('Error fetching upgrade material data:', error);
+
     }
   };
   fetchUpgradeMaterialsData();
@@ -171,8 +175,9 @@ useEffect(() => {
   };
 }, []);
 
-const backgroundPositionY = `${scrollPosition * 0.5}px`; // Adjust the scroll speed as needed
 
+
+const backgroundPositionY = `${scrollPosition * 0.5}px`; // Adjust the scroll speed as needed
     
   if (loading) {
     return <p>Loading...</p>;
@@ -195,7 +200,7 @@ const getSpecialCaseImageSrc = (characterName) => {
       return 'UI_Gacha_AvatarImg_Alhatham';
     case 'Amber':
       return 'UI_Gacha_AvatarImg_Ambor';
-    case 'Arataki-Itto':
+    case 'Arataki Itto':
       return 'UI_Gacha_AvatarImg_Itto';
     case 'Baizhu':
       return 'UI_Gacha_AvatarImg_Baizhuer';
@@ -314,61 +319,58 @@ const getSpecialCaseImageSrc = (characterName) => {
 };
 
 const getTalentImage = (weaponType, talentType, characterName) => {
+
   const talentTypeMap = {
-      NORMAL_ATTACK: "Skill_A",
-      ELEMENTAL_SKILL: "Skill_S",
-      ELEMENTAL_BURST: "Skill_E"
+    NORMAL_ATTACK: "Skill_A",
+    ELEMENTAL_SKILL: "Skill_S",
+    ELEMENTAL_BURST: "Skill_E",
+    RIGHT_CLICK: "UI_Talent_S" // Update to match the talent type from API response
   };
 
   // Get the talent image prefix based on the talent type
   let talentImagePrefix;
-  switch (talentType) {
-      case "elemental_skill":
-          talentImagePrefix = "Skill_S";
-          break;
-      case "elemental_burst":
-          talentImagePrefix = "Skill_E";
-          break;
-      default:
-          talentImagePrefix = talentTypeMap[talentType]; // Use the default talent type mapping
+  if (talentTypeMap.hasOwnProperty(talentType)) {
+    talentImagePrefix = talentTypeMap[talentType];
+  } else {
+    talentImagePrefix = "UI_Talent_S"; // Default to UI_Talent_S if talent type is not specified
   }
 
   // Construct the talent image path based on talent type
   let imagePath;
   if (talentType === "NORMAL_ATTACK") {
-      // Determine the weapon prefix based on the weapon type for normal attack
-      let weaponPrefix = "01"; // Default to sword if weapon type is unknown
-      if (weaponType) {
-          switch (weaponType) {
-              case "sword":
-                  weaponPrefix = "01";
-                  break;
-              case "bow":
-                  weaponPrefix = "02";
-                  break;
-              case "polearm":
-                  weaponPrefix = "03";
-                  break;
-              case "claymore":
-                  weaponPrefix = "04";
-                  break;
-              case "catalyst":
-                  return `/assets/talents/Skill_A_Catalyst_MD.png`;
-              default:
-                  break; // No need to change the weapon prefix for other talent types
-          }
+    // Determine the weapon prefix based on the weapon type for normal attack
+    let weaponPrefix = "01"; // Default to sword if weapon type is unknown
+    if (weaponType) {
+      switch (weaponType) {
+        case "Sword":
+          weaponPrefix = "01";
+          break;
+        case "Bow":
+          weaponPrefix = "02";
+          break;
+        case "Polearm":
+          weaponPrefix = "03";
+          break;
+        case "Claymore":
+          weaponPrefix = "04";
+          break;
+        case "Catalyst":
+          return `/assets/talents/Skill_A_Catalyst_MD.png`;
+        default:
+          break; // No need to change the weapon prefix for other talent types
       }
-      imagePath = `/assets/talents/Skill_A_${weaponPrefix}.png`;
-  } else if (talentType === "ELEMENTAL_BURST") {
-      // Convert character name to match image format
-      const formattedCharacterName = convertCharacterNameToImageFormat(characterName);
-      imagePath = `/assets/talents/Skill_E_${formattedCharacterName}_01_HD.png`;
+    }
+    imagePath = `/assets/talents/Skill_A_${weaponPrefix}.png`;
+  } else if (talentType === "ELEMENTAL_BURST" || !talentTypeMap.hasOwnProperty(talentType)) {
+    // Convert character name to match image format
+    const formattedCharacterName = convertCharacterNameToImageFormat(characterName);
+    const suffix = talentType === "ELEMENTAL_BURST" ? "_01_HD" : "_05"; // Determine the suffix based on talent type
+    imagePath = `/assets/talents/${talentImagePrefix}_${formattedCharacterName}${suffix}.png`;
   } else {
-      // Convert character name to match image format
-      const formattedCharacterName = convertCharacterNameToImageFormat(characterName);
-      imagePath = `/assets/talents/${talentImagePrefix}_${formattedCharacterName}_01.png`;
+    // Convert character name to match image format
+    const formattedCharacterName = convertCharacterNameToImageFormat(characterName);
+    imagePath = `/assets/talents/${talentImagePrefix}_${formattedCharacterName}_01.png`;
   }
-
   return imagePath;
 };
 
@@ -389,11 +391,11 @@ const getPassiveTalentImage = (characterName, talent) => {
       // Check description for additional conditions
       if (talent.description.includes("Decreases all party members' gliding Stamina Consumption")) {
           return "/assets/talents/UI_Talent_Explosion_Glide.png";
-      } else if (talent.description.includes("Weapon Ascension Materials, he has a 10% chance to receive double the product.")) {
-          return "/assets/talents/UI_Talent_Combine_Weapon_Double.png";
+        } else if (talent.description.includes("Weapon Ascension Materials") && talent.description.includes("10% chance")) {
+          return "/assets/talents/UI_Talent_Combine_Weapon_Double.png";      
       } else if (talent.description.includes("When a party member uses attacks to obtain wood from a tree, they have a 25% chance to get an additional log of wood.")) {
           return "/assets/talents/UI_Talent_S_Itto_07.png";
-      }
+    }
 
       // For other unlock conditions, handle them accordingly
       // You can add more conditions here as needed
@@ -435,206 +437,230 @@ const getConstellationImage = (characterName, constellation) => {
     return imageUrl;
 };
 
-  return (
-    <div className="character-detail-wrapper">
-      <NavMenu />
-      <div className="character-detail-container" style={{ 
-            backgroundImage: `url('/assets/constellations/Eff_UI_Talent_${convertCharacterNameToImageFormat(character.name)}.png')`,
-            backgroundRepeat: 'repeat',
-            backgroundSize: '250px',
-            borderRadius: '10px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-            padding: '20px',
-            animationName: 'fadeIn',
-            animationDuration: '1s',
-            animationFillMode: 'both',
-            backgroundPositionY: backgroundPositionY,
-        }}>
-          
-      <div className="character-header">
-          <img src={`/assets/characters/${getSpecialCaseImageSrc(characterName)}.png`} alt={characterName} />
-          <div className="character-info">
-          <div className="info-item">
+
+return (
+  <div className="character-detail-wrapper">
+    {/* Character Detail */}
+    <NavMenu />
+    <CharacterNavMenu />
+    {/* Character Detail Container */}
+    <div
+      className="character-detail-container"
+      style={{
+        backgroundImage: `url('/assets/constellations/Eff_UI_Talent_${convertCharacterNameToImageFormat(
+          character.name
+        )}.png')`,
+        backgroundRepeat: 'repeat',
+        backgroundSize: '250px',
+        borderRadius: '10px',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        padding: '20px',
+        animationName: 'fadeIn',
+        animationDuration: '1s',
+        animationFillMode: 'both',
+        backgroundPositionY: backgroundPositionY,
+      }}
+    >
+<div className="character-detail-container">
+    <div className="character-header">
+        <img src={`/assets/characters/${getSpecialCaseImageSrc(character.name)}.png`} alt={character.name} />
+    </div>
+
+    <div className="character-info">
+        <div className="info-item">
             <h3>Name:</h3>
             <h2>{character.name}</h2>
-          </div>
-          <div className="info-item">
+        </div>
+        <div className="info-item">
             <h3>Description:</h3>
             <p>{character.description}</p>
-          </div>
-          <div className="info-item">
+        </div>
+        <div className="info-item">
             <h3>Rarity:</h3>
             <p>{character.rarity}</p>
-          </div>
-          <div className="info-item">
+        </div>
+        <div className="info-item">
             <h3>Element:</h3>
             <p>{character.element}</p>
-          </div>
-          <div className="info-item">
+        </div>
+        <div className="info-item">
             <h3>Weapon Type:</h3>
             <p>{character.weapon}</p>
-          </div>
-          <div className="info-item">
+        </div>
+        <div className="info-item">
             <h3>Nation:</h3>
             <p>{character.nation}</p>
-          </div>
-          <div className="info-item">
+        </div>
+        <div className="info-item">
             <h3>Affiliation:</h3>
             <p>{character.affiliation}</p>
-          </div>
-          <div className="info-item">
+        </div>
+        <div className="info-item">
             <h3>Constellation:</h3>
             <p>{character.constellation}</p>
-          </div>
-          <div className="info-item">
+        </div>
+        <div className="info-item">
             <h3>Birthday:</h3>
             <p>{character.birthday}</p>
-          </div>
-          <div className="info-item">
+        </div>
+        <div className="info-item">
             <h3>Release Date:</h3>
             <p>{character.release}</p>
-          </div>
         </div>
-        </div>
-
-        <div className="character-section">
-      <h3>Upgrade Materials:</h3>
-      <div className="upgrade-materials">
-        {upgradeMaterials.map((material, index) => (
-          <div key={index} className="upgrade-materials-item">
-            <img src={material.imageSrc} alt={material.name} />
-            <p>{material.name}</p>
-          </div>
-        ))}
-      </div>
     </div>
-               {/* Display character's specific build */}
-{characterBuilds[characterName] && (
-  <div className="character-build">
-    <h4>Character Build:</h4>
-    <ul>
-      {/* Display weapons */}
-      <li className="build-item">
-        <h4>Weapons</h4>
-        <ul className="build-sublist">
-          {characterBuilds[characterName].weapons.map((weapon, index) => (
-            <li key={index}>
-              <img src={`/assets/weapons/${weaponImages[index]}.png`} alt={weapon} className="weapon-image"/>
-              <p>{weapon}</p> ({weaponRarities[index]}✩)
-            </li>
-          ))}
-        </ul> 
-      </li>
-
-      <div className="character-section artifacts">
-  <h3>Artifacts:</h3>
-  <div className="artifacts-wrapper">
-    {Object.entries(characterBuilds[characterName].artifacts).map(([setName, setItems], setIndex) => (
-      <div key={setIndex} className="artifact-set">
-        <h4>{setName}</h4>
-        <div className="artifact-items">
-          {setItems.map((artifact, index) => {
-            const artifactName = artifact.trim(); // Remove any leading/trailing spaces
-            const matchedArtifact = artifacts.find(item => item.name === artifactName);
-            if (!matchedArtifact) {
-              return null; // Skip rendering if artifact is not found
-            }
-            return (
-              <div key={index} className="artifact-item">
-                <img src={matchedArtifact.imageSrc} alt={artifactName} className="artifact-image" />
-                <p>{artifactName}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    ))}
-  </div>
 </div>
 
-      
-      {/* Display main stats */}
-      <li className="build-item">
-        <h4>Main Stats</h4>
-        <ul className="build-sublist">
-          {Object.entries(characterBuilds[characterName].main_stats).map(([stat, value]) => (
-            <li key={stat}>{stat}: {value}</li>
-          ))}
-        </ul>
-      </li>
 
-      {/* Display substats */}
-      <li className="build-item">
-        <h4>Substats</h4>
-        <ul className="build-sublist">
-          {characterBuilds[characterName].substats.map((substat, index) => (
-            <li key={index}>{index + 1}: {substat}</li>
-          ))}
-        </ul>
-      </li>
-    </ul>
-  </div>
-)}
-
-  <div className="character-section">
-    <h3>Talents:</h3>
-    {character.skillTalents && character.skillTalents.map((talent, index) => (
-      <div key={index} className="talent">
-        <h4>{talent.name}</h4>
-        {characterName && (
-          <img src={getTalentImage(character.weapon, talent.type, character.name)} alt={talent.type} />
-        )}
-        <p>{talent.description}</p>
-      </div>
-    ))}
-  </div>
-
-<div className="character-section">
-  <h3>Passive Talents:</h3>
-  {character.passiveTalents && character.passiveTalents.map((talent, index) => (
-    <div key={index} className="passive-talent">
-      <h4>{talent.name}</h4>
-      {/* Get corresponding passive talent image */}
-      <img src={getPassiveTalentImage(character.name, talent)} alt={talent.name} />
-      <p>{talent.description}</p>
-    </div>
-  ))}
-</div>
-
-<div className="character-section">
-    <h3>Constellations:</h3>
-    {character.constellations && character.constellations.map((constellation) => (
-        <div key={constellation.name} className="constellation">
-            <h4>{constellation.name}</h4>
-            {/* Get corresponding constellation image */}
-            <img src={getConstellationImage(character.name, constellation)} alt={constellation.name} />
-            <p>{constellation.description}</p>
-        </div>
-    ))}
-</div>
-        <div className="character-section">
-          <h3>Ascension Costs:</h3>
-          {character && character.costs && Object.entries(character.costs).map(([ascendLevel, items]) => (
-            <div key={ascendLevel} className="ascension-level">
-              <h4>Ascension Level {ascendLevel.slice(-1)}</h4>
-              <ul>
-                {items.map((item, index) => (
-                  <li key={index}>
-                    <img src={getMaterialImageSrc(item.id)} alt={item.name} />
-                    {item.name}: {item.count}
-                  </li>
-                ))}
-              </ul>
+      {/* Upgrade Materials */}
+      <div id="upgrade-materials" className="character-section">
+        <h3>Upgrade Materials:</h3>
+        <div className="upgrade-materials">
+          {upgradeMaterials.map((material, index) => (
+            <div key={index} className="upgrade-materials-item">
+              <img src={material.imageSrc} alt={material.name} />
+              <p>{material.name}</p>
             </div>
           ))}
         </div>
       </div>
-      <Footer />
+
+      {/* Character Build */}
+      {characterBuilds[character.name] && (
+        <div id="character-build" className="character-build">
+          <h4>Character Build:</h4>
+          <ul>
+            {/* Display weapons */}
+            <li className="build-item">
+              <h4>Weapons</h4>
+              <ul className="build-sublist">
+                {characterBuilds[character.name].weapons.map((weapon, index) => (
+                  <li key={index}>
+                    <img src={`/assets/weapons/${weaponImages[index]}.png`} alt={weapon} className="weapon-image"/>
+                    <p>{weapon}</p> ({weaponRarities[index]}✩)
+                  </li>
+                ))}
+              </ul> 
+            </li>
+
+            {/* Display artifacts */}
+            <div id="artifacts" className="character-section artifacts">
+              <h3>Artifacts:</h3>
+              <div className="artifacts-wrapper">
+                {Object.entries(characterBuilds[character.name].artifacts).map(([setName, setItems], setIndex) => (
+                  <div key={setIndex} className="artifact-set">
+                    <h4>{setName}</h4>
+                    <div className="artifact-items">
+                      {setItems.map((artifact, index) => {
+                        const artifactName = artifact.trim(); // Remove any leading/trailing spaces
+                        const matchedArtifact = artifacts.find(item => item.name === artifactName);
+                        if (!matchedArtifact) {
+                          return null; // Skip rendering if artifact is not found
+                        }
+                        return (
+                          <div key={index} className="artifact-item">
+                            <img src={matchedArtifact.imageSrc} alt={artifactName} className="artifact-image" />
+                            <p>{artifactName}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Display main stats */}
+            <li className="build-item">
+              <h4>Main Stats</h4>
+              <ul className="build-sublist">
+                {Object.entries(characterBuilds[character.name].main_stats).map(([stat, value]) => (
+                  <li key={stat}>{stat}: {value}</li>
+                ))}
+              </ul>
+            </li>
+
+            {/* Display substats */}
+            <li className="build-item">
+              <h4>Substats</h4>
+              <ul className="build-sublist">
+                {characterBuilds[character.name].substats.map((substat, index) => (
+                  <li key={index}>{index + 1}: {substat}</li>
+                ))}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      )}
+
+      {/* Display Talents */}
+      <div id="talents" className="character-section">
+        <h3>Talents:</h3>
+        {character.skillTalents && character.skillTalents.map((talent, index) => (
+          <div key={index} className="talent">
+            <h4>{talent.name}</h4>
+            {character.name && (
+              <img src={getTalentImage(character.weapon, talent.type, character.name)} alt={talent.type} />
+            )}
+            <p>{talent.description}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Display Passive Talents */}
+      <div className="character-section">
+        <h3>Passive Talents:</h3>
+        {character.passiveTalents && character.passiveTalents.map((talent, index) => (
+          <div key={index} className="passive-talent">
+            <h4>{talent.name}</h4>
+            {/* Get corresponding passive talent image */}
+            <img src={getPassiveTalentImage(character.name, talent)} alt={talent.name} />
+            <p>{talent.description}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Display Constellations */}
+      <div id="constellations" className="character-section">
+        <h3>Constellations:</h3>
+        {character.constellations && character.constellations.map((constellation) => (
+          <div key={constellation.name} className="constellation">
+            <h4>{constellation.name}</h4>
+            {/* Get corresponding constellation image */}
+            <img src={getConstellationImage(character.name, constellation)} alt={constellation.name} />
+            <p>{constellation.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <div id="ascension" className="character-section">
+  <h3>Ascension Costs:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Ascension Level</th>
+        <th>Material Name</th>
+        <th>Material Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {character && character.costs && Object.entries(character.costs).map(([ascendLevel, items]) => (
+        items.map((item, index) => (
+          <tr key={`${ascendLevel}-${index}`}>
+            {index === 0 && <td rowSpan={items.length}>Ascension Level {ascendLevel.slice(-1)}</td>}
+            <td>
+              <img className="material-image" src={getMaterialImageSrc(item.id)} alt={item.name} /> {item.name}
+            </td>
+            <td>{item.count}</td>
+          </tr>
+        ))
+      ))}
+    </tbody>
+  </table>
+</div>
     </div>
-  );
-};
 
+    <Footer />
+  </div>
+);
+              };
 export default CharacterDetailPage;
-  
-  
-

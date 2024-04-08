@@ -1,16 +1,23 @@
+/* Base styles */
+body {
+    font-family: 'Genshin', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* Wrapper for the entire character detail page */
 .character-detail-wrapper {
     background-color: #0c1447;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    margin: -20px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    font-family: 'Genshin', sans-serif;
 }
 
 /* Container for character details */
@@ -19,37 +26,21 @@
     background-color: #1f2b56;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 20px 140px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    font-family: 'Genshin', sans-serif;
+    margin-left: 130px;
+    margin-right: 130px;
 }
 
+/* Character Header Styles */
 .character-header {
     padding: 20px;
     display: grid;
     grid-template-columns: auto 2fr;
     align-items: center;
     text-align: center;
-    font-family: 'Genshin', sans-serif;
     background-size: 150px;
     background-position: center;
-    animation-name: fadeInBackground;
-    animation-duration: 1s;
-    animation-fill-mode: both;
-}
-
-/* Define CSS animation */
-@keyframes fadeInBackground {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    animation: fadeInBackground 1s both;
+    margin: 20px;
 }
 
 .character-header img {
@@ -65,7 +56,6 @@
     transform: scale(1.1);
 }
 
-
 /* Info section styles */
 .character-info {
     border-radius: 10px;
@@ -73,43 +63,33 @@
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-top: 20px;
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    align-self: start;
-    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-family: 'Genshin', sans-serif;
 }
 
-/* Responsive Media Queries */
-@media (max-width: 768px) {
-    .character-header {
-        grid-template-columns: auto;
-        justify-content: center;
-    }
-
-    .character-info {
-        margin-top: 20px;
-        width: 100%;
-        max-width: none;
-        height: auto;
-    }
+.info-item {
+    flex: 0 0 calc(50% - 20px);
+    margin-bottom: 20px;
+    color: #ffff;
 }
 
-/* Info section item styles */
 .info-item h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
     color: #ecce72;
-    font-size: 24px;
-    margin-bottom: 10px;
 }
 
 .info-item p {
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    color: #fdedda;
 }
 
 /* Character section styles */
 .character-section {
     margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .character-section h3 {
@@ -118,43 +98,28 @@
     margin-bottom: 20px;
 }
 
-.character-section .talent,
-.character-section .passive-talent,
-.character-section .constellation {
+.character-section > div {
     border-radius: 10px;
     background-color: #2a376e;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px;
 }
-.character-section .ascension-level {
-    border-radius: 10px;
-    background-color: #1f2b56;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-}
-.character-section .talent h4,
-.character-section .passive-talent h4,
-.character-section .ascension-level h4,
-.character-section .constellation h4 {
+
+.character-section h4 {
     color: #ecce72;
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-.character-section .talent p,
-.character-section .passive-talent p,
-.character-section .constellation p {
+.character-section p,
+.character-section ul li {
     font-size: 20px;
     color: #fdedda;
     margin-bottom: 15px;
 }
 
-.character-section .ascension-level ul li {
-    font-size: 18px;
-    color: #fdedda;
-    margin-bottom: 10px;
+.character-section ul li {
     padding: 10px;
     border-radius: 10px;
     background-color: #2a376e;
@@ -163,7 +128,7 @@
     align-items: center;
 }
 
-.character-section .ascension-level ul li img {
+.character-section ul li img {
     margin-right: 10px;
     width: 44px;
     height: 44px;
@@ -179,13 +144,7 @@
     text-decoration: underline;
 }
 
-/* Error message styles */
-.error-message {
-    color: red;
-    text-align: center;
-}
-
-/* Character build styles */
+/* Character build and upgrade materials styles */
 .character-build {
     border-radius: 10px;
     background-color: #1f2b56;
@@ -194,65 +153,11 @@
     margin-bottom: 20px;
 }
 
-.character-build h4 {
+.character-build h4,
+.upgrade-materials h4 {
     color: #ecce72;
     font-size: 24px;
     margin-bottom: 10px;
-}
-
-/* Style for each build item */
-.build-item {
-    border-radius: 10px;
-    background-color: #2a376e;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    list-style: none;
-}
-
-/* Style for sublists within build items */
-.build-sublist {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 0;
-}
-
-/* Add rounded border to list items inside build-sublist */
-.build-sublist li {
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    list-style: none;
-}
-
-/* Style for text inside build-sublist */
-.build-sublist li h5,
-.build-sublist li p {
-    color: #fdedda;
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.weapon-image {
-    width: 70px;
-    height: auto;
-    margin-right: 5px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
-}
-
-.weapon-image:hover {
-    transform: scale(1.1);
-    filter: brightness(110%);
-}
-
-
-/* Remove list markers */
-.build-item::marker,
-.build-sublist::marker {
-    display: none;
 }
 
 /* Upgrade materials section styles */
@@ -294,44 +199,93 @@
     margin-bottom: 10px;
 }
 
-/* Artifacts section styles */
-.character-section.artifacts {
-    margin-top: 40px;
-    margin-bottom: 40px;
-  }
-  
-  .artifacts-wrapper {
+
+
+
+/* Style for each build item */
+.build-item {
+    border-radius: 10px;
+    background-color: #2a376e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Increased padding */
+    margin-bottom: 30px; /* Increased margin */
+    list-style: none;
+}
+
+/* Style for sublists within build items */
+.build-sublist {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-  }
-  
-  .artifact-set {
+    padding: 0;
+}
+
+.build-sublist li {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    list-style: none;
+}
+
+.build-sublist li h5,
+.build-sublist li p {
+    color: #fdedda;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Weapon image styles */
+.weapon-image {
+    width: 70px;
+    height: auto;
+    margin-right: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.weapon-image:hover {
+    transform: scale(1.1);
+    filter: brightness(110%);
+}
+
+/* Artifact section styles */
+.character-section.artifacts {
+    margin-top: 40px;
+}
+
+.artifacts-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.artifact-set {
     border-radius: 10px;
     background-color: #2a376e;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-  }
-  
-  .artifact-set h4 {
+}
+
+.artifact-set h4 {
     color: #ecce72;
     font-size: 24px;
     margin-bottom: 10px;
-  }
-  
-  .artifact-items {
+}
+
+.artifact-items {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 10px;
-  }
-  
-  .artifact-item {
+}
+
+.artifact-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .artifact-item img {
+}
+
+.artifact-item img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -346,10 +300,62 @@
     filter: brightness(110%);
 }
 
-  
-  .artifact-item p {
+.artifact-item p {
     color: #fdedda;
     font-size: 18px;
     text-align: center;
-  }
-  
+}
+
+/* Error message styles */
+.error-message {
+    color: red;
+    text-align: center;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    .character-header {
+        grid-template-columns: 1fr; /* Change to a single column layout */
+    }
+
+    .info-item {
+        flex: 0 0 100%; /* Full width for smaller devices */
+    }
+
+    .character-detail-container {
+        margin: 20px;
+    }
+}
+
+/* Table styles */
+.character-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    
+}
+
+.character-section th,
+.character-section td {
+    padding: 10px;
+    border: 1px solid #2a376e;
+    color: #fdedda;
+    
+}
+
+.character-section th {
+    background-color: #2a376e;
+}
+
+.character-section tbody tr:hover {
+    background-color: #324085;
+}
+
+.character-section table .material-image {
+    max-width: 30px;
+    max-height: 30px;
+    vertical-align: middle;
+    margin-right: 5px;
+    
+}
+

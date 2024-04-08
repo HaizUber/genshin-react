@@ -142,60 +142,117 @@ import '../styles/HomePage.css';
   const getSpecialCaseImageSrc = (characterName) => {
     switch (characterName) {
       case 'Aether':
-        return 'UI_AvatarIcon_PlayerBoy';
+        return 'UI_AvatarIcon_PlayerBoy_Card';
       case 'Alhaitham':
-        return 'UI_AvatarIcon_Alhatham';
+        return 'UI_AvatarIcon_Alhatham_Card';
       case 'Amber':
-        return 'UI_AvatarIcon_Ambor';
+        return 'UI_AvatarIcon_Ambor_Card';
       case 'Arataki Itto':
-        return 'UI_AvatarIcon_Itto';
+        return 'UI_AvatarIcon_Itto_Card';
       case 'Baizhu':
-        return 'UI_AvatarIcon_Baizhuer';
+        return 'UI_AvatarIcon_Baizhuer_Card';
       case 'Hu Tao':
-        return 'UI_AvatarIcon_Hutao';
+        return 'UI_AvatarIcon_Hutao_Card';
       case 'Jean':
-        return 'UI_AvatarIcon_Qin';
+        return 'UI_AvatarIcon_Qin_Card';
       case 'Kaedehara Kazuha':
-        return 'UI_AvatarIcon_Kazuha';
+        return 'UI_AvatarIcon_Kazuha_Card';
       case 'Kamisato Ayaka':
-        return 'UI_AvatarIcon_Ayaka';
+        return 'UI_AvatarIcon_Ayaka_Card';
       case 'Kamisato Ayato':
-        return 'UI_AvatarIcon_Ayato';
+        return 'UI_AvatarIcon_Ayato_Card';
       case 'Kirara':
-        return 'UI_AvatarIcon_Momoka';
+        return 'UI_AvatarIcon_Momoka_Card';
       case 'Kujou Sara':
-        return 'UI_AvatarIcon_Sara';
+        return 'UI_AvatarIcon_Sara_Card';
       case 'Kuki Shinobu':
-        return 'UI_AvatarIcon_Shinobu';
+        return 'UI_AvatarIcon_Shinobu_Card';
       case 'Lumine':
-        return 'UI_AvatarIcon_PlayerGirl';
+        return 'UI_AvatarIcon_PlayerGirl_Card';
       case 'Lynette':
-        return 'UI_AvatarIcon_Linette';
+        return 'UI_AvatarIcon_Linette_Card';
       case 'Lyney':
-        return 'UI_AvatarIcon_Liney';
+        return 'UI_AvatarIcon_Liney_Card';
       case 'Noelle':
-        return 'UI_AvatarIcon_Noel';
+        return 'UI_AvatarIcon_Noel_Card';
       case 'Raiden Shogun':
-        return 'UI_AvatarIcon_Shougun';
+        return 'UI_AvatarIcon_Shougun_Card';
       case 'Sangonomiya Kokomi':
-        return 'UI_AvatarIcon_Kokomi';
+        return 'UI_AvatarIcon_Kokomi_Card';
       case 'Shikanoin Heizou':
-        return 'UI_AvatarIcon_Heizo';
+        return 'UI_AvatarIcon_Heizo_Card';
       case 'Thoma':
-        return 'UI_AvatarIcon_Tohma';
+        return 'UI_AvatarIcon_Tohma_Card';
       case 'Yae Miko':
-        return 'UI_AvatarIcon_Yae';
+        return 'UI_AvatarIcon_Yae_Card';
       case 'Yanfei':
-        return 'UI_AvatarIcon_Feiyan';
+        return 'UI_AvatarIcon_Feiyan_Card';
       case 'Yun Jin':
-        return 'UI_AvatarIcon_Yunjin';
+        return 'UI_AvatarIcon_Yunjin_Card';
       case 'Xianyun':
-        return 'UI_AvatarIcon_Liuyun';
+        return 'UI_AvatarIcon_Liuyun_Card';
       default:
-        return `UI_AvatarIcon_${characterName.replace(/\s+/g, '')}`;
+        return `UI_AvatarIcon_${characterName.replace(/\s+/g, '')}_Card`;
     }
   };
 
+
+  const getSpecialCharacterImageSrc = (characterName) => {
+    switch (characterName) {
+      case 'Aether':
+        return 'UI_Gacha_AvatarIcon_PlayerBoy';
+      case 'Alhaitham':
+        return 'UI_Gacha_AvatarIcon_Alhatham';
+      case 'Amber':
+        return 'UI_Gacha_AvatarIcon_Ambor_';
+      case 'Arataki Itto':
+        return 'UI_Gacha_AvatarIcon_Itto';
+      case 'Baizhu':
+        return 'UI_Gacha_AvatarIcon_Baizhuer';
+      case 'Hu Tao':
+        return 'UI_Gacha_AvatarIcon_Hutao';
+      case 'Jean':
+        return 'UI_Gacha_AvatarIcon_Qin';
+      case 'Kaedehara Kazuha':
+        return 'UI_Gacha_AvatarIcon_Kazuha';
+      case 'Kamisato Ayaka':
+        return 'UI_Gacha_AvatarIcon_Ayaka';
+      case 'Kamisato Ayato':
+        return 'UI_Gacha_AvatarIcon_Ayato';
+      case 'Kirara':
+        return 'UI_Gacha_AvatarIcon_Momoka';
+      case 'Kujou Sara':
+        return 'UI_Gacha_AvatarIcon_Sara';
+      case 'Kuki Shinobu':
+        return 'UI_Gacha_AvatarIcon_Shinobu';
+      case 'Lumine':
+        return 'UI_Gacha_AvatarIcon_PlayerGirl';
+      case 'Lynette':
+        return 'UI_Gacha_AvatarIcon_Linette';
+      case 'Lyney':
+        return 'UI_Gacha_AvatarIcon_Liney';
+      case 'Noelle':
+        return 'UI_Gacha_AvatarIcon_Noel';
+      case 'Raiden Shogun':
+        return 'UI_Gacha_AvatarIcon_Shougun';
+      case 'Sangonomiya Kokomi':
+        return 'UI_Gacha_AvatarIcon_Kokomi';
+      case 'Shikanoin Heizou':
+        return 'UI_Gacha_AvatarIcon_Heizo';
+      case 'Thoma':
+        return 'UI_Gacha_AvatarIcon_Tohma';
+      case 'Yae Miko':
+        return 'UI_Gacha_AvatarIcon_Yae';
+      case 'Yanfei':
+        return 'UI_Gacha_AvatarIcon_Feiyan';
+      case 'Yun Jin':
+        return 'UI_Gacha_AvatarIcon_Yunjin';
+      case 'Xianyun':
+        return 'UI_Gacha_AvatarIcon_Liuyun';
+      default:
+        return `UI_Gacha_AvatarIcon_${characterName.replace(/\s+/g, '')}`;
+    }
+  };
   return (
     <div className="HomePage">
       <NavMenu />
@@ -268,19 +325,18 @@ import '../styles/HomePage.css';
 
       </div>
       <div className="site-content">
-      {loading && <p>Loading...</p>}
-  {error && <p>Error: {error}</p>}
-  <div className="character-list">
-    {characters.map((character, index) => (
-      // Replace spaces with hyphens in the character name for the link
-      <Link key={index} to={`/characters/${character.name.replace(/\s/g, '-')}`}>
-        <div className="character-card">
-          <img src={process.env.PUBLIC_URL + `/assets/characters/${character.imageUrl}.png`} alt={character.name} />
-          <p>{character.name}</p>
+      <div className="character-list">
+  {characters.map((character, index) => (
+    <a key={index} href={`/characters/${character.name.replace(/\s/g, '-')}`} target="_blank" rel="noopener noreferrer">
+      <div className="card">
+        <div className="wrapper">
+        <img src={process.env.PUBLIC_URL + `/assets/characters/${getSpecialCaseImageSrc(character.name)}.png`} alt={character.name} className="cover-image" />
         </div>
-      </Link>
-    ))}
-        </div>
+        <img src={process.env.PUBLIC_URL + `/assets/characters/${getSpecialCharacterImageSrc(character.name)}.png`} alt={character.name} className="character" />
+      </div>
+    </a>
+  ))}
+</div>
       </div>
       <Footer />
     </div>

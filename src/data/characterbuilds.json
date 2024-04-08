@@ -1,12 +1,12 @@
 {
   "Amber": {
     "materials": [
-      "Ballad",
-      "Tusk of Monoceros Caeli",
-      "Prithiva Topaz Silver",
-      "Basalt Pillar",
-      "Cecilia",
-      "Divining Scroll"
+      "Freedom",
+      "Dvalin's Sigh",
+      "Agnidus Agate Silver",
+      "Everflame Seed",
+      "Small Lamp Grass",
+      "Firm Arrowhead"
     ],
 
     "weapons": [
@@ -45,6 +45,14 @@
     ]
   },
   "Albedo": {
+    "materials": [
+      "Ballad",
+      "Tusk of Monoceros Caeli",
+      "Prithiva Topaz Silver",
+      "Basalt Pillar",
+      "Cecilia",
+      "Divining Scroll"
+    ],
     "weapons": [
       "Cinnabar Spindle",
       "Harbinger of Dawn",
@@ -269,7 +277,7 @@
       "HP%",
       "HP"
     ]
-  },"Ayaka": {
+  },"Kamisato-Ayaka": {
     "materials": [
       "Elegance",
       "Bloodjade Branch",
