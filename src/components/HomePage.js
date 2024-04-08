@@ -191,6 +191,8 @@ import '../styles/HomePage.css';
         return 'UI_AvatarIcon_Yunjin_Card';
       case 'Xianyun':
         return 'UI_AvatarIcon_Liuyun_Card';
+        case 'Gaming':
+          return 'UI_AvatarIcon_Gaming_Card';
       default:
         return `UI_AvatarIcon_${characterName.replace(/\s+/g, '')}_Card`;
     }
@@ -204,7 +206,7 @@ import '../styles/HomePage.css';
       case 'Alhaitham':
         return 'UI_Gacha_AvatarIcon_Alhatham';
       case 'Amber':
-        return 'UI_Gacha_AvatarIcon_Ambor_';
+        return 'UI_Gacha_AvatarIcon_Ambor';
       case 'Arataki Itto':
         return 'UI_Gacha_AvatarIcon_Itto';
       case 'Baizhu':
@@ -249,6 +251,64 @@ import '../styles/HomePage.css';
         return 'UI_Gacha_AvatarIcon_Yunjin';
       case 'Xianyun':
         return 'UI_Gacha_AvatarIcon_Liuyun';
+        case 'Gaming':
+          return 'UI_Gacha_AvatarIcon_Gaming';
+      default:
+        return `UI_Gacha_AvatarIcon_${characterName.replace(/\s+/g, '')}`;
+    }
+  };
+  const getSpecialCharacterName = (characterName) => {
+    switch (characterName) {
+      case 'Aether':
+        return 'PlayerBoy';
+      case 'Alhaitham':
+        return 'Alhatham';
+      case 'Amber':
+        return 'Ambor';
+      case 'Arataki Itto':
+        return 'Itto';
+      case 'Baizhu':
+        return 'Baizhuer';
+      case 'Hu Tao':
+        return 'Hutao';
+      case 'Jean':
+        return 'Qin';
+      case 'Kaedehara Kazuha':
+        return 'Kazuha';
+      case 'Kamisato Ayaka':
+        return 'Ayaka';
+      case 'Kamisato Ayato':
+        return 'Ayato';
+      case 'Kirara':
+        return 'Momoka';
+      case 'Kujou Sara':
+        return 'Sara';
+      case 'Kuki Shinobu':
+        return 'Shinobu';
+      case 'Lumine':
+        return 'PlayerGirl';
+      case 'Lynette':
+        return 'Linette';
+      case 'Lyney':
+        return 'Liney';
+      case 'Noelle':
+        return 'Noel';
+      case 'Raiden Shogun':
+        return 'Shougun';
+      case 'Sangonomiya Kokomi':
+        return 'Kokomi';
+      case 'Shikanoin Heizou':
+        return 'Heizo';
+      case 'Thoma':
+        return 'Tohma';
+      case 'Yae Miko':
+        return 'Yae';
+      case 'Yanfei':
+        return 'Feiyan';
+      case 'Yun Jin':
+        return 'Yunjin';
+      case 'Xianyun':
+        return 'Liuyun';
       default:
         return `UI_Gacha_AvatarIcon_${characterName.replace(/\s+/g, '')}`;
     }
@@ -266,25 +326,25 @@ import '../styles/HomePage.css';
         <div className="element-filters">
           <p>Element:</p>
           <button onClick={() => handleFilterOption({ type: 'element', value: 'Anemo' })} className={filterOptions.element === 'Anemo' ? 'active' : ''}data-tooltip="Anemo">
-            <img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_305.png'} alt="Anemo" />
+            <img src={process.env.PUBLIC_URL + '/assets/icons/anemo.png'} alt="Anemo" />
           </button>
           <button onClick={() => handleFilterOption({ type: 'element', value: 'Cryo' })} className={filterOptions.element === 'Cryo' ? 'active' : ''}data-tooltip="Cryo">
-            <img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_306.png'} alt="Cryo" />
+            <img src={process.env.PUBLIC_URL + '/assets/icons/cryo.png'} alt="Cryo" />
           </button>
           <button onClick={() => handleFilterOption({ type: 'element', value: 'Dendro' })} className={filterOptions.element === 'Dendro' ? 'active' : ''}data-tooltip="Dendro">
-            <img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_303.png'} alt="Dendro" />
+            <img src={process.env.PUBLIC_URL + '/assets/icons/dendro.png'} alt="Dendro" />
           </button>
           <button onClick={() => handleFilterOption({ type: 'element', value: 'Electro' })} className={filterOptions.element === 'Electro' ? 'active' : ''}data-tooltip="Electro">
-            <img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_304.png'} alt="Electro" />
+            <img src={process.env.PUBLIC_URL + '/assets/icons/electro.png'} alt="Electro" />
           </button>
           <button onClick={() => handleFilterOption({ type: 'element', value: 'Geo' })} className={filterOptions.element === 'Geo' ? 'active' : ''}data-tooltip="Geo">
-            <img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_307.png'} alt="Geo" />
+            <img src={process.env.PUBLIC_URL + '/assets/icons/geo.png'} alt="Geo" />
           </button>
           <button onClick={() => handleFilterOption({ type: 'element', value: 'Hydro' })} className={filterOptions.element === 'Hydro' ? 'active' : ''}data-tooltip="Hydro">
-            <img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_302.png'} alt="Hydro" />
+            <img src={process.env.PUBLIC_URL + '/assets/icons/hydro.png'} alt="Hydro" />
           </button>
           <button onClick={() => handleFilterOption({ type: 'element', value: 'Pyro' })} className={filterOptions.element === 'Pyro' ? 'active' : ''}data-tooltip="Pyro">
-            <img src={process.env.PUBLIC_URL + '/assets/icons/UI_ItemIcon_301.png'} alt="Pyro" />
+            <img src={process.env.PUBLIC_URL + '/assets/icons/pyro.png'} alt="Pyro" />
           </button>
         </div>
         <div className="separator"></div>
@@ -330,13 +390,25 @@ import '../styles/HomePage.css';
     <a key={index} href={`/characters/${character.name.replace(/\s/g, '-')}`} target="_blank" rel="noopener noreferrer">
       <div className="card">
         <div className="wrapper">
-        <img src={process.env.PUBLIC_URL + `/assets/characters/${getSpecialCaseImageSrc(character.name)}.png`} alt={character.name} className="cover-image" />
+          <img
+            src={process.env.PUBLIC_URL + `/assets/characters/${getSpecialCaseImageSrc(character.name) || 'UI_AvatarIcon_' + getSpecialCharacterName}.png`}
+            alt={character.name}
+            className="cover-image"
+          />
         </div>
-        <img src={process.env.PUBLIC_URL + `/assets/characters/${getSpecialCharacterImageSrc(character.name)}.png`} alt={character.name} className="character" />
+        <div className="character-name">{character.name}</div>
+        <img
+          src={process.env.PUBLIC_URL + `/assets/characters/${getSpecialCharacterImageSrc(character.name) || 'UI_AvatarIcon_' + character.name.replace(/\s+/g, '')}.png`}
+          alt={character.name}
+          className="character"
+        />
+
       </div>
     </a>
   ))}
 </div>
+
+
       </div>
       <Footer />
     </div>
