@@ -45,7 +45,7 @@ import '../styles/HomePage.css';
         let filteredCharacters = [];
   
         if (filterOptions.rarity === '5') {
-          filteredCharacters = await getFiveStarCharacters();
+          filteredCharacters =          await getFiveStarCharacters();
         } else if (filterOptions.rarity === '4') {
           filteredCharacters = await getFourStarCharacters();
         } else {
@@ -97,19 +97,36 @@ import '../styles/HomePage.css';
             case 'Polearm':
               weaponCharacterNames = polearmCharacters;
               break;
-              case 'Catalyst':
-                weaponCharacterNames = catalystCharacters;
-                break;
+            case 'Catalyst':
+              weaponCharacterNames = catalystCharacters;
+              break;
             default:
               break;
           }
+          
+          // Filter characters based on the weapon list
           filteredCharacters = filteredCharacters.filter(character => weaponCharacterNames.includes(character));
         }
         if (searchQuery) {
-          filteredCharacters = filteredCharacters.filter(character =>
-            character.toLowerCase().includes(searchQuery.toLowerCase())
-          );
+          filteredCharacters = filteredCharacters.filter(character => {
+            const lowerCaseName = character.toLowerCase();
+            const lowerCaseSearchQuery = searchQuery.toLowerCase();
+        
+            // Check if the character's name matches the search query
+            if (lowerCaseName.includes(lowerCaseSearchQuery)) {
+              return true;
+            }
+        
+            // Check if the character is a Traveler and if its element matches the search query
+            if (lowerCaseName.includes('traveler')) {
+              const elements = ["anemo", "geo", "hydro", "electro", "dendro"];
+              return elements.some(element => lowerCaseSearchQuery.includes(element));
+            }
+        
+            return false;
+          });
         }
+        
         setCharacters(filteredCharacters.map(character => ({
           name: character,
           imageUrl: getSpecialCaseImageSrc(character)
@@ -123,6 +140,9 @@ import '../styles/HomePage.css';
   
     filterCharacters();
   }, [filterOptions, allCharacterNames, searchQuery]);
+  
+  
+  
   
 
   const handleFilterOption = (option) => {
@@ -198,117 +218,10 @@ import '../styles/HomePage.css';
     }
   };
 
-
-  const getSpecialCharacterImageSrc = (characterName) => {
-    switch (characterName) {
-      case 'Aether':
-        return 'UI_Gacha_AvatarIcon_PlayerBoy';
-      case 'Alhaitham':
-        return 'UI_Gacha_AvatarIcon_Alhatham';
-      case 'Amber':
-        return 'UI_Gacha_AvatarIcon_Ambor';
-      case 'Arataki Itto':
-        return 'UI_Gacha_AvatarIcon_Itto';
-      case 'Baizhu':
-        return 'UI_Gacha_AvatarIcon_Baizhuer';
-      case 'Hu Tao':
-        return 'UI_Gacha_AvatarIcon_Hutao';
-      case 'Jean':
-        return 'UI_Gacha_AvatarIcon_Qin';
-      case 'Kaedehara Kazuha':
-        return 'UI_Gacha_AvatarIcon_Kazuha';
-      case 'Kamisato Ayaka':
-        return 'UI_Gacha_AvatarIcon_Ayaka';
-      case 'Kamisato Ayato':
-        return 'UI_Gacha_AvatarIcon_Ayato';
-      case 'Kirara':
-        return 'UI_Gacha_AvatarIcon_Momoka';
-      case 'Kujou Sara':
-        return 'UI_Gacha_AvatarIcon_Sara';
-      case 'Kuki Shinobu':
-        return 'UI_Gacha_AvatarIcon_Shinobu';
-      case 'Lumine':
-        return 'UI_Gacha_AvatarIcon_PlayerGirl';
-      case 'Lynette':
-        return 'UI_Gacha_AvatarIcon_Linette';
-      case 'Lyney':
-        return 'UI_Gacha_AvatarIcon_Liney';
-      case 'Noelle':
-        return 'UI_Gacha_AvatarIcon_Noel';
-      case 'Raiden Shogun':
-        return 'UI_Gacha_AvatarIcon_Shougun';
-      case 'Sangonomiya Kokomi':
-        return 'UI_Gacha_AvatarIcon_Kokomi';
-      case 'Shikanoin Heizou':
-        return 'UI_Gacha_AvatarIcon_Heizo';
-      case 'Thoma':
-        return 'UI_Gacha_AvatarIcon_Tohma';
-      case 'Yae Miko':
-        return 'UI_Gacha_AvatarIcon_Yae';
-      case 'Yanfei':
-        return 'UI_Gacha_AvatarIcon_Feiyan';
-      case 'Yun Jin':
-        return 'UI_Gacha_AvatarIcon_Yunjin';
-      case 'Xianyun':
-        return 'UI_Gacha_AvatarIcon_Liuyun';
-        case 'Gaming':
-          return 'UI_Gacha_AvatarIcon_Gaming';
-      default:
-        return `UI_Gacha_AvatarIcon_${characterName.replace(/\s+/g, '')}`;
-    }
-  };
   const getSpecialCharacterName = (characterName) => {
     switch (characterName) {
       case 'Aether':
-        return 'PlayerBoy';
-      case 'Alhaitham':
-        return 'Alhatham';
-      case 'Amber':
-        return 'Ambor';
-      case 'Arataki Itto':
-        return 'Itto';
-      case 'Baizhu':
-        return 'Baizhuer';
-      case 'Hu Tao':
-        return 'Hutao';
-      case 'Jean':
-        return 'Qin';
-      case 'Kaedehara Kazuha':
-        return 'Kazuha';
-      case 'Kamisato Ayaka':
-        return 'Ayaka';
-      case 'Kamisato Ayato':
-        return 'Ayato';
-      case 'Kirara':
-        return 'Momoka';
-      case 'Kujou Sara':
-        return 'Sara';
-      case 'Kuki Shinobu':
-        return 'Shinobu';
-      case 'Lumine':
-        return 'PlayerGirl';
-      case 'Lynette':
-        return 'Linette';
-      case 'Lyney':
-        return 'Liney';
-      case 'Noelle':
-        return 'Noel';
-      case 'Raiden Shogun':
-        return 'Shougun';
-      case 'Sangonomiya Kokomi':
-        return 'Kokomi';
-      case 'Shikanoin Heizou':
-        return 'Heizo';
-      case 'Thoma':
-        return 'Tohma';
-      case 'Yae Miko':
-        return 'Yae';
-      case 'Yanfei':
-        return 'Feiyan';
-      case 'Yun Jin':
-        return 'Yunjin';
-      case 'Xianyun':
-        return 'Liuyun';
+        return 'Traveller';
       default:
         return `UI_Gacha_AvatarIcon_${characterName.replace(/\s+/g, '')}`;
     }
@@ -386,27 +299,96 @@ import '../styles/HomePage.css';
       </div>
       <div className="site-content">
       <div className="character-list">
-  {characters.map((character, index) => (
-    <a key={index} href={`/characters/${character.name.replace(/\s/g, '-')}`} target="_blank" rel="noopener noreferrer">
-      <div className="card">
-        <div className="wrapper">
-          <img
-            src={process.env.PUBLIC_URL + `/assets/characters/${getSpecialCaseImageSrc(character.name) || 'UI_AvatarIcon_' + getSpecialCharacterName}.png`}
-            alt={character.name}
-            className="cover-image"
-          />
-        </div>
-        <div className="character-name">{character.name}</div>
-        <img
-          src={process.env.PUBLIC_URL + `/assets/characters/${getSpecialCharacterImageSrc(character.name) || 'UI_AvatarIcon_' + character.name.replace(/\s+/g, '')}.png`}
-          alt={character.name}
-          className="character"
-        />
-
-      </div>
-    </a>
-  ))}
+  {[
+    ...characters.filter(character => character.name !== "Aether" && character.name !== "Lumine"), // Exclude Aether and Lumine
+    { name: "Traveler Anemo", element: "Anemo", weaponType: "Sword", rarity: 5 },
+    { name: "Traveler Geo", element: "Geo", weaponType: "Sword", rarity: 5 },
+    { name: "Traveler Electro", element: "Electro", weaponType: "Sword", rarity: 5 },
+    { name: "Traveler Dendro", element: "Dendro", weaponType: "Sword", rarity: 5 },
+    { name: "Traveler Hydro", element: "Hydro", weaponType: "Sword", rarity: 5 }
+  ].filter(character => {
+    // Check if searchQuery matches the character name or if it's a Traveler matching the search query
+    if (searchQuery) {
+      return (
+        character.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (character.name.startsWith("Traveler") && searchQuery.toLowerCase().includes("traveler"))
+      );
+    } else {
+      return true; // Display all characters if there's no search query
+    }
+  }).filter(character => {
+    // Filter by element if filterOptions.element is set
+    if (filterOptions.element && character.name.startsWith("Traveler")) {
+      return character.element.toLowerCase() === filterOptions.element.toLowerCase();
+    } else {
+      return true; // Include all characters if element filter is not set or character is not a Traveler
+    }
+  }).filter(character => {
+    // Filter by weapon type if filterOptions.weaponType is set
+    if (filterOptions.weaponType && character.name.startsWith("Traveler")) {
+      return character.weaponType.toLowerCase() === filterOptions.weaponType.toLowerCase();
+    } else {
+      return true; // Include all characters if weapon type filter is not set or character is not a Traveler
+    }
+  }).filter(character => {
+    // Filter by rarity if filterOptions.rarity is set
+    if (filterOptions.rarity && character.name.startsWith("Traveler")) {
+      return character.rarity === parseInt(filterOptions.rarity);
+    } else {
+      return true; // Include all characters if rarity filter is not set or character is not a Traveler
+    }
+  }).map((character, index) => {
+    // Check if the character is Aether, Lumine, or a Traveler
+    if (character.name.startsWith("Traveler")) {
+      // Render cards for each element of the Traveler
+      const element = character.name.split(" ")[1];
+      return (
+        <a key={index} href={`/characters/${character.name.replace(/\s/g, '-')}`} target="_blank" rel="noopener noreferrer">
+          <div className="card">
+            <div className="wrapper">
+              <img
+                src={process.env.PUBLIC_URL + `/assets/characters/UI_AvatarIcon_PlayerGirl_Card.png`}
+                alt={`Traveler ${element}`}
+                className="cover-image"
+              />
+            </div>
+            <div className="character-name">{character.name}</div>
+            <img
+              src={process.env.PUBLIC_URL + `/assets/characters/character-traveler-card.png`}
+              alt={`Traveler ${element}`}
+              className="character"
+            />
+          </div>
+        </a>
+      );
+    } else {
+      // Render normal character card
+      return (
+        <a key={index} href={`/characters/${character.name.replace(/\s/g, '-')}`} target="_blank" rel="noopener noreferrer">
+          <div className="card">
+            <div className="wrapper">
+              <img
+                src={process.env.PUBLIC_URL + `/assets/characters/${getSpecialCaseImageSrc(character.name) || 'UI_AvatarIcon_' + getSpecialCharacterName}.png`}
+                alt={character.name}
+                className="cover-image"
+              />
+            </div>
+            <div className="character-name">{character.name}</div>
+            <img
+              src={process.env.PUBLIC_URL + `/assets/characters/character-${character.name.toLowerCase().replace(/\s+/g, '-')}-card.png`}
+              alt={character.name}
+              className="character"
+            />
+          </div>
+        </a>
+      );
+    }
+  })}
 </div>
+
+
+
+
 
 
       </div>
