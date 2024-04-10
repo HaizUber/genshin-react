@@ -6,6 +6,7 @@ import NavMenu from './NavMenu';
 import CharacterNavMenu from './characterNavmenu'; 
 import Footer from './Footer';
 import characterBuilds from '../data/characterbuilds.json'; // Import the character builds
+import quotes from '../data/quotes.json';
 
 const CharacterDetailPage = () => {
   const { characterName } = useParams();
@@ -17,6 +18,7 @@ const CharacterDetailPage = () => {
    const [artifacts, setArtifacts] = useState([]);
    const [upgradeMaterials, setUpgradeMaterials] = useState([]);
    const [scrollPosition, setScrollPosition] = useState(0);
+   const [quote, setQuote] = useState('');
   
    useEffect(() => {
     const fetchCharacterDetail = async () => {
@@ -35,22 +37,28 @@ const CharacterDetailPage = () => {
             // Fetch character data from the first endpoint
             const characterData = await getCharacterDetail(firstName);
 
+            // Simulate delay for loading
+            setTimeout(async () => {
+                // Fetch additional data including ascension costs from the second endpoint
+                const alternativeData = await getAlternativeResponse(firstName);
 
-            // Fetch additional data including ascension costs from the second endpoint
-            const alternativeData = await getAlternativeResponse(firstName);
+                // Merge the additional data into the character data
+                const characterWithCosts = {
+                    ...characterData,
+                    ...alternativeData // Assuming all data from the second endpoint is needed
+                };
 
-
-            // Merge the additional data into the character data
-            const characterWithCosts = {
-                ...characterData,
-                ...alternativeData // Assuming all data from the second endpoint is needed
-            };
-
-            setCharacter(characterWithCosts);
+                setCharacter(characterWithCosts);
+                setLoading(false); // Set loading to false after filtering
+            }, 2000); // Simulate 2 seconds delay
+                // Choose a random quote
+                const randomIndex = Math.floor(Math.random() * quotes.length);
+                const randomQuote = quotes[randomIndex].quote;
+                const randomCharacter = quotes[randomIndex].character;
+                setQuote(`${randomQuote} ~${randomCharacter}`);
         } catch (error) {
             setError(error.message);
-        } finally {
-            setLoading(false);
+            setLoading(false); // Set loading to false in case of error
         }
     };
 
@@ -144,7 +152,10 @@ useEffect(() => {
           const upgradeMaterialData = {
             id: data.id,
             name: data.name,
-            imageSrc: getUpgradeMaterialImageSrc(data.images.nameicon)
+            imageSrc: getUpgradeMaterialImageSrc(data.images.nameicon),
+            dropdomain: data.dropdomain,
+            daysofweek: data.daysofweek,
+            source: data.source
           };
           return upgradeMaterialData;
         } else {
@@ -174,14 +185,19 @@ useEffect(() => {
       window.removeEventListener('scroll', handleScroll);
   };
 }, []);
-
-
-
+  
 const backgroundPositionY = `${scrollPosition * 0.5}px`; // Adjust the scroll speed as needed
     
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+if (loading) {
+  return (
+    <>
+      <div className="loader"></div>
+      <div className="quote">{quote}</div>
+    </>
+  );
+}
+
+
 
   if (error) {
     return <p className="error-message">Error: {error}</p>;
@@ -510,64 +526,78 @@ return (
     </div>
 </div>
 
+{/* Upgrade Materials */}
+<div id="upgrade-materials" className="character-section">
+  <h3>Upgrade Materials:</h3>
+  <div className="upgrade-materials">
+    {upgradeMaterials.map((material, index) => {
+      // Filter out "Recommendation: Found in" and "Recommendation:" from source recommendations
+      const filteredSource = material.source ? material.source.map(source => source.replace('Recommendation: Found in', '').replace('Recommendation:', '')).join(', ') : '';
 
-      {/* Upgrade Materials */}
-      <div id="upgrade-materials" className="character-section">
-        <h3>Upgrade Materials:</h3>
-        <div className="upgrade-materials">
-          {upgradeMaterials.map((material, index) => (
-            <div key={index} className="upgrade-materials-item">
-              <img src={material.imageSrc} alt={material.name} />
-              <p>{material.name}</p>
-            </div>
-          ))}
+      // Concatenate multiple source recommendations into a single line
+      const sourceRecommendations = filteredSource.replace(/,([^,]*)$/, ' or$1');
+      return (
+        <div key={index} className="upgrade-materials-item" data-dropdomain={material.dropdomain ? `${material.dropdomain} on ${material.daysofweek ? material.daysofweek.join(', ') : ''}` : ''} data-source={sourceRecommendations}>
+          <img src={material.imageSrc} alt={material.name} />
+          <p>{material.name}</p>
         </div>
-      </div>
+      );
+    })}
+  </div>
+</div>
+
 
       {/* Character Build */}
       {characterBuilds[character.name] && (
         <div id="character-build" className="character-build">
           <h4>Character Build:</h4>
           <ul>
-            {/* Display weapons */}
-            <li className="build-item">
-              <h4>Weapons</h4>
-              <ul className="build-sublist">
-                {characterBuilds[character.name].weapons.map((weapon, index) => (
-                  <li key={index}>
-                    <img src={`/assets/weapons/${weaponImages[index]}.png`} alt={weapon} className="weapon-image"/>
-                    <p>{weapon}</p> ({weaponRarities[index]}✩)
-                  </li>
-                ))}
-              </ul> 
-            </li>
+{/* Display weapons */}
+<li className="build-item">
+  <h4>Weapons</h4>
+  <ul className="build-sublist">
+    {characterBuilds[character.name].weapons.map((weapon, index) => (
+      <li key={index}>
+        <div className="weapon-info">
+          <img src={`/assets/weapons/${weaponImages[index]}.png`} alt={weapon} className="weapon-image"/>
+          <div className="weapon-rarity">{weaponRarities[index]}✩</div>
+          <p>{weapon}</p>
+        </div>
+      </li>
+    ))}
+  </ul> 
+</li>
 
-            {/* Display artifacts */}
-            <div id="artifacts" className="character-section artifacts">
-              <h3>Artifacts:</h3>
-              <div className="artifacts-wrapper">
-                {Object.entries(characterBuilds[character.name].artifacts).map(([setName, setItems], setIndex) => (
-                  <div key={setIndex} className="artifact-set">
-                    <h4>{setName}</h4>
-                    <div className="artifact-items">
-                      {setItems.map((artifact, index) => {
-                        const artifactName = artifact.trim(); // Remove any leading/trailing spaces
-                        const matchedArtifact = artifacts.find(item => item.name === artifactName);
-                        if (!matchedArtifact) {
-                          return null; // Skip rendering if artifact is not found
-                        }
-                        return (
-                          <div key={index} className="artifact-item">
-                            <img src={matchedArtifact.imageSrc} alt={artifactName} className="artifact-image" />
-                            <p>{artifactName}</p>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
+
+{/* Display artifacts */}
+<div id="artifacts" className="character-section artifacts">
+  <h3>Artifacts:</h3>
+  <div className="artifacts-wrapper">
+    {Object.entries(characterBuilds[character.name].artifacts).map(([setName, setItems], setIndex) => (
+      <div key={setIndex} className="artifact-set">
+        <div className="artifact-items">
+          {setItems.map((artifact, index) => {
+            const artifactName = artifact.trim(); // Remove any leading/trailing spaces
+            const matchedArtifact = artifacts.find(item => item.name === artifactName);
+            if (!matchedArtifact) {
+              return null; // Skip rendering if artifact is not found
+            }
+            // Extracting the number from the set name
+            const setNumber = setName.match(/\d+/)[0];
+            return (
+              <div key={index} className="artifact-item">
+                <img src={matchedArtifact.imageSrc} alt={artifactName} className="artifact-image" />
+                <div className="artifact-number">{setNumber}</div>
+                <p>{artifactName}</p>
               </div>
-            </div>
+            );
+          })}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
 
             {/* Display main stats */}
             <li className="build-item">

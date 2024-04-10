@@ -226,6 +226,10 @@ import '../styles/HomePage.css';
         return `UI_Gacha_AvatarIcon_${characterName.replace(/\s+/g, '')}`;
     }
   };
+
+  if (loading) {
+    return <div className="loader"></div>
+  }
   return (
     <div className="HomePage">
       <NavMenu />
