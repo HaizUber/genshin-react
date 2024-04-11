@@ -42,7 +42,8 @@
       "CRIT Rate",
       "CRIT DMG",
       "ATK%"
-    ]
+    ],
+    "videoid": "35hQwmWxb7M"
   },
   "Albedo": {
     "materials": [
@@ -89,7 +90,8 @@
       "CRIT DMG",
       "DEF%",
       "ATK%"
-    ]
+    ],
+    "videoid": "A3U51KyZLxE"
   },
   "Alhaitham": {
     "materials": [
@@ -137,103 +139,96 @@
       "CRIT Rate",
       "CRIT DMG",
       "Elemental Mastery"
+    ],
+    "videoid": "6XbHqN8Cs60"
+},
+"Aloy": {
+  "materials": [
+    "Freedom",
+    "Molten Moment",
+    "Shivada Jade Sliver",
+    "Crystalline Bloom",
+    "Crystal Marrow",
+    "Spectral Husk"
+  ],
+  "weapons": [
+    "Thundering Pulse",
+    "Polar Star",
+    "Skyward Harp",
+    "The Stringless",
+    "The Viridescent Hunt"
+  ],
+  "artifacts": {
+    "4 piece Noblesse Oblige": [
+      "Noblesse Oblige"
+    ],
+    "2 piece Blizzard Strayer / Noblesse Oblige": [
+      "Blizzard Strayer",
+      "Noblesse Oblige"
+    ],
+    "4 piece Emblem of Severed Fate": [
+      "Emblem of Severed Fate"
+    ],
+    "2 piece Blizzard Strayer / Gilded Dreams": [
+      "Blizzard Strayer",
+      "Gilded Dreams"
+    ],
+    "2 piece Noblesse Oblige / Gilded Dreams": [
+      "Noblesse Oblige",
+      "Gilded Dreams"
     ]
   },
-  "Aloy": {
-    "materials": [
-      "Freedom",
-      "Molten Moment",
-      "Shivada Jade Sliver",
-      "Crystalline Bloom",
-      "Crystal Marrow",
-      "Spectral Husk"
+  "main_stats": {
+    "Sands": "ATK% / Elemental Mastery",
+    "Goblet": "Cryo DMG",
+    "Circlet": "CRIT Rate / CRIT DMG"
+  },
+  "substats": [
+    "CRIT Rate",
+    "CRIT DMG",
+    "ATK%",
+    "Elemental Mastery"
+  ],
+  "videoid": "NQBk9S1fpcw"
+},
+"Arataki-Itto": {
+  "materials": [
+    "Elegance",
+    "Ashen Heart",
+    "Prithiva Topaz Sliver",
+    "Riftborn Regalia",
+    "Onikabuto",
+    "Slime Condensate"
+  ],
+  "weapons": [
+    "Redhorn Stonethresher",
+    "Serpent Spine",
+    "Skyward Pride",
+    "Whiteblind",
+    "Wolf's Gravestone"
+  ],
+  "artifacts": {
+    "4 piece Husk of Opulent Dreams": [
+      "Husk of Opulent Dreams"
     ],
-    "weapons": [
-      "Thundering Pulse",
-      "Polar Star",
-      "Skyward Harp",
-      "The Stringless",
-      "The Viridescent Hunt"
+    "4 piece Desert Pavilion Chronicle": [
+      "Desert Pavilion Chronicle"
     ],
-    "artifacts": {
-      "4 piece Noblesse Oblige": [
-        "Noblesse Oblige"
-      ],
-      "2 piece Blizzard Strayer / Noblesse Oblige": [
-        "Blizzard Strayer",
-        "Noblesse Oblige"
-      ],
-      "4 piece Emblem of Severed Fate": [
-        "Emblem of Severed Fate"
-      ],
-      "2 piece Blizzard Strayer / Gilded Dreams": [
-        "Blizzard Strayer",
-        "Gilded Dreams"
-      ],
-      "2 piece Noblesse Oblige / Gilded Dreams": [
-        "Noblesse Oblige",
-        "Gilded Dreams"
-      ]
-    },
-    "main_stats": {
-      "Sands": "ATK% / Elemental Mastery",
-      "Goblet": "Cryo DMG",
-      "Circlet": "CRIT Rate / CRIT DMG"
-    },
-    "substats": [
-      "CRIT Rate",
-      "CRIT DMG",
-      "ATK%",
-      "Elemental Mastery"
+    "4 piece Retracing Bolide": [
+      "Retracing Bolide"
+    ],
+    "2 piece Archaic Petra / Husk of Opulent Dreams": [
+      "Archaic Petra",
+      "Husk of Opulent Dreams"
+    ],
+    "2 piece Emblem of Severed Fate / Husk of Opulent Dreams": [
+      "Emblem of Severed Fate",
+      "Husk of Opulent Dreams"
     ]
   },
-  "Arataki-Itto": {
-    "materials": [
-      "Elegance",
-      "Ashen Heart",
-      "Prithiva Topaz Sliver",
-      "Riftborn Regalia",
-      "Onikabuto",
-      "Slime Condensate"
-    ],
-    "weapons": [
-      "Redhorn Stonethresher",
-      "Serpent Spine",
-      "Skyward Pride",
-      "Whiteblind",
-      "Wolf's Gravestone"
-    ],
-    "artifacts": {
-      "4 piece Husk of Opulent Dreams": [
-        "Husk of Opulent Dreams"
-      ],
-      "4 piece Desert Pavilion Chronicle": [
-        "Desert Pavilion Chronicle"
-      ],
-      "4 piece Retracing Bolide": [
-        "Retracing Bolide"
-      ],
-      "2 piece Archaic Petra / Husk of Opulent Dreams": [
-        "Archaic Petra",
-        "Husk of Opulent Dreams"
-      ],
-      "2 piece Emblem of Severed Fate / Husk of Opulent Dreams": [
-        "Emblem of Severed Fate",
-        "Husk of Opulent Dreams"
-      ]
-    },
-    "main_stats": {
-      "Sands": "DEF%",
-      "Goblet": "Geo DMG",
-      "Circlet": "CRIT Rate / CRIT DMG"
-    },
-    "substats": [
-      "CRIT Rate",
-      "CRIT DMG",
-      "DEF%",
-      "Energy Recharge"
-    ]
-  }, "Baizhu": {
+  "videoid": "iXeJ94AFZDw"
+}
+, "Baizhu": {
     "materials": [
       "Gold",
       "Worldspan Fern",
@@ -276,8 +271,437 @@
       "Energy Recharge",
       "HP%",
       "HP"
-    ]
-  },"Kamisato-Ayaka": {
+    ],
+    "videoid": "HtiJkMsNtHg"
+  },
+  "Barbara": {
+    "materials": [
+      "Freedom",
+      "Ring of Boreas",
+      "Varunada Lazurite Sliver",
+      "Cleansing Heart",
+      "Philanemo Mushroom",
+      "Divining Scroll"
+    ],
+    "weapons": [
+      "Thrilling Tales of Dragon Slayers",
+      "Everlasting Moonglow",
+      "Prototype Amber",
+      "Favonius Codex",
+      "Wine and Song"
+    ],
+    "artifacts": {
+      "4 piece Maiden Beloved": [
+        "Maiden Beloved"
+      ],
+      "2 piece Maiden Beloved / Tenacity of the Millelith": [
+        "Maiden Beloved",
+        "Tenacity of the Millelith"
+      ],
+      "2 piece Maiden Beloved / Ocean-Hued Clam": [
+        "Maiden Beloved",
+        "Ocean-Hued Clam"
+      ],
+      "2 piece Ocean-Hued Clam / Tenacity of the Millelith": [
+        "Ocean-Hued Clam",
+        "Tenacity of the Millelith"
+      ],
+      "4 piece Instructor": [
+        "Instructor"
+      ]
+    },
+    "main_stats": {
+      "Sands": "HP%",
+      "Goblet": "HP%",
+      "Circlet": "Healing Bonus"
+    },
+    "substats": [
+      "HP%",
+      "HP",
+      "Energy Recharge"
+    ],
+    "videoid":"-_1I3-J56Iw"
+  },
+  "Beidou": {
+    "materials": [
+      "Gold",
+      "Dvalin's Sigh",
+      "Vajrada Amethyst Sliver",
+      "Lightning Prism",
+      "Noctilous Jade",
+      "Treasure Hoarder Insignia"
+    ],
+    "weapons": [
+      "Wolf's Gravestone",
+      "Serpent Spine",
+      "Beacon of the Reed Sea",
+      "Redhorn Stonethresher",
+      "Akuoumaru"
+    ],
+    "artifacts": {
+      "4 piece Emblem of Severed Fate": [
+        "Emblem of Severed Fate"
+      ],
+      "2 piece Emblem of Severed Fate / Noblesse Oblige": [
+        "Emblem of Severed Fate",
+        "Noblesse Oblige"
+      ],
+      "2 piece Emblem of Severed Fate / Thundering Fury": [
+        "Emblem of Severed Fate",
+        "Thundering Fury"
+      ],
+      "2 piece Noblesse Oblige / Thundering Fury": [
+        "Noblesse Oblige",
+        "Thundering Fury"
+      ],
+      "4 piece Thundersoother": [
+        "Thundersoother"
+      ]
+    },
+    "main_stats": {
+      "Sands": "ATK% / Energy Recharge",
+      "Goblet": "Electro DMG",
+      "Circlet": "CRIT Rate / CRIT DMG"
+    },
+    "substats": [
+      "CRIT Rate",
+      "CRIT DMG",
+      "ATK%",
+      "Energy Recharge"
+    ],
+    "videoid":"JJvETHeEZvs"
+  },
+  "Bennett": {
+    "materials": [
+        "Resistance",
+        "Dvalin's Plume",
+        "Agnidus Agate Sliver",
+        "Everflame Seed",
+        "Windwheel Aster",
+        "Treasure Hoarder Insignia"
+    ],
+    "weapons": [
+        "Mistsplitter Reforged",
+        "Aquila Favonia",
+        "Skyward Blade",
+        "Freedom-Sworn",
+        "The Alley Flash"
+    ],
+    "artifacts": {
+        "4 piece Noblesse Oblige": [
+            "Noblesse Oblige"
+        ],
+        "4 piece Emblem of Severed Fate": [
+            "Emblem of Severed Fate"
+        ],
+        "4 piece Crimson Witch of Flames": [
+            "Crimson Witch of Flames"
+        ],
+        "2 piece Emblem of Severed Fate / Noblesse Oblige": [
+            "Emblem of Severed Fate",
+            "Noblesse Oblige"
+        ],
+        "2 piece Crimson Witch of Flames / Noblesse Oblige": [
+            "Crimson Witch of Flames",
+            "Noblesse Oblige"
+        ]
+    },
+    "main_stats": {
+        "Sands": "ATK% / Energy Recharge",
+        "Goblet": "Pyro DMG",
+        "Circlet": "CRIT Rate / CRIT DMG"
+    },
+    "substats": [
+        "CRIT Rate",
+        "CRIT DMG",
+        "ATK%",
+        "Energy Recharge"
+    ],
+    "videoid":"Qt7M6w6vM_M"
+},
+"Candace": {
+  "materials": [
+      "Admonition",
+      "Tears of the Calamitous God",
+      "Varunada Lazurite Sliver",
+      "Light Guiding Tetrahedron",
+      "Redcrest",
+      "Faded Red Satin"
+  ],
+  "weapons": [
+      "Favonius Lance",
+      "Black Tassel",
+      "Staff of Homa",
+      "Skyward Spine",
+      "Engulfing Lightning"
+  ],
+  "artifacts": {
+      "4 piece Noblesse Oblige": [
+          "Noblesse Oblige"
+      ],
+      "4 piece Emblem of Severed Fate": [
+          "Emblem of Severed Fate"
+      ],
+      "4 piece Tenacity of the Millelith": [
+          "Tenacity of the Millelith"
+      ],
+      "2 piece Emblem of Severed Fate / Tenacity of the Millelith": [
+          "Emblem of Severed Fate",
+          "Tenacity of the Millelith"
+      ],
+      "2 piece Emblem of Severed Fate / The Exile": [
+          "Emblem of Severed Fate",
+          "The Exile"
+      ]
+  },
+  "main_stats": {
+      "Sands": "Energy Recharge / HP%",
+      "Goblet": "HP%",
+      "Circlet": "HP%"
+  },
+  "substats": [
+      "Energy Recharge",
+      "HP%",
+      "HP"
+  ],
+  "videoid": "-n5ZlOtLzKU"
+},
+"Charlotte": {
+  "materials": [
+      "Justice",
+      "Shivada Jade Sliver",
+      "Beryl Conch",
+      "Meshing Gear",
+      "Tourbillon Device",
+      "Lightless Silk String"
+  ],
+  "weapons": [
+      "Prototype Amber",
+      "Favonius Codex",
+      "Thrilling Tales of Dragon Slayers",
+      "Wine and Song",
+      "Fruit of Fulfillment"
+  ],
+  "artifacts": {
+      "4 piece Noblesse Oblige": [
+          "Noblesse Oblige"
+      ],
+      "4 piece Tenacity of the Millelith": [
+          "Tenacity of the Millelith"
+      ],
+      "4 piece Ocean-Hued Clam": [
+          "Ocean-Hued Clam"
+      ],
+      "2 piece Emblem of Severed Fate / Shimenawa's Reminiscence": [
+          "Emblem of Severed Fate",
+          "Shimenawa's Reminiscence"
+      ],
+      "2 piece Emblem of Severed Fate / Ocean-Hued Clam": [
+          "Emblem of Severed Fate",
+          "Ocean-Hued Clam"
+      ]
+  },
+  "main_stats": {
+      "Sands": "Energy Recharge / ATK%",
+      "Goblet": "ATK%",
+      "Circlet": "Healing Bonus / ATK%"
+  },
+  "substats": [
+      "Energy Recharge",
+      "ATK%",
+      "CRIT Rate"
+  ],
+  "videoid": "MDgHVVPqVmU"
+},
+"Chevreuse": {
+  "materials": [
+      "Order",
+      "Lightless Eye of the Maelstrom",
+      "Agnidus Agate Sliver",
+      "Fontemer Unihorn",
+      "Lumidouce Bell",
+      "Meshing Gear"
+  ],
+  "weapons": [
+      "Favonius Lance",
+      "Rightful Reward",
+      "Black Tassel",
+      "Prototype Starglitter",
+      "Kitain Cross Spear"
+  ],
+  "artifacts": {
+      "4 piece Noblesse Oblige": [
+          "Noblesse Oblige"
+      ],
+      "4 piece Ocean-Hued Clam": [
+          "Ocean-Hued Clam"
+      ],
+      "4 piece Song of Days Past": [
+          "Song of Days Past"
+      ],
+      "2 piece Tenacity of the Millelith / Vourukasha's Glow": [
+          "Tenacity of the Millelith",
+          "Vourukasha's Glow"
+      ],
+      "2 piece Ocean-Hued Clam / Tenacity of the Millelith": [
+          "Ocean-Hued Clam",
+          "Tenacity of the Millelith"
+      ]
+  },
+  "main_stats": {
+      "Sands": "HP%",
+      "Goblet": "HP%",
+      "Circlet": "HP%"
+  },
+  "substats": [
+      "Energy Recharge",
+      "HP%"
+  ],
+  "videoid": "J7gnFCdZNmU"
+},
+"Chiori": {
+  "materials": [
+      "Light",
+      "Lightless Silk String",
+      "Prithiva Topaz Sliver",
+      "Dendrobium",
+      "Spectral Husk",
+      "Artificed Spare Clockwork Component — Coppelia"
+  ],
+  "weapons": [
+      "Uraku Misugiri",
+      "Harbinger of Dawn",
+      "Cinnabar Spindle",
+      "Wolf-Fang",
+      "Primordial Jade Cutter"
+  ],
+  "artifacts": {
+      "4 piece Golden Troupe": [
+          "Golden Troupe"
+      ],
+      "4 piece Husk of Opulent Dreams": [
+          "Husk of Opulent Dreams"
+      ],
+      "2 piece Archaic Petra / 2 piece Golden Troupe": [
+          "Archaic Petra",
+          "Golden Troupe"
+      ],
+      "2 piece Archaic Petra / 2 piece Husk of Opulent Dreams": [
+          "Archaic Petra",
+          "Husk of Opulent Dreams"
+      ],
+      "4 piece Noblesse Oblige": [
+          "Noblesse Oblige"
+      ]
+  },
+  "main_stats": {
+      "Sands": "DEF%",
+      "Goblet": "Geo DMG / DEF%",
+      "Circlet": "CRIT Rate / CRIT DMG / DEF%"
+  },
+  "substats": [
+      "CRIT Rate / CRIT DMG",
+      "DEF%",
+      "ATK%"
+  ],
+  "videoid": "lFlgRCLUYNY"
+},
+"Chongyun": {
+  "materials": [
+      "Diligence",
+      "Dvalin's Sigh",
+      "Shivada Jade Sliver",
+      "Hoarfrost Core",
+      "Cor Lapis",
+      "Damaged Mask"
+  ],
+  "weapons": [
+      "Wolf's Gravestone",
+      "Serpent Spine",
+      "Redhorn Stonethresher",
+      "Beacon of the Reed Sea",
+      "The Unforged"
+  ],
+  "artifacts": {
+      "2 piece Blizzard Strayer / 2 piece Noblesse Oblige": [
+          "Blizzard Strayer",
+          "Noblesse Oblige"
+      ],
+      "4 piece Emblem of Severed Fate": [
+          "Emblem of Severed Fate"
+      ],
+      "2 piece Blizzard Strayer / 2 piece Shimenawa's Reminiscence": [
+          "Blizzard Strayer",
+          "Shimenawa's Reminiscence"
+      ],
+      "2 piece Noblesse Oblige / 2 piece Shimenawa's Reminiscence": [
+          "Noblesse Oblige",
+          "Shimenawa's Reminiscence"
+      ],
+      "2 piece Blizzard Strayer / 2 piece Emblem of Severed Fate": [
+          "Blizzard Strayer",
+          "Emblem of Severed Fate"
+      ]
+  },
+  "main_stats": {
+      "Sands": "ATK% / Energy Recharge / Elemental Mastery",
+      "Goblet": "Cryo DMG",
+      "Circlet": "CRIT Rate / CRIT DMG"
+  },
+  "substats": [
+      "CRIT Rate / CRIT DMG",
+      "ATK%",
+      "Elemental Mastery"
+  ],
+  "videoid": "qinzJTim2y8"
+},
+"Collei": {
+  "materials": [
+      "Praxis",
+      "Tears of the Calamitous God",
+      "Nagadus Emerald Sliver",
+      "Majestic Hooked Beak",
+      "Rukkhashava Mushrooms",
+      "Firm Arrowhead"
+  ],
+  "weapons": [
+      "Elegy for the End",
+      "Polar Star",
+      "Sacrificial Bow",
+      "Favonius Warbow",
+      "Aqua Simulacra"
+  ],
+  "artifacts": {
+      "4 piece Deepwood Memories": [
+          "Deepwood Memories"
+      ],
+      "4 piece Noblesse Oblige": [
+          "Noblesse Oblige"
+      ],
+      "4 piece Tenacity of the Millelith": [
+          "Tenacity of the Millelith"
+      ],
+      "4 piece Instructor": [
+          "Instructor"
+      ],
+      "4 piece Gilded Dreams": [
+          "Gilded Dreams"
+      ]
+  },
+  "main_stats": {
+      "Sands": "Energy Recharge / ATK% / Elemental Mastery",
+      "Goblet": "Dendro DMG",
+      "Circlet": "CRIT Rate / CRIT DMG"
+  },
+  "substats": [
+      "Energy Recharge",
+      "CRIT Rate / CRIT DMG",
+      "ATK% / Elemental Mastery"
+  ],
+  "videoid": "J-nGm9BmKtE"
+},
+
+  "Kamisato-Ayaka": {
     "materials": [
       "Elegance",
       "Bloodjade Branch",
@@ -325,8 +749,9 @@
       "CRIT DMG",
       "ATK%",
       "Energy Recharge"
-    ]
-  },"Ayato": {
+    ],
+    "videoid":"5RCsr1Y8UZA"
+  },"Kamisato-Ayato": {
     "materials": [
       "Elegance",
       "Mudra of the Malefic General",
@@ -358,7 +783,8 @@
       ],
       "2 piece Blizzard Strayer": [
         "Blizzard Strayer"
-      ]
+      ],
+      "videoid":"KxMs7IsSTgs"
     },
     "main_stats": {
       "Sands": "ATK%",
@@ -369,8 +795,9 @@
       "CRIT DMG",
       "ATK%",
       "Energy Recharge"
-    ]
-  },"Childe": {
+    ],
+    "videoid":"KxMs7IsSTgs"
+  },"Tartaglia": {
     "materials": [
       "Freedom",
       "Shard of a Foul Legacy",
@@ -413,7 +840,8 @@
       "CRIT DMG",
       "ATK%",
       "Elemental Mastery"
-    ]
+    ],
+    "videoid":"3f2-EANyrNM"
   },"Cyno": {
     "materials": [
       "Admonition",
@@ -460,7 +888,8 @@
       "CRIT DMG",
       "Elemental Mastery",
       "ATK%"
-    ]
+    ],
+    "videoid":"J9WuPBOC_S8"
   }
   }  
 

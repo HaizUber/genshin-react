@@ -1,4 +1,4 @@
-  import React, { useState, useEffect } from 'react';
+  import React, { useState, useEffect, useRef} from 'react';
   import { useParams } from 'react-router-dom';
   import { getCharacterDetail, getAlternativeResponse } from '../api/genshinApi';
   import '../styles/characterDetailPage.css'; // Import the CSS file
@@ -7,6 +7,7 @@
   import Footer from './Footer';
   import characterBuilds from '../data/characterbuilds.json'; // Import the character builds
   import quotes from '../data/quotes.json';
+  import YouTube from 'react-youtube';
 
   const CharacterDetailPage = () => {
     const { characterName } = useParams();
@@ -20,7 +21,9 @@
     const [scrollPosition, setScrollPosition] = useState(0);
     const [quote, setQuote] = useState('');
     const [weaponData, setWeaponData] = useState([]);
-    
+    const playerRef = useRef(null);
+    const [isMuted, setIsMuted] = useState(false);
+
     useEffect(() => {
       const fetchCharacterDetail = async () => {
           try {
@@ -30,10 +33,13 @@
               let firstName = characterName;
               if (characterName === 'Kamisato-Ayaka') {
                   firstName = 'Ayaka';
+              } else if (characterName === 'Kamisato-Ayato') {
+                  firstName = 'Ayato';
               } else {
                   // Extract the first word from the character name
                   firstName = characterName.split(' ')[0];
               }
+              
 
               // Fetch character data from the first endpoint
               const characterData = await getCharacterDetail(firstName);
@@ -465,6 +471,38 @@
       }
       return imageUrl;
   };
+  const handleReady = (event) => {
+    event.target.mute(); // Mute the video when it's ready
+    event.target.playVideo(); // Autoplay the video
+    playerRef.current = event.target; // Save the player reference
+};
+const handleStateChange = (event) => {
+  if (event.data === window.YT.PlayerState.ENDED) {
+      event.target.seekTo(0);
+      event.target.playVideo();
+  }
+}
+const toggleMute = () => {
+    setIsMuted(prevIsMuted => !prevIsMuted); // Toggle the muted state
+    const player = playerRef.current;
+    if (player) {
+        if (!isMuted) { // Check the updated state value from setIsMuted
+            player.unMute(); // Unmute the video
+        } else {
+            player.mute(); // Mute the video
+        }
+    }
+};
+let videoid;
+const characterData = characterBuilds[characterName];
+if (characterData && characterData.videoid) {
+    videoid = characterData.videoid;
+    console.log("Video ID for character", characterName, ":", videoid);
+    // Now you can use videoid safely
+} else {
+    console.error("Video id is undefined for character:", characterName);
+    // Handle the case where video id is undefined
+}
 
 
   return (
@@ -491,10 +529,38 @@
         }}
       >
   <div className="character-detail-container">
-      <div className="character-header">
-          <img src={`/assets/characters/${getSpecialCaseImageSrc(character.name)}.png`} alt={character.name} />
-      </div>
 
+  <div className="character-header">
+      <div className="video-container">
+        <div className="video-overlay"></div>
+        <YouTube
+          videoId={videoid}
+          opts={{
+            width: '1050',
+            height: '580',
+            playerVars: {
+              autoplay: 1,
+              loop: 1,
+              modestbranding: 1,
+              controls: 0
+            }
+          }}
+          onReady={handleReady}
+          onStateChange={handleStateChange}
+        />
+      </div>
+      <img
+        src={`/assets/characters/${getSpecialCaseImageSrc(character.name)}.png`}
+        alt={character.name}
+      />
+    </div>
+    <button className="mute-button" onClick={toggleMute}>
+  {isMuted ? (
+    <img src="/assets/icons/unmute.png" alt="Unmute" className="mute-icon" />
+  ) : (
+    <img src="/assets/icons/mute.png" alt="Mute" className="mute-icon" />
+  )}
+</button>
       <div className="character-info">
           <div className="info-item">
               <h3>Name:</h3>
