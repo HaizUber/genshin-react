@@ -329,46 +329,178 @@ body {
   margin-bottom: 5px;
 }
 
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  max-width: 300px; /* Maximum width for the tooltip */
+  background-color: rgba(0, 0, 0, 0.9); /* Darker background */
+  color: #ffffff; /* White text */
+  text-align: left;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%;
+  left: 50%;
+  right: calc(100% + 10px); /* Position on the left side of the weapon image */
+  transform: translateY(50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Show the tooltip text when hovering over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Tooltip image */
+.tooltip-image {
+  width: 70px; /* Adjusted width to match the weapon image */
+  height: auto;
+  border-radius: 5px;
+  margin-right: 10px; /* Spacing between image and text */
+}
+
+/* Apply gradients to tooltip weapon images */
+.tooltip-image {
+  width: 70px;
+  height: auto;
+  margin-right: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+/* Apply 5-star gradient to tooltip weapon images */
+.tooltip-image.weapon-image-5star {
+  background: hsla(35, 50%, 60%, 1);
+  background: linear-gradient(135deg, hsla(35, 50%, 60%, 1) 0%, hsla(32, 39%, 56%, 1) 41%, hsla(350, 22%, 39%, 1) 100%);
+  background: -moz-linear-gradient(135deg, hsla(35, 50%, 60%, 1) 0%, hsla(32, 39%, 56%, 1) 41%, hsla(350, 22%, 39%, 1) 100%);
+  background: -webkit-linear-gradient(135deg, hsla(35, 50%, 60%, 1) 0%, hsla(32, 39%, 56%, 1) 41%, hsla(350, 22%, 39%, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#CCA368", endColorstr="#BB9264", GradientType=1);
+}
+
+.tooltip-image.weapon-image-4star {
+  background: hsla(265, 53%, 57%, 1);
+
+  background: linear-gradient(135deg, hsla(265, 53%, 57%, 1) 0%, hsla(262, 39%, 51%, 1) 41%, hsla(239, 28%, 33%, 1) 100%);
+  
+  background: -moz-linear-gradient(135deg, hsla(265, 53%, 57%, 1) 0%, hsla(262, 39%, 51%, 1) 41%, hsla(239, 28%, 33%, 1) 100%);
+  
+  background: -webkit-linear-gradient(135deg, hsla(265, 53%, 57%, 1) 0%, hsla(262, 39%, 51%, 1) 41%, hsla(239, 28%, 33%, 1) 100%);
+  
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#8857CC", endColorstr="#7451B2", GradientType=1 );
+}
+
+/* Apply 3-star gradient to tooltip weapon images */
+.tooltip-image-3star {
+  background: hsla(215, 49%, 50%, 1);
+  background: linear-gradient(135deg, hsla(215, 49%, 50%, 1) 0%, hsla(218, 46%, 44%, 1) 41%, hsla(231, 44%, 33%, 1) 100%);
+  background: -moz-linear-gradient(135deg, hsla(215, 49%, 50%, 1) 0%, hsla(218, 46%, 44%, 1) 41%, hsla(231, 44%, 33%, 1) 100%);
+  background: -webkit-linear-gradient(135deg, hsla(215, 49%, 50%, 1) 0%, hsla(218, 46%, 44%, 1) 41%, hsla(231, 44%, 33%, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4175BE", endColorstr="#3D63A4", GradientType=1);
+}
+
+/* Tooltip content */
+.tooltip-content {
+  display: grid;
+  gap: 1  0px; /* Gap between grid items */
+  position: relative; /* Set position to relative */
+}
+
+/* Weapon name */
+.weapon-name {
+  color: #ffffff; /* White text */
+  font-size: 16px; /* Font size */
+  margin-bottom: 5px; /* Adjusted spacing */
+  left: 550px;
+}
+
+/* Base ATK and substat */
+.base-atk-substat {
+  color: #ffffff; /* White text */
+  font-size: 14px; /* Font size */
+  margin-bottom: 5px; /* Adjusted spacing */
+}
+
+/* Weapon effect */
+.weapon-effect {
+  color: #ffffff; /* White text */
+  font-size: 14px; /* Font size */
+  margin-top: 5px; /* Adjusted spacing */
+}
+
+
+
 /* Weapon image styles */
 .weapon-info {
-    display: flex;
-    align-items: center;
-  }
+  display: flex;
+  align-items: center;
+}
+
+/* Default gradient background for 4-star rarity */
+.weapon-image {
+  width: 70px;
+  height: auto;
+  margin-right: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+  background: hsla(265, 53%, 57%, 1);
+
+  background: linear-gradient(135deg, hsla(265, 53%, 57%, 1) 0%, hsla(262, 39%, 51%, 1) 41%, hsla(239, 28%, 33%, 1) 100%);
   
-  .weapon-image {
-    width: 70px;
-    height: auto;
-    margin-right: 5px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
-  }
+  background: -moz-linear-gradient(135deg, hsla(265, 53%, 57%, 1) 0%, hsla(262, 39%, 51%, 1) 41%, hsla(239, 28%, 33%, 1) 100%);
   
-  .weapon-image:hover {
-    transform: scale(1.1);
-    filter: brightness(110%);
-  }
+  background: -webkit-linear-gradient(135deg, hsla(265, 53%, 57%, 1) 0%, hsla(262, 39%, 51%, 1) 41%, hsla(239, 28%, 33%, 1) 100%);
   
-  .weapon-info p {
-    color: #fdedda;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#8857CC", endColorstr="#7451B2", GradientType=1 );
+}
+
+/* Gradient background for 5-star rarity */
+.weapon-image.weapon-image-5star {
+  background: hsla(35, 50%, 60%, 1);
+
+  background: linear-gradient(135deg, hsla(35, 50%, 60%, 1) 0%, hsla(32, 39%, 56%, 1) 41%, hsla(350, 22%, 39%, 1) 100%);
   
-  .weapon-rarity {
-    position: absolute;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fdedda;
-    border-radius: 10%;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    padding-left: 28px;
-    padding-right: 28px;
-    margin-top: 55px;
-    margin-left: 35px;
-  }
+  background: -moz-linear-gradient(135deg, hsla(35, 50%, 60%, 1) 0%, hsla(32, 39%, 56%, 1) 41%, hsla(350, 22%, 39%, 1) 100%);
+  
+  background: -webkit-linear-gradient(135deg, hsla(35, 50%, 60%, 1) 0%, hsla(32, 39%, 56%, 1) 41%, hsla(350, 22%, 39%, 1) 100%);
+  
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#CCA368", endColorstr="#BB9264", GradientType=1 );
+}
+.weapon-image-3star {
+  /* Add your specified gradient for 3-star weapons */
+  background: hsla(215, 49%, 50%, 1);
+
+  background: linear-gradient(135deg, hsla(215, 49%, 50%, 1) 0%, hsla(218, 46%, 44%, 1) 41%, hsla(231, 44%, 33%, 1) 100%);
+  
+  background: -moz-linear-gradient(135deg, hsla(215, 49%, 50%, 1) 0%, hsla(218, 46%, 44%, 1) 41%, hsla(231, 44%, 33%, 1) 100%);
+  
+  background: -webkit-linear-gradient(135deg, hsla(215, 49%, 50%, 1) 0%, hsla(218, 46%, 44%, 1) 41%, hsla(231, 44%, 33%, 1) 100%);
+  
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#4175BE", endColorstr="#3D63A4", GradientType=1 );
+}
+
+
+.weapon-image:hover {
+  transform: scale(1.1);
+  filter: brightness(110%);
+}
+
+.weapon-info p {
+  color: #fdedda;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
 
 /* Artifact section styles */
 .character-section.artifacts {
@@ -414,6 +546,15 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out; 
+    background: hsla(35, 50%, 60%, 1);
+
+    background: linear-gradient(135deg, hsla(35, 50%, 60%, 1) 0%, hsla(32, 39%, 56%, 1) 41%, hsla(350, 22%, 39%, 1) 100%);
+    
+    background: -moz-linear-gradient(135deg, hsla(35, 50%, 60%, 1) 0%, hsla(32, 39%, 56%, 1) 41%, hsla(350, 22%, 39%, 1) 100%);
+    
+    background: -webkit-linear-gradient(135deg, hsla(35, 50%, 60%, 1) 0%, hsla(32, 39%, 56%, 1) 41%, hsla(350, 22%, 39%, 1) 100%);
+    
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#CCA368", endColorstr="#BB9264", GradientType=1 );
 }
 
 .artifact-item img:hover {
@@ -438,7 +579,12 @@ body {
     padding-right: 32px;
     margin-top: 55px;
   }
-  
+  /* Artifact details */
+.artifact-details {
+  color: #ffffff; /* White text */
+  font-size: 16px; /* Font size */
+  margin-bottom: 5px; /* Add a gap between artifact details */
+}
 
 /* Error message styles */
 .error-message {
@@ -459,6 +605,9 @@ body {
     .character-detail-container {
         margin: 20px;
     }
+}
+.webp-gif {
+border-radius: 25px;
 }
 
 /* Table styles */
