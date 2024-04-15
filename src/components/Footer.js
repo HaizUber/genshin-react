@@ -37,6 +37,7 @@ const Footer = () => {
       </footer>
       <footer className="bottom">
         <p className="copyright">© 2023 GenshinBuddy All rights reserved</p>
+        <p className="copyright">GenshinBuddy v1.0</p>
       </footer>
     </section>
   );

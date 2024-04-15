@@ -497,7 +497,6 @@ let videoid;
 const characterData = characterBuilds[characterName];
 if (characterData && characterData.videoid) {
     videoid = characterData.videoid;
-    console.log("Video ID for character", characterName, ":", videoid);
     console.log(weaponRarities)
     // Now you can use videoid safely
 } else {
@@ -537,12 +536,14 @@ if (characterData && characterData.videoid) {
           videoId={videoid}
           opts={{
             width: '1050',
-            height: '580',
+            height: '600',
             playerVars: {
               autoplay: 1,
               loop: 1,
               modestbranding: 1,
-              controls: 0
+              controls: 0,
+              cc_lang_pref: 'en', // Set the language preference for subtitles
+              cc_load_policy: 1, // Enable closed captions by default
             }
           }}
           onReady={handleReady}
