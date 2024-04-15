@@ -1,25 +1,165 @@
-/* Footer.css */
+/* General Styles */
+body {
+  margin: 0;
+  background: #1f1d58;
+  color: #f7f7f7;
+}
 
-.Footer {
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    background-color: #0c1447; /* Night theme background color */
-    padding: 20px 0;
-    text-align: center;
-    color: #ffffff; /* White text */
-    font-size: 16px;
-    font-family: 'Genshin', sans-serif; /* Use Genshin font */
+section {
+  position: relative;
+  width: 100%;
+  background: #29277a;
+  padding-top: 20px;
+  padding-left: 40px;
+  padding-bottom: 10px;
+  margin-bottom: -15px;
+  margin-left: -20px;
+  margin-top: -10px;
+  margin-bottom: -20px;
+}
+
+/* Footer Styles */
+footer {
+  position: relative;
+  margin: 0 30px;
+  color: rgba(255, 255, 255, 0.5); /* Use rgba for better opacity control */
+}
+
+footer.top {
+  display: grid;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2); /* Use rgba for better opacity control */
+
+}
+
+footer.top > img {
+
+  height: 50px;
+  display: block;
+  margin: 0 auto 30px;
+}
+
+footer.top .links {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.links-column {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+}
+
+footer h2 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.96); /* Use rgba for better opacity control */
+}
+
+footer p {
+  margin: 0;
+}
+.links-column a {
+  color: #f7f7f7; /* Set text color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s; /* Smooth color transition */
+}
+
+.links-column a:hover {
+  color: #ecce72; /* Change text color on hover */
+}
+.socials a {
+  color: #f7f7f7; /* Set text color */
+  text-decoration: none; /* Remove underline */
+  font-size: 24px; /* Set font size */
+  transition: color 0.3s; /* Smooth color transition */
+}
+
+.socials a:hover {
+  color: #ecce72; /* Change text color on hover */
+}
+
+
+.legal > a {
+  margin-left: 4px; /* Adjusted margin for better spacing */
+  text-decoration: none; /* Remove hyperlink effect */
+  color: rgba(255, 255, 255, 0.5); /* Set color for legal links */
+}
+
+footer.top .socials {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 56px;
+}
+
+footer.top .socials > a {
+  font-size: 24px;
+  color: #fff; /* Set color for social icons */
+}
+
+.socials-column :is(h2, p) {
+  display: none;
+}
+
+/* Media Queries */
+@media (min-width: 400px) {
+  .links-column {
+    text-align: left;
   }
-  
-  .Footer a {
-    color: #ecce72; /* Genshin yellow */
-    text-decoration: none;
-    transition: color 0.3s ease; /* Smooth transition for link color */
-    margin-left: 20px;
+
+  footer.top .links {
+    grid-template-columns: repeat(2, 1fr);
+    margin-right: 50px;
   }
-  
-  .Footer a:hover {
-    color: #fdedda; /* Light yellow color on hover */
+
+  footer.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 20px;
+    text-align: left;
   }
-  
+
+  footer.top .socials {
+    left: 0;
+    transform: translateX(0);
+  }
+
+  footer.top > img {
+    margin: 0 0 50px;
+  }
+}
+
+@media (min-width: 640px) {
+  footer {
+    margin: 0 auto;
+    max-width: 580px;
+    padding: 0;
+  }
+
+  footer.top .links {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  footer.top .socials {
+    position: static;
+  }
+
+  footer.bottom {
+    justify-content: flex-start;
+  }
+
+  .socials-column :is(h2, p) {
+    display: block;
+  }
+}

@@ -60,7 +60,7 @@
     margin: 0 50px;
     border: 2px solid #fdedda; /* White border */
     border-radius: 10px; /* Rounded corners */
-    margin-bottom: 20px; /* Add margin at the bottom */
+    margin-bottom: 40px; /* Add margin at the bottom */
 }
 
 .cover-image {
@@ -125,13 +125,21 @@
     transition: all 0.5s;
     position: absolute;
     z-index: -1;
-
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .card:hover .character {
     opacity: 1;
     transform: translate3d(0%, -30%, 100px);
 }
+
 
 .character-name {
     position: absolute; /* Position absolute */
@@ -187,7 +195,7 @@ h1 {
     background-color: #1f2b56;
     border-radius: 10px;
     padding: 10px;
-    margin-top: 40px;
+    margin-top: 60px;
     margin-bottom: 20px;
 }
 
@@ -322,3 +330,21 @@ h1 {
 .search-bar input:not(:placeholder-shown) + .clear-icon {
     display: block;
 }
+/* Media query for screens smaller than 768px (typical tablet size) */
+@media screen and (max-width: 991px) {
+    .filter-options {
+        flex-direction: column; /* Arrange filter options vertically */
+        align-items: stretch; /* Stretch items to fill container horizontally */
+    }
+
+    .filter-options button {
+        font-size: 16px; /* Decrease font size slightly for better fit */
+        padding: 8px 16px; /* Decrease padding slightly for better touch responsiveness */
+        margin: 5px; /* Add margin between filter buttons */
+    }
+
+    .separator {
+        display: none; /* Hide separators on smaller screens to save space */
+    }
+}
+

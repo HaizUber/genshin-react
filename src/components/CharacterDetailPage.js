@@ -498,6 +498,7 @@ const characterData = characterBuilds[characterName];
 if (characterData && characterData.videoid) {
     videoid = characterData.videoid;
     console.log("Video ID for character", characterName, ":", videoid);
+    console.log(weaponRarities)
     // Now you can use videoid safely
 } else {
     console.error("Video id is undefined for character:", characterName);
@@ -532,7 +533,6 @@ if (characterData && characterData.videoid) {
 
   <div className="character-header">
       <div className="video-container">
-        <div className="video-overlay"></div>
         <YouTube
           videoId={videoid}
           opts={{
@@ -549,10 +549,6 @@ if (characterData && characterData.videoid) {
           onStateChange={handleStateChange}
         />
       </div>
-      <img
-        src={`/assets/characters/${getSpecialCaseImageSrc(character.name)}.png`}
-        alt={character.name}
-      />
     </div>
     <button className="mute-button" onClick={toggleMute}>
   {isMuted ? (
@@ -562,6 +558,10 @@ if (characterData && characterData.videoid) {
   )}
 </button>
       <div className="character-info">
+      <img
+        src={`/assets/characters/${getSpecialCaseImageSrc(character.name)}.png`}
+        alt={character.name}
+      />
           <div className="info-item">
               <h3>Name:</h3>
               <h2>{character.name}</h2>
