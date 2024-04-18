@@ -528,14 +528,13 @@ if (characterData && characterData.videoid) {
           backgroundPositionY: backgroundPositionY,
         }}
       >
-  <div className="character-detail-container">
 
   <div className="character-header">
       <div className="video-container">
         <YouTube
           videoId={videoid}
           opts={{
-            width: '1050',
+            width: '1080',
             height: '600',
             playerVars: {
               autoplay: 1,
@@ -558,53 +557,89 @@ if (characterData && characterData.videoid) {
     <img src="/assets/icons/mute.png" alt="Mute" className="mute-icon" />
   )}
 </button>
-      <div className="character-info">
-      <img
-        src={`/assets/characters/${getSpecialCaseImageSrc(character.name)}.png`}
-        alt={character.name}
-      />
-          <div className="info-item">
-              <h3>Name:</h3>
-              <h2>{character.name}</h2>
-          </div>
-          <div className="info-item">
-              <h3>Description:</h3>
-              <p>{character.description}</p>
-          </div>
-          <div className="info-item">
-              <h3>Rarity:</h3>
-              <p>{character.rarity}</p>
-          </div>
-          <div className="info-item">
-              <h3>Element:</h3>
-              <p>{character.element}</p>
-          </div>
-          <div className="info-item">
-              <h3>Weapon Type:</h3>
-              <p>{character.weapon}</p>
-          </div>
-          <div className="info-item">
-              <h3>Nation:</h3>
-              <p>{character.nation}</p>
-          </div>
-          <div className="info-item">
-              <h3>Affiliation:</h3>
-              <p>{character.affiliation}</p>
-          </div>
-          <div className="info-item">
-              <h3>Constellation:</h3>
-              <p>{character.constellation}</p>
-          </div>
-          <div className="info-item">
-              <h3>Birthday:</h3>
-              <p>{character.birthday}</p>
-          </div>
-          <div className="info-item">
-              <h3>Release Date:</h3>
-              <p>{character.release}</p>
-          </div>
-      </div>
+<div class="character-info">
+  <img
+    src={`/assets/characters/${getSpecialCaseImageSrc(character.name)}.png`}
+    alt={character.name}
+    class="character-image"
+  />
+  <div class="info-container">
+    <div class="info-group">
+    <div class="info-item">
+    <div class="element-name-container">
+    
+    <img src={`/assets/icons/${character.element}.png`} alt={character.element} class="element-icon" />
+    <h2>{character.name}</h2>
+      <div class="star-container">
+    {character.rarity === '5' && (
+      <>
+        <img src="/assets/icons/star.png" alt="star" />
+        <img src="/assets/icons/star.png" alt="star" />
+        <img src="/assets/icons/star.png" alt="star" />
+        <img src="/assets/icons/star.png" alt="star" />
+        <img src="/assets/icons/star.png" alt="star" />
+      </>
+    )}
+    {character.rarity === '4' && (
+      <>
+        <img src="/assets/icons/star.png" alt="star" />
+        <img src="/assets/icons/star.png" alt="star" />
+        <img src="/assets/icons/star.png" alt="star" />
+        <img src="/assets/icons/star.png" alt="star" />
+      </>
+    )}
   </div>
+    
+</div>
+</div>
+<div class="info-item">
+  <div class="rounded-border element-info">
+    <p>{character.element}</p>
+  </div>
+  <div class="rounded-border element-info">
+    <p>{character.weapon}</p>
+  </div>
+  <div class="rounded-border element-info">
+    <p>{character.rarity}-Star</p>
+  </div>
+</div>
+<div class ="info-item">
+      <div class="rounded-border element-info">
+        <p>{character.description}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="attributes-container glassmorphism">
+    <h2>Attributes</h2>
+    <div class="info-group">
+        <div class="info-item">
+            <h3>Birthday:</h3>
+            <p>{character.birthday}</p>
+        </div>
+        <div class="info-item">
+            <h3>Constellation:</h3>
+            <p>{character.constellation}</p>
+        </div>
+        <div class="info-item">
+            <h3>Title:</h3>
+            <p>{character.title}</p>
+        </div>
+        <div class="info-item">
+            <h3>Region:</h3>
+            <p>{character.region}</p>
+        </div>
+        <div class="info-item">
+            <h3>Affiliation:</h3>
+            <p>{character.affiliation}</p>
+        </div>
+        <div class="info-item">
+            <h3>Version:</h3>
+            <p>{character.version}</p>
+        </div>
+    </div>
+</div>
+</div>
 
   {/* Upgrade Materials */}
   <div id="upgrade-materials" className="character-section">
