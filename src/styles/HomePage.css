@@ -1,5 +1,5 @@
 :root {
-    --card-height: 300px;
+    --card-height: 200px;
     --card-width: calc(var(--card-height) / 1.5);
 }
 
@@ -150,7 +150,7 @@
     color: #fdedda; /* White text */
     padding: 5px 10px; /* Add padding */
     border-radius: 5px; /* Rounded corners */
-    font-size: 18px; /* Font size */
+    font-size: 15px; /* Font size */
   }
 
 /* HomePage.css */
