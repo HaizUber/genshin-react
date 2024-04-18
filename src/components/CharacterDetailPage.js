@@ -568,7 +568,7 @@ if (characterData && characterData.videoid) {
     <div class="info-item">
     <div class="element-name-container">
     
-    <img src={`/assets/icons/${character.element}.png`} alt={character.element} class="element-icon" />
+    <img src={`/assets/icons/${character.element.toLowerCase()}.png`} alt={character.element.toLowerCase()} class="element-icon" />
     <h2>{character.name}</h2>
       <div class="star-container">
     {character.rarity === '5' && (
