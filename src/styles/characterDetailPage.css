@@ -753,64 +753,277 @@ border-radius: 25px;
     
 }
 
-/* Responsive Media Queries */
+/* Adjustments for mobile screens */
 @media (max-width: 768px) {
-  /* Hide character header on smaller screens */
   .character-header {
-      display: none;
+    display: none;
   }
 
-/* Adjustments for mobile screens */
-.character-info {
+  body {
+    overflow-x: hidden; /* Prevent horizontal overflow */
+  }
+
+  /* Make character-detail-container cover the entire screen */
+  .character-detail-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 10px; /* Adjust padding as needed */
+    z-index: 1; /* Ensure it's on top of other content */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+  }
+
+  /* Adjustments for navmenu */
+  .navmenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000; /* Ensure it's above character-detail-container */
+  }
+
+  /* Adjustments for footer */
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10001; /* Ensure it's above character-detail-container */
+  }
+
+  /* Adjustments for character info */
+  .character-build{
+    margin-right: 15px;
+  }
+  .character-info {
+    padding: 10px; /* Reduce padding */
+    margin-top: 10px; /* Reduce margin top */
+    margin-bottom: -90px; /* Reduce margin bottom */
+    margin-right: 15px;
+  }
+  .character-image-container {
+    overflow: visible; /* Allow overflow to be visible */
+    max-width: 100%; /* Ensure the container doesn't expand beyond the screen */
+  }
+  
+  .character-image {
+    width: 200%; /* Increase image size to fill 200% of its container */
+    height: auto; /* Maintain aspect ratio */
+    padding: 0; /* Remove padding */
+    margin-bottom: 10px; /* Add space between image and info */
+  }
+  
+  .info-container {
+    margin-top: 100px; /* Adjust margin top */
+    position: static; /* Remove absolute positioning */
+    width: 100%; /* Occupy full width */
+    max-width: none; /* Remove max-width */
+    margin-left: 0; /* Remove left margin */
+  }
+
+  .element-name-container {
+    flex-direction: row; /* Stack icon and name vertically */
+    align-items: flex-start; /* Align items to the left */
+  }
+
+  .element-icon {
+    max-width: 50px; /* Adjust icon size */
+  }
+
+  .star-container {
+    margin-top: 5px; /* Adjust margin */
+  }
+
+  .attributes-container {
+    position: static; /* Remove absolute positioning */
+    margin-top: 80px; /* Add margin top */
+    padding: 10px; /* Reduce padding */
+    border-radius: 5px; /* Adjust border radius */
+
+  }
+
+  .info-item {
+    flex-direction: row; /* Stack elements vertically */
+    gap: 5px; /* Adjust spacing between elements */
+  }
+
+  .info-item h3 {
+    font-size: 16px; /* Reduce font size */
+  }
+
+  .info-item p {
+    font-size: 14px; /* Reduce font size */
+  }
+  /* Upgrade materials section styles */
+  .upgrade-materials {
+    display: block; /* Change to block display for better stacking on smaller screens */
+    padding: 10px; /* Reduce padding */
+    margin-right: 15px;
+  }
+  
+  .upgrade-materials-item {
+    margin-bottom: 20px; /* Add margin bottom to create space between items */
+  }
+  
+  .upgrade-materials-item img {
+    max-width: 50%; /* Ensure images fill their container */
+    height: auto; /* Allow images to maintain aspect ratio */
+  }
+  
+  .upgrade-materials-item h4 {
+    font-size: 20px; /* Reduce font size for smaller screens */
+  }
+  
+  .upgrade-materials-item p {
+    font-size: 16px; /* Reduce font size for smaller screens */
+  }
+  
+  .upgrade-materials-item::after {
+    bottom: 100%; /* Position tooltip above the item */
+    left: 50%; /* Center tooltip horizontally */
+    transform: translateX(-50%); /* Center tooltip horizontally */
+    max-width: 90vw; /* Adjust maximum width to prevent off-screen */
+    padding: 10px; /* Reduce padding */
+  }
+  
+  /* Move the entire tooltip when displaying data-dropdomain */
+  .upgrade-materials-item[data-dropdomain]::after {
+    left: 50%; /* Center tooltip horizontally */
+    transform: translateX(-50%); /* Center tooltip horizontally */
+  }
+  .webp-gif {
+    border-radius: 10px; /* Reduce border radius for smaller screens */
+    max-width: 100%; /* Ensure the image fits its container */
+    height: auto; /* Allow the image to maintain aspect ratio */
+  }
+  .character-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-x: auto; /* Add horizontal scrolling for small screens */
+  }
+
+  .character-section th,
+  .character-section td {
+    padding: 8px 12px; /* Reduce padding for smaller screens and add spacing to the right */
+    font-size: 14px; /* Reduce font size for smaller screens */
+    border: 1px solid #2a376e;
+    color: #fdedda;
+  }
+
+  .character-section th {
+    background-color: #2a376e;
+    font-size: 16px; /* Increase font size for table headers */
+  }
+
+  .character-section tbody tr:hover {
+    background-color: #324085;
+  }
+
+  .character-section table .material-image {
+    max-width: 20px; /* Reduce image size */
+    max-height: 20px; /* Reduce image size */
+    vertical-align: middle;
+    margin-right: 3px; /* Reduce margin */
+  }
+  .character-section{
+    margin-right: 15px;
+  }
+  /* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 250px; /* Adjusted width for horizontal size */
+  max-width: 250%; /* Maximum width for the tooltip */
+  background-color: rgba(0, 0, 0, 0.9); /* Darker background */
+  color: #ffffff; /* White text */
+  text-align: left;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%; /* Adjusted distance from the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip image */
+.tooltip-image {
+  width: 70px; /* Adjusted width for horizontal size */
+  height: auto;
+  border-radius: 5px;
+  margin-right: 10px; /* Spacing between image and text */
+}
+
+/* Show the tooltip text when hovering over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Apply gradients to tooltip weapon images */
+.tooltip-image.weapon-image-5star {
+  background: hsla(35, 50%, 60%, 1);
+  background: linear-gradient(135deg, hsla(35, 50%, 60%, 1) 0%, hsla(32, 39%, 56%, 1) 41%, hsla(350, 22%, 39%, 1) 100%);
+}
+
+.tooltip-image.weapon-image-4star {
+  background: hsla(265, 53%, 57%, 1);
+  background: linear-gradient(135deg, hsla(265, 53%, 57%, 1) 0%, hsla(262, 39%, 51%, 1) 41%, hsla(239, 28%, 33%, 1) 100%);
+}
+
+.tooltip-image-3star {
+  background: hsla(215, 49%, 50%, 1);
+  background: linear-gradient(135deg, hsla(215, 49%, 50%, 1) 0%, hsla(218, 46%, 44%, 1) 41%, hsla(231, 44%, 33%, 1) 100%);
+}
+
+/* Tooltip content */
+.tooltip-content {
+  display: grid;
+  gap: 1 0px; /* Gap between grid items */
+  position: relative; /* Set position to relative */
+}
+/* Weapon information container */
+.weapon-info {
+  display: grid;
+  grid-template-columns: auto 1fr; /* Auto size for the image, 1fr for the text */
+  align-items: center;
+  margin-bottom: 10px; /* Adjusted margin bottom */
+}
+.build-item {
+  padding: 20px; /* Reduce padding */
+  margin-bottom: 20px; /* Reduce margin */
+}
+
+.build-sublist {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust column size */
+  gap: 15px; /* Reduce gap */
   padding: 10px; /* Reduce padding */
-  margin-top: 10px; /* Reduce margin top */
 }
 
-.character-image {
-  max-width: 100%; /* Ensure image fills its container */
-  padding: 0; /* Remove padding */
-  margin-bottom: 10px; /* Add space between image and info */
+.build-sublist li {
+  margin-bottom: 10px; /* Reduce margin */
 }
 
-.info-container {
-  margin-top: 150px;
-  position: static; /* Remove absolute positioning */
-  width: 100%; /* Occupy full width */
-  max-width: none; /* Remove max-width */
-  margin-left: 0; /* Remove left margin */
-}
-
-.element-name-container {
-  flex-direction: column; /* Stack icon and name vertically */
-  align-items: flex-start; /* Align items to the left */
-}
-
-.element-icon {
-  max-width: 50px; /* Adjust icon size */
-}
-
-.star-container {
-  margin-top: 5px; /* Adjust margin */
-}
-
-.attributes-container {
-  position: static; /* Remove absolute positioning */
-  margin-top: 80px; /* Add margin top */
-  padding: 10px; /* Reduce padding */
-  border-radius: 5px; /* Adjust border radius */
-}
-
-.info-item {
-  flex-direction: column; /* Stack elements vertically */
-  gap: 5px; /* Adjust spacing between elements */
-}
-
-.info-item h3 {
+.build-sublist li h5,
+.build-sublist li p,
+.build-sublist li h4 {
   font-size: 16px; /* Reduce font size */
+  margin-bottom: 5px; /* Reduce margin */
 }
 
-.info-item p {
-  font-size: 14px; /* Reduce font size */
-}
 
 }
+
+
+

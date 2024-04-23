@@ -331,20 +331,21 @@ h1 {
     display: block;
 }
 /* Media query for screens smaller than 768px (typical tablet size) */
-@media screen and (max-width: 991px) {
+@media (max-width: 768px) {
     .filter-options {
         flex-direction: column; /* Arrange filter options vertically */
         align-items: stretch; /* Stretch items to fill container horizontally */
     }
 
     .filter-options button {
-        font-size: 16px; /* Decrease font size slightly for better fit */
-        padding: 8px 16px; /* Decrease padding slightly for better touch responsiveness */
-        margin: 5px; /* Add margin between filter buttons */
+        font-size: 14px; /* Decrease font size slightly for better fit */
+        padding: 6px 12px; /* Decrease padding slightly for better touch responsiveness */
+        margin: 5px 0; /* Add margin between filter buttons */
     }
 
     .separator {
         display: none; /* Hide separators on smaller screens to save space */
     }
+        
 }
 

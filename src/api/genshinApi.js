@@ -70,7 +70,7 @@ export const getCharactersByElement = async (element) => {
 
 const getCharacterDetail = async (characterName) => {
   try {
-    const response = await fetch(`https://genshin.jmp.blue/characters/${characterName}`);
+    const response = await fetch(`https://genshin-buddy-api.vercel.app/characters/${characterName}`);
     let data = null;
 
     if (response.ok) {
